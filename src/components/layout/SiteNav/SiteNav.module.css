@@ -23,7 +23,7 @@
 .brand {
   justify-self: start;
   font-family: var(--font-family-headline);
-  font-size: var(--font-size-logo);
+  font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
   line-height: 1.2;
   color: var(--color-text-muted);
@@ -59,7 +59,7 @@
   letter-spacing: var(--label-letter-spacing);
   font-optical-sizing: auto;
   font-style: normal;
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-md);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-muted);
   transition: color 0.15s ease;

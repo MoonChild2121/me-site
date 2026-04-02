@@ -1,5 +1,5 @@
-import HomeHero from '@/components/home/HomeHero/HomeHero';
+import Home from '@/components/home/Home';
 
 export default function HomeContainer() {
-  return <HomeHero />;
+  return <Home />;
 }
