@@ -1,0 +1,42 @@
+:root {
+  color-scheme: light;
+
+  --color-neutral: #f9f7f2;
+  --color-primary: #1a1a1a;
+  --color-secondary: #635f58;
+  --color-tertiary: #a69076;
+
+  --color-background: var(--color-neutral);
+  --color-surface: var(--color-neutral);
+  --color-text: var(--color-primary);
+  --color-text-muted: var(--color-secondary);
+  --color-accent: var(--color-tertiary);
+  --color-border: color-mix(in srgb, var(--color-primary) 12%, transparent);
+
+  --space-32: 2.285714rem;
+  --space-40: 2.857143rem;
+
+  --font-family-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-family-label: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-family-headline: "Newsreader", ui-serif, Georgia, "Times New Roman", serif;
+
+  --label-letter-spacing: 0.06em;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Font sizes: px at 14px root → rem (same formula as pxToRem in tokens.ts) */
+  --font-size-xs: 0.857143rem;
+  --font-size-sm: 0.928571rem;
+  --font-size-body: 1rem;
+  --font-size-logo: 1rem;
+  --font-size-md: 1.142857rem;
+  --font-size-lg: 1.428571rem;
+  --font-size-xl: 1.714286rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 2.285714rem;
+  --font-size-4xl: 3.428571rem;
+  --font-size-hero: 9.142857rem;
+}
