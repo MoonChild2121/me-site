@@ -2,6 +2,8 @@
 
 :root {
   background-color: #f9f7f2;
+  /* Approx header height: 24px top/bottom padding + 1 line of text */
+  --site-header-height: calc(48px + (var(--font-size) * 1.2));
 }
 
 html {
@@ -26,7 +28,7 @@ html {
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
+  overflow-x: visible;
 }
 
 body {
@@ -52,7 +54,8 @@ body {
   width: 100%;
   max-width: none;
   margin: 0;
-  padding-top: 32px;
+  padding-top: 0;
+  overflow-x: hidden;
   background-color: #f9f7f2;
   background-color: var(--color-background);
 }
@@ -61,8 +64,14 @@ body {
   width: 100%;
   max-width: none;
   margin: 0;
-  padding: 0 32px 3rem;
+  padding: var(--space-32) var(--space-32) 3rem;
   box-sizing: border-box;
+}
+
+@media (max-width: 40rem) {
+  .page-container {
+    padding: calc(20 / 14 * 1rem) calc(20 / 14 * 1rem) 2rem;
+  }
 }
 
 .font-label {
