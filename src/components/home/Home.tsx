@@ -6,6 +6,12 @@ import { RECENT_ENTRIES } from '../../data/entries';
 import type { Entry } from '../../types/entry';
 import { useEffect, useRef } from 'react';
 
+const ENTRY_DATE_FORMATTER = new Intl.DateTimeFormat('en-US', {
+  month: 'short',
+  day: '2-digit',
+  timeZone: 'UTC'
+});
+
 export default function Home() {
   const s = useHomeStyles();
   const rootRef = useRef<HTMLDivElement | null>(null);
@@ -13,9 +19,10 @@ export default function Home() {
   const roundFlowerUrl = new URL('../../assets/roundFlower.svg', import.meta.url).toString();
 
   const formatEntryDate = (date: string) => {
-    const d = new Date(date);
+    // Ensure SSR + client render the same day (avoid timezone shifts).
+    const d = new Date(`${date}T00:00:00Z`);
     if (Number.isNaN(d.getTime())) return date;
-    return d.toLocaleString('en-US', { month: 'short', day: '2-digit' });
+    return ENTRY_DATE_FORMATTER.format(d);
   };
 
   const getTypeLabel = (type: Entry['type']) => type.toUpperCase();
