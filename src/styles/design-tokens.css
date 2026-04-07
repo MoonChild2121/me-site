@@ -41,7 +41,7 @@
   --font-size-2xl-px: 28;
   --font-size-3xl-px: 32;
   --font-size-4xl-px: 48;
-  --font-size-hero-px: 128;
+  --font-size-hero-px: 96;
 
   --font-size-xs: calc(var(--font-size-xs-px) / var(--rem-base) * 1rem);
   --font-size: calc(var(--font-size-px) / var(--rem-base) * 1rem);

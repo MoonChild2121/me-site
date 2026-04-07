@@ -1,5 +1,8 @@
 .header {
   width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 50;
   border-bottom: 1px solid var(--color-border);
   background-color: #f9f7f2;
   background-color: var(--color-background);
@@ -22,9 +25,13 @@
 
 .brand {
   justify-self: start;
-  font-family: var(--font-family-headline);
+  font-family: var(--font-family-label);
+  text-transform: uppercase;
+  letter-spacing: var(--label-letter-spacing);
+  font-optical-sizing: auto;
+  font-style: normal;
   font-size: var(--font-size-md);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-medium);
   line-height: 1.2;
   color: var(--color-text-muted);
   transition: color 0.15s ease;
@@ -36,6 +43,8 @@
 
 .brandActive {
   color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
 }
 
 .center {
@@ -69,8 +78,39 @@
   color: var(--color-text);
 }
 
+.linkIcon {
+  display: none;
+  line-height: 0;
+}
+
+.linkLabel {
+  display: inline;
+}
+
 .linkActive {
   color: var(--color-text);
   text-decoration: underline;
   text-underline-offset: 0.25rem;
+}
+
+@media (max-width: 40rem) {
+  .nav {
+    padding: 16px 20px;
+  }
+
+  .center {
+    gap: calc(24 / 14 * 1rem);
+  }
+
+  .linkIcon {
+    display: inline-flex;
+  }
+
+  .linkLabel {
+    display: none;
+  }
+
+  .linkActive {
+    text-decoration: none;
+  }
 }

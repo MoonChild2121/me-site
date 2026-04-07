@@ -13,6 +13,8 @@ export function useNavStyles() {
       center: styles.center,
       spacer: styles.spacer,
       link: styles.link,
+      linkIcon: styles.linkIcon,
+      linkLabel: styles.linkLabel,
       linkActive: styles.linkActive,
     }),
     []
