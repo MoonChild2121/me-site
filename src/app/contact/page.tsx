@@ -5,5 +5,5 @@ export const metadata = {
 };
 
 export default function ContactPage() {
-  return <PageShell title="Contact" />;
+  return <PageShell />;
 }

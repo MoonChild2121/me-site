@@ -1,0 +1,63 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  border-radius: calc(999 / var(--rem-base) * 1rem);
+  border: 1px solid var(--color-border);
+  background-color: transparent;
+  padding: calc(2 / var(--rem-base) * 1rem);
+  transition: background-color 0.12s ease, border-color 0.12s ease;
+}
+
+.root:hover {
+  border-color: color-mix(in srgb, var(--color-text) 22%, transparent);
+}
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(32 / var(--rem-base) * 1rem);
+  height: calc(32 / var(--rem-base) * 1rem);
+  color: var(--color-text-muted);
+}
+
+.iconWrap :is(img, svg) {
+  display: block;
+}
+
+.divider {
+  width: 1px;
+  height: calc(18 / var(--rem-base) * 1rem);
+  background-color: var(--color-border);
+  margin-right: calc(2 / var(--rem-base) * 1rem);
+}
+
+.input {
+  width: min(calc(360 / var(--rem-base) * 1rem), 62vw);
+  appearance: none;
+  border: none;
+  border-radius: calc(999 / var(--rem-base) * 1rem);
+  padding: calc(8 / var(--rem-base) * 1rem) calc(10 / var(--rem-base) * 1rem);
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size);
+  line-height: 1.4;
+  outline: none;
+}
+
+.input::placeholder {
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
+
+.root:focus-within {
+  border-color: color-mix(in srgb, var(--color-text) 70%, transparent);
+  background-color: transparent;
+}
+
+@media (max-width: 40rem) {
+  .input {
+    width: 100%;
+  }
+}
+

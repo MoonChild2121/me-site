@@ -5,6 +5,6 @@ export const metadata = {
 };
 
 export default function LogPage() {
-  return <PageShell title="Log" />;
+  return <PageShell />;
 }
 

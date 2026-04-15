@@ -2,8 +2,8 @@
 
 :root {
   background-color: #f9f7f2;
-  /* Approx header height: 24px top/bottom padding + 1 line of text */
-  --site-header-height: calc(48px + (var(--font-size) * 1.2));
+  /* Header: 24px top/bottom padding + 1 line of text + 1px border-bottom */
+  --site-header-height: calc(49px + (var(--font-size) * 1.2));
 }
 
 html {
