@@ -1,0 +1,336 @@
+.expGroups {
+  display: flex;
+  flex-direction: column;
+  gap: calc(24 / var(--rem-base) * 1rem);
+}
+
+.expGroup {
+  display: flex;
+  flex-direction: column;
+  gap: calc(12 / var(--rem-base) * 1rem);
+}
+
+.expGroupLabel {
+  font-family: var(--font-family-label);
+  text-transform: uppercase;
+  letter-spacing: var(--label-letter-spacing);
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: color-mix(in srgb, var(--color-text) 62%, transparent);
+  padding-top: calc(8 / var(--rem-base) * 1rem);
+  display: flex;
+  align-items: center;
+  gap: calc(12 / var(--rem-base) * 1rem);
+}
+
+.expGroupLabel::after {
+  content: '';
+  height: 1px;
+  flex: 1;
+  background: color-mix(in srgb, var(--color-text) 10%, transparent);
+}
+
+.expCards {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(10 / var(--rem-base) * 1rem);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.expCard {
+  border: 1px solid var(--color-border);
+  border-radius: calc(14 / var(--rem-base) * 1rem);
+  background-color: color-mix(in srgb, var(--color-text) 1.5%, transparent);
+  overflow: hidden;
+  width: calc(520 / var(--rem-base) * 1rem);
+  min-width: calc(520 / var(--rem-base) * 1rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.expCardOpen {
+  border-color: color-mix(in srgb, var(--color-text) 14%, transparent);
+}
+
+.expCardInner {
+  display: flex;
+  align-items: stretch;
+  min-height: calc(164 / var(--rem-base) * 1rem);
+  flex: 1;
+}
+
+.expCardButton {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  padding: calc(14 / var(--rem-base) * 1rem) calc(16 / var(--rem-base) * 1rem);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: calc(8 / var(--rem-base) * 1rem);
+}
+
+.expCardOpen .expCardButton {
+  border-bottom-color: var(--color-border);
+}
+
+.expCardButton:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-text) 50%, transparent) inset;
+}
+
+.expArrowStrip {
+  appearance: none;
+  border: 0;
+  background-color: color-mix(in srgb, var(--color-text) 1.5%, transparent);
+  border-left: 1px solid var(--color-border);
+  width: calc(36 / var(--rem-base) * 1rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  transition: background-color 0.18s ease, color 0.18s ease;
+  flex: 0 0 auto;
+}
+
+.expArrowStrip:hover {
+  background-color: color-mix(in srgb, var(--color-text) 3%, transparent);
+  color: var(--color-text);
+}
+
+.expCardOpen .expArrowStrip {
+  background-color: color-mix(in srgb, var(--color-background) 96%, var(--color-text));
+  border-bottom: 1px solid var(--color-border);
+}
+
+.expArrowStrip svg {
+  transition: transform 0.22s ease;
+}
+
+.expArrowStripOpen svg {
+  transform: rotate(180deg);
+}
+
+.expHeaderBlock {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: calc(14 / var(--rem-base) * 1rem);
+}
+
+.expTitle {
+  font-family: var(--font-family-headline);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  min-width: 0;
+}
+
+.expCompany {
+  color: color-mix(in srgb, var(--color-text-muted) 90%, transparent);
+  font-weight: var(--font-weight-medium);
+}
+
+.expMetaStack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: calc(3 / var(--rem-base) * 1rem);
+  flex: 0 0 auto;
+  padding-top: calc(2 / var(--rem-base) * 1rem);
+}
+
+.expMetaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(5 / var(--rem-base) * 1rem);
+  font-family: var(--font-family-label);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.expMetaItem svg {
+  color: color-mix(in srgb, var(--color-text-muted) 70%, transparent);
+  flex: 0 0 auto;
+}
+
+.expSummaryLine {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size);
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--color-text) 76%, transparent);
+  max-width: 68ch;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(6 / var(--rem-base) * 1rem);
+  padding-top: calc(2 / var(--rem-base) * 1rem);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: calc(6 / var(--rem-base) * 1rem) calc(10 / var(--rem-base) * 1rem);
+  border-radius: calc(999 / var(--rem-base) * 1rem);
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-text) 6%, transparent);
+  color: var(--color-text);
+  font-family: var(--font-family-label);
+  text-transform: uppercase;
+  letter-spacing: var(--label-letter-spacing);
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+.expDetailsWrap {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 280ms ease, opacity 220ms ease;
+  will-change: max-height, opacity;
+}
+
+.expDetails {
+  padding: calc(14 / var(--rem-base) * 1rem) calc(16 / var(--rem-base) * 1rem) calc(16 / var(--rem-base) * 1rem);
+  background-color: color-mix(in srgb, var(--color-background) 96%, var(--color-text));
+}
+
+.expSectionsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: calc(16 / var(--rem-base) * 1rem);
+}
+
+.expSection {
+  display: flex;
+  flex-direction: column;
+  gap: calc(8 / var(--rem-base) * 1rem);
+}
+
+.expSectionLabel {
+  font-family: var(--font-family-label);
+  text-transform: uppercase;
+  letter-spacing: var(--label-letter-spacing);
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+}
+
+.expSectionBody {
+  display: flex;
+  flex-direction: column;
+  gap: calc(6 / var(--rem-base) * 1rem);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size);
+  line-height: 1.55;
+  color: var(--color-text);
+  max-width: 78ch;
+}
+
+.expOverviewLine {
+  color: var(--color-text);
+}
+
+.expLine {
+  padding-left: calc(12 / var(--rem-base) * 1rem);
+  border-left: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+  color: var(--color-text);
+}
+
+.keyword {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--color-text) 28%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.focusAreas {
+  display: flex;
+  flex-direction: column;
+  gap: calc(12 / var(--rem-base) * 1rem);
+}
+
+.focusArea {
+  display: flex;
+  flex-direction: column;
+  gap: calc(8 / var(--rem-base) * 1rem);
+}
+
+.focusAreaLabel {
+  font-family: var(--font-family-label);
+  text-transform: uppercase;
+  letter-spacing: var(--label-letter-spacing);
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: color-mix(in srgb, var(--color-text) 66%, transparent);
+}
+
+.focusAreaBody {
+  display: flex;
+  flex-direction: column;
+  gap: calc(6 / var(--rem-base) * 1rem);
+  color: var(--color-text);
+}
+
+.emptyState {
+  border: 1px solid var(--color-border);
+  border-radius: calc(14 / var(--rem-base) * 1rem);
+  padding: calc(18 / var(--rem-base) * 1rem);
+  color: var(--color-text-muted);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size);
+  line-height: 1.6;
+}
+
+.section {
+  scroll-margin-top: calc(var(--site-header-height) + var(--space-32));
+  display: flex;
+  flex-direction: column;
+  gap: calc(14 / var(--rem-base) * 1rem);
+  flex: 1;
+  min-height: 0;
+}
+
+.sectionBody {
+  display: flex;
+  flex-direction: column;
+  gap: calc(20 / var(--rem-base) * 1rem);
+}
+
+@media (max-width: 36rem) {
+  .expCard {
+    width: calc(400 / var(--rem-base) * 1rem);
+    min-width: calc(400 / var(--rem-base) * 1rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .expArrowStrip,
+  .expArrowStrip svg,
+  .expDetailsWrap {
+    transition: none;
+  }
+}

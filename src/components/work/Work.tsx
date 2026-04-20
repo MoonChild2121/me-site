@@ -1,15 +1,12 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import Link from 'next/link';
-import { FiBriefcase, FiChevronRight, FiDownload, FiGithub, FiLinkedin, FiMail, FiPhone } from 'react-icons/fi';
+import { FiDownload } from 'react-icons/fi';
 
-import { useWorkDashboardStyles } from './useWorkDashboardStyles';
 import SearchBar from '@/components/common/SearchBar/SearchBar';
 import {
   SECTIONS,
   SECTION_INDEX,
-  EXPERIENCES,
   PROJECTS,
   PUBLICATIONS,
   SKILL_GROUPS,
@@ -17,6 +14,9 @@ import {
   ADDITIONAL,
   type SectionId,
 } from './constants';
+import { useWorkDashboardStyles } from './useWorkDashboardStyles';
+import OverviewTab from './overviewTab/OverviewTab';
+import ExperienceTab from './experienceTab/ExperienceTab';
 
 function normalize(text: string) {
   return text.toLowerCase().trim();
@@ -79,12 +79,6 @@ export default function Work() {
     [activeSection, transition]
   );
 
-  const filteredExperiences = useMemo(() => {
-    return EXPERIENCES.filter(exp =>
-      matchesQuery([exp.role, exp.company, exp.dateRange, ...exp.highlights].join(' '), normalizedQuery)
-    );
-  }, [normalizedQuery]);
-
   const filteredProjects = useMemo(() => {
     return PROJECTS.filter(p =>
       matchesQuery([p.name, p.summary, ...(p.highlights ?? [])].join(' '), normalizedQuery)
@@ -128,139 +122,10 @@ export default function Work() {
   const renderSection = () => {
     switch (activeSection) {
       case 'overview':
-        return (
-          <section className={s.section} aria-label="Overview">
-            <div className={`${s.sectionBody} ${s.overviewSectionBody}`}>
-              <div className={s.overviewLeft}>
-                <div className={s.overviewIntroWrap}>
-                  <div className={s.stackTight}>
-                    <p className={s.summary}>Frontend engineer focused on clear, scalable interface systems.</p>
-                    <p className={s.body}>
-                      I build production Next.js applications with a focus on structure, performance, and long-term
-                      maintainability. My background in machine learning and research shapes how I reason about
-                      systems, trade-offs, and clarity.
-                    </p>
-                  </div>
-                </div>
-
-                <div className={`${s.panel} ${s.contactCard}`} aria-label="Contact">
-                  <div className={s.panelHeading}>Contact</div>
-                  <div className={s.contactStack}>
-                    <a className={s.contactRow} href="tel:+923060040951">
-                      <span className={s.iconBadge} aria-hidden>
-                        <FiPhone size={16} aria-hidden />
-                      </span>
-                      <span className={s.contactRowText}>+92 306 0040951</span>
-                    </a>
-                    <a className={s.contactRow} href="mailto:zkashif.bscs21seecs@seecs.edu.pk">
-                      <span className={s.iconBadge} aria-hidden>
-                        <FiMail size={16} aria-hidden />
-                      </span>
-                      <span className={s.contactRowText}>zkashif.bscs21seecs@seecs.edu.pk</span>
-                    </a>
-                    <a
-                      className={s.contactRow}
-                      href="https://linkedin.com/in/zainab-kashif-193b26218"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <span className={s.iconBadge} aria-hidden>
-                        <FiLinkedin size={16} aria-hidden />
-                      </span>
-                      <span className={s.contactRowText}>LinkedIn</span>
-                    </a>
-                    <a className={s.contactRow} href="https://github.com/MoonChild2121" target="_blank" rel="noreferrer">
-                      <span className={s.iconBadge} aria-hidden>
-                        <FiGithub size={16} aria-hidden />
-                      </span>
-                      <span className={s.contactRowText}>GitHub</span>
-                    </a>
-
-                    <Link className={s.contactCta} href="/contact">
-                      Or directly email me here!
-                    </Link>
-                  </div>
-                </div>
-              </div>
-
-              <div className={s.overviewRightStack}>
-                <div className={s.highlightsGrid} aria-label="Highlights">
-                  <button
-                    type="button"
-                    className={`${s.highlightTile} ${s.highlightTileButton}`}
-                    onClick={() => goToSection('experience')}
-                  >
-                    <div className={s.highlightLine}>
-                      <span>Associate Frontend Engineer - Carbonteq</span>
-                      <span className={s.highlightLineEnd}>
-                        <span className={s.currentPill} aria-label="Current role" title="Current role">
-                          <FiBriefcase size={14} aria-hidden />
-                        </span>
-                        <span className={s.highlightChevron} aria-hidden>
-                          <FiChevronRight size={18} aria-hidden />
-                        </span>
-                      </span>
-                    </div>
-                  </button>
-                  <div className={s.highlightTile}>Next.js production systems</div>
-                  <button
-                    type="button"
-                    className={`${s.highlightTile} ${s.highlightTileButton}`}
-                    onClick={() => goToSection('projects')}
-                  >
-                    <div className={s.highlightLine}>
-                      <span>Design systems + UI architecture</span>
-                      <span className={s.highlightChevron} aria-hidden>
-                        <FiChevronRight size={18} aria-hidden />
-                      </span>
-                    </div>
-                  </button>
-                  <div className={s.highlightTile}>Performance + accessibility focus</div>
-                  <div className={s.highlightTile}>ML / AI background</div>
-                  <button
-                    type="button"
-                    className={`${s.highlightTile} ${s.highlightTileButton}`}
-                    onClick={() => goToSection('publications')}
-                  >
-                    <div className={s.highlightLine}>
-                      <span>IEEE publication (2025)</span>
-                      <span className={s.highlightChevron} aria-hidden>
-                        <FiChevronRight size={18} aria-hidden />
-                      </span>
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </section>
-        );
+        return <OverviewTab goToSection={goToSection} />;
 
       case 'experience':
-        return (
-          <section className={s.section} aria-label="Experience">
-            <div className={s.sectionBody}>
-              {filteredExperiences.length === 0 ? (
-                <div className={s.emptyState}>No experience entries match your search.</div>
-              ) : (
-                <div className={s.list}>
-                  {filteredExperiences.map(exp => (
-                    <article key={`${exp.company}-${exp.role}-${exp.dateRange}`} className={s.item}>
-                      <header className={s.itemHeader}>
-                        <div className={s.itemTitle}>{exp.role}</div>
-                        <div className={s.itemMeta}>{exp.dateRange}</div>
-                      </header>
-                      <ul className={s.bullets}>
-                        {exp.highlights.map(h => (
-                          <li key={h}>{h}</li>
-                        ))}
-                      </ul>
-                    </article>
-                  ))}
-                </div>
-              )}
-            </div>
-          </section>
-        );
+        return <ExperienceTab query={query} />;
 
       case 'projects':
         return (
@@ -460,4 +325,3 @@ export default function Work() {
     </div>
   );
 }
-
