@@ -231,6 +231,22 @@
   }
 }
 
+.stagger {
+  animation: staggerFadeIn 340ms ease both;
+  animation-delay: calc(var(--stagger, 0) * 80ms);
+}
+
+@keyframes staggerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(calc(8 / var(--rem-base) * 1rem));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .tileButton {
     transition: none;
@@ -238,5 +254,10 @@
 
   .tileButton:hover {
     transform: none;
+  }
+
+  .stagger {
+    animation: none;
+    opacity: 1;
   }
 }

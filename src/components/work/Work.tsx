@@ -1,35 +1,32 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type { CSSProperties } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { FiDownload } from 'react-icons/fi';
 
-import SearchBar from '@/components/common/SearchBar/SearchBar';
+import posScreenshot from '@/assets/pos.png';
+import publicationImage from '@/assets/publication.png';
 import {
   SECTIONS,
   SECTION_INDEX,
-  PROJECTS,
+  EXPLORATIONS,
+  FEATURED_PROJECT,
   PUBLICATIONS,
   SKILL_GROUPS,
   EDUCATION,
-  ADDITIONAL,
+  COURSES,
   type SectionId,
 } from './constants';
 import { useWorkDashboardStyles } from './useWorkDashboardStyles';
 import OverviewTab from './overviewTab/OverviewTab';
 import ExperienceTab from './experienceTab/ExperienceTab';
 
-function normalize(text: string) {
-  return text.toLowerCase().trim();
-}
-
-function matchesQuery(text: string, query: string) {
-  if (!query) return true;
-  return normalize(text).includes(query);
+function staggerStyle(index: number): CSSProperties {
+  return { '--stagger': index } as CSSProperties;
 }
 
 export default function Work() {
   const s = useWorkDashboardStyles();
-  const [didInitialEnter, setDidInitialEnter] = useState(false);
 
   useEffect(() => {
     const html = document.documentElement;
@@ -42,13 +39,6 @@ export default function Work() {
     };
   }, []);
 
-  useEffect(() => {
-    const frame = window.requestAnimationFrame(() => setDidInitialEnter(true));
-    return () => window.cancelAnimationFrame(frame);
-  }, []);
-
-  const [query, setQuery] = useState('');
-  const normalizedQuery = useMemo(() => normalize(query), [query]);
   const [activeSection, setActiveSection] = useState<SectionId>('overview');
   const [transition, setTransition] = useState<'idle' | 'leaving' | 'entering'>('idle');
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -79,40 +69,6 @@ export default function Work() {
     [activeSection, transition]
   );
 
-  const filteredProjects = useMemo(() => {
-    return PROJECTS.filter(p =>
-      matchesQuery([p.name, p.summary, ...(p.highlights ?? [])].join(' '), normalizedQuery)
-    );
-  }, [normalizedQuery]);
-
-  const featuredProject = filteredProjects.find(p => p.featured);
-  const otherProjects = filteredProjects.filter(p => !p.featured);
-
-  const filteredPublications = useMemo(() => {
-    return PUBLICATIONS.filter(pub =>
-      matchesQuery(
-        [pub.title, pub.venue, pub.year, pub.summary ?? '', ...(pub.highlights ?? [])].join(' '),
-        normalizedQuery
-      )
-    );
-  }, [normalizedQuery]);
-
-  const filteredSkillGroups = useMemo(() => {
-    if (!normalizedQuery) return SKILL_GROUPS;
-    return SKILL_GROUPS.map(group => ({
-      ...group,
-      skills: group.skills.filter(skill => matchesQuery(skill, normalizedQuery)),
-    })).filter(group => group.skills.length > 0 || matchesQuery(group.label, normalizedQuery));
-  }, [normalizedQuery]);
-
-  const filteredEducation = useMemo(() => {
-    return EDUCATION.filter(item => matchesQuery([item.title, item.meta, item.summary].join(' '), normalizedQuery));
-  }, [normalizedQuery]);
-
-  const filteredAdditional = useMemo(() => {
-    return ADDITIONAL.filter(item => matchesQuery([item.title, item.meta, item.summary].join(' '), normalizedQuery));
-  }, [normalizedQuery]);
-
   const sectionTransitionClass =
     transition === 'leaving' ? s.sectionLeaving : transition === 'entering' ? s.sectionEntering : '';
 
@@ -125,75 +81,151 @@ export default function Work() {
         return <OverviewTab goToSection={goToSection} />;
 
       case 'experience':
-        return <ExperienceTab query={query} />;
+        return <ExperienceTab query="" />;
 
       case 'projects':
         return (
           <section className={s.section} aria-label="Projects">
             <div className={s.sectionBody}>
-              {featuredProject ? (
-                <div className={s.featuredPanel} aria-label="Featured project">
-                  <div className={s.itemHeader}>
-                    <div className={s.itemTitle}>Featured — {featuredProject.name}</div>
-                  </div>
-                  <div className={s.body}>{featuredProject.summary}</div>
-                  {featuredProject.highlights?.length ? (
-                    <ul className={s.bullets}>
-                      {featuredProject.highlights.map(h => (
-                        <li key={h}>{h}</li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </div>
-              ) : null}
+              <div className={s.projectsFlow} aria-label="Projects content">
+                <section className={`${s.featuredProject} ${s.stagger}`} style={staggerStyle(0)} aria-label="Featured project">
+                  <header className={s.featuredHeader}>
+                    <div className={s.featuredKicker}>Featured System</div>
+                    <div className={s.featuredTitle}>{FEATURED_PROJECT.title}</div>
+                    <div className={s.featuredMeta}>{FEATURED_PROJECT.meta}</div>
+                  </header>
 
-              {otherProjects.length === 0 ? (
-                <div className={s.emptyState}>No projects match your search.</div>
-              ) : (
-                <div className={s.list}>
-                  {otherProjects.map(p => (
-                    <article key={p.name} className={s.item}>
-                      <header className={s.itemHeader}>
-                        <div className={s.itemTitle}>{p.name}</div>
-                      </header>
-                      <div className={s.body}>{p.summary}</div>
-                    </article>
-                  ))}
-                </div>
-              )}
+                  <div className={s.featuredOverview}>{FEATURED_PROJECT.overview}</div>
+
+                  <div className={s.featuredMain}>
+                    <div className={s.featuredBlocks}>
+                      <section className={`${s.featuredBlock} ${s.stagger}`} style={staggerStyle(1)} aria-label="What I built">
+                        <div className={s.blockLabel}>What I Built</div>
+                        <ul className={s.blockList}>
+                          {FEATURED_PROJECT.whatIBuilt.map(item => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </section>
+
+                      <section className={`${s.featuredBlock} ${s.stagger}`} style={staggerStyle(2)} aria-label="System thinking">
+                        <div className={s.blockLabel}>System Thinking</div>
+                        <ul className={s.blockList}>
+                          {FEATURED_PROJECT.systemThinking.map(item => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </section>
+
+                      <section className={`${s.featuredBlock} ${s.stagger}`} style={staggerStyle(3)} aria-label="Highlights">
+                        <div className={s.blockLabel}>Highlights</div>
+                        <ul className={s.blockList}>
+                          {FEATURED_PROJECT.highlights.map(item => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </section>
+                    </div>
+
+                    <div className={`${s.featuredMedia} ${s.stagger}`} style={staggerStyle(2)} aria-label="Featured project image">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        className={s.featuredImage}
+                        src={posScreenshot.src}
+                        alt="Custom POS system interface screenshot"
+                        loading="lazy"
+                      />
+                    </div>
+                  </div>
+                </section>
+
+                <section className={`${s.explorations} ${s.stagger}`} style={staggerStyle(5)} aria-label="Explorations">
+                  <header className={s.explorationsHeader}>
+                    <div className={s.explorationsTitle}>Explorations</div>
+                    <div className={s.explorationsIntro}>
+                      Smaller projects exploring different systems, models, and problem spaces.
+                    </div>
+                  </header>
+
+                  <div className={s.explorationList} aria-label="Exploration projects">
+                    {EXPLORATIONS.map((p, i) => (
+                      <article key={p.title} className={`${s.explorationItem} ${s.stagger}`} style={staggerStyle(6 + i)}>
+                        <header className={s.explorationHeader}>
+                          <div className={s.explorationTitle}>{p.title}</div>
+                          <div className={s.explorationMeta}>{p.meta}</div>
+                        </header>
+                        <div className={s.explorationDesc}>{p.description}</div>
+
+                        <details className={s.explorationDetails}>
+                          <summary className={s.explorationSummary}>Key points</summary>
+                          <ul className={s.explorationPoints}>
+                            {p.keyPoints.map(k => (
+                              <li key={k}>{k}</li>
+                            ))}
+                          </ul>
+                        </details>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              </div>
             </div>
           </section>
         );
 
       case 'publications':
         return (
-          <section className={s.section} aria-label="Publications">
+          <section className={s.pubSection} aria-label="Publications">
             <div className={s.sectionBody}>
-              {filteredPublications.length === 0 ? (
-                <div className={s.emptyState}>No publications match your search.</div>
-              ) : (
-                <div className={s.list}>
-                  {filteredPublications.map(pub => (
-                    <article key={`${pub.title}-${pub.year}`} className={s.item}>
-                      <header className={s.itemHeader}>
-                        <div className={s.itemTitle}>{pub.title}</div>
-                        <div className={s.itemMeta}>
-                          {pub.venue} — {pub.year}
-                        </div>
-                      </header>
-                      {pub.summary ? <div className={s.body}>{pub.summary}</div> : null}
-                      {pub.highlights?.length ? (
-                        <ul className={s.bullets}>
-                          {pub.highlights.map(h => (
-                            <li key={h}>{h}</li>
-                          ))}
-                        </ul>
-                      ) : null}
-                      <div className={s.pubLink}>→ View Publication</div>
-                    </article>
-                  ))}
+              <div className={s.pubLayout} aria-label="Publications layout">
+                <div className={s.pubContent}>
+                  <div className={s.list}>
+                    {PUBLICATIONS.map((pub, i) => (
+                      <article
+                        key={`${pub.title}-${pub.year}`}
+                        className={`${s.item} ${s.stagger}`}
+                        style={staggerStyle(i)}
+                      >
+                        <header className={s.itemHeader}>
+                          <div className={s.itemTitle}>{pub.title}</div>
+                          <div className={s.itemMeta}>
+                            {pub.venue} — {pub.year}
+                          </div>
+                        </header>
+                        {pub.summary ? <div className={s.body}>{pub.summary}</div> : null}
+                        {pub.highlights?.length ? (
+                          <ul className={s.bullets}>
+                            {pub.highlights.map(h => (
+                              <li key={h}>{h}</li>
+                            ))}
+                          </ul>
+                        ) : null}
+                        {pub.url ? (
+                          <a
+                            className={s.pubLink}
+                            href={pub.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View Publication
+                          </a>
+                        ) : (
+                          <span className={s.pubLink}>View Publication</span>
+                        )}
+                      </article>
+                    ))}
+                  </div>
                 </div>
-              )}
+
+                <div
+                  className={`${s.pubMedia} ${s.stagger}`}
+                  style={staggerStyle(PUBLICATIONS.length)}
+                  aria-label="Publication image"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img className={s.pubImage} src={publicationImage.src} alt="Publication cover screenshot" loading="lazy" />
+                </div>
+              </div>
             </div>
           </section>
         );
@@ -202,68 +234,67 @@ export default function Work() {
         return (
           <section className={s.section} aria-label="Skills">
             <div className={s.sectionBody}>
-              {filteredSkillGroups.length === 0 ? (
-                <div className={s.emptyState}>No skills match your search.</div>
-              ) : (
-                <div className={s.list}>
-                  {filteredSkillGroups.map(group => (
-                    <div key={group.label} className={s.item}>
-                      <div className={s.itemHeader}>
-                        <div className={s.itemTitle}>{group.label}</div>
-                      </div>
-                      <div className={s.body}>{group.skills.join(', ')}</div>
+              <div className={s.skillsGrid}>
+                {SKILL_GROUPS.map((group, i) => (
+                  <div key={group.title} className={`${s.skillCard} ${s.stagger}`} style={staggerStyle(i)}>
+                    <div className={s.skillCardHeader}>
+                      <div className={s.skillCardTitle}>{group.title}</div>
+                      <div className={s.skillCardSubtitle}>{group.subtitle}</div>
                     </div>
-                  ))}
-                </div>
-              )}
+                    <div className={s.skillCardTags}>
+                      {group.tags.map(tag => (
+                        <span key={tag} className={s.skillTag}>{tag}</span>
+                      ))}
+                    </div>
+                    <div className={s.skillCardBody}>{group.description}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
         );
 
-      case 'education':
+      case 'education': {
+        let idx = 0;
         return (
           <section className={s.section} aria-label="Education">
             <div className={s.sectionBody}>
-              {filteredEducation.length === 0 ? (
-                <div className={s.emptyState}>No education entries match your search.</div>
-              ) : (
-                <div className={s.list}>
-                  {filteredEducation.map(item => (
-                    <article key={item.title} className={s.item}>
-                      <header className={s.itemHeader}>
-                        <div className={s.itemTitle}>{item.title}</div>
-                        <div className={s.itemMeta}>{item.summary}</div>
-                      </header>
-                      <div className={s.body}>{item.meta}</div>
-                    </article>
-                  ))}
-                </div>
-              )}
-            </div>
-          </section>
-        );
+              <div className={s.list}>
+                {EDUCATION.map((item, eduIdx) => (
+                  <article
+                    key={item.title}
+                    className={`${s.item} ${eduIdx === 0 ? s.eduPrimary : ''} ${s.stagger}`}
+                    style={staggerStyle(idx++)}
+                  >
+                    <header className={s.itemHeader}>
+                      <div className={s.itemTitle}>{item.title}</div>
+                      <div className={s.itemMeta}>{item.summary}</div>
+                    </header>
+                    <div className={s.body}>{item.meta}</div>
+                  </article>
+                ))}
+              </div>
 
-      case 'additional':
-        return (
-          <section className={s.section} aria-label="Additional">
-            <div className={s.sectionBody}>
-              {filteredAdditional.length === 0 ? (
-                <div className={s.emptyState}>No additional entries match your search.</div>
-              ) : (
-                <div className={s.list}>
-                  {filteredAdditional.map(item => (
-                    <article key={item.title} className={s.item}>
-                      <header className={s.itemHeader}>
-                        <div className={s.itemTitle}>{item.title}</div>
-                      </header>
-                      <div className={s.body}>{item.meta}</div>
-                    </article>
-                  ))}
-                </div>
-              )}
+              <div className={`${s.cfWrap} ${s.stagger}`} style={staggerStyle(idx++)} aria-label="Courses">
+                <section className={s.cfBlock} aria-label="Courses">
+                  <div className={s.cfLabel}>Courses</div>
+                  <ul className={s.courseList} aria-label="Courses list">
+                    {COURSES.map(course => (
+                      <li key={`${course.name}-${course.provider}`} className={s.courseItem}>
+                        <div className={s.courseTopRow}>
+                          <div className={s.courseName}>{course.name}</div>
+                          <div className={s.courseProvider}>{course.provider}</div>
+                        </div>
+                        {course.focus ? <div className={s.courseFocus}>{course.focus}</div> : null}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              </div>
             </div>
           </section>
         );
+      }
 
       default:
         return null;
@@ -304,12 +335,6 @@ export default function Work() {
                 </span>
                 <span>Download CV</span>
               </a>
-              <SearchBar
-                value={query}
-                onChange={setQuery}
-                placeholder={`Search ${activeLabel}`}
-                ariaLabel={`Search ${activeLabel}`}
-              />
             </div>
           </div>
         </div>
@@ -317,7 +342,7 @@ export default function Work() {
         <div className={s.screen} aria-label="Work content">
           <div ref={contentRef} className={s.screenScroller}>
             <div className={`${s.sectionFrame} ${isOverview ? s.sectionFrameCenter : ''} ${sectionTransitionClass}`}>
-              <div className={!didInitialEnter ? s.contentEnter : ''}>{renderSection()}</div>
+              {renderSection()}
             </div>
           </div>
         </div>

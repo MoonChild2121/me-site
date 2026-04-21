@@ -4,8 +4,7 @@ export type SectionId =
   | 'projects'
   | 'publications'
   | 'skills'
-  | 'education'
-  | 'additional';
+  | 'education';
 
 export const SECTIONS: Array<{ id: SectionId; label: string }> = [
   { id: 'overview', label: 'Overview' },
@@ -14,7 +13,6 @@ export const SECTIONS: Array<{ id: SectionId; label: string }> = [
   { id: 'publications', label: 'Publications' },
   { id: 'skills', label: 'Skills' },
   { id: 'education', label: 'Education' },
-  { id: 'additional', label: 'Additional' },
 ];
 
 export const SECTION_INDEX = Object.fromEntries(
@@ -42,11 +40,24 @@ export type Experience = {
   };
 };
 
-export type Project = {
-  name: string;
-  summary: string;
-  featured?: boolean;
-  highlights?: string[];
+export type FeaturedProject = {
+  title: string;
+  meta: string;
+  overview: string;
+  whatIBuilt: string[];
+  systemThinking: string[];
+  highlights: string[];
+  image?: {
+    src: string;
+    alt: string;
+  };
+};
+
+export type ExplorationProject = {
+  title: string;
+  meta: string;
+  description: string;
+  keyPoints: string[];
 };
 
 export type Publication = {
@@ -55,6 +66,7 @@ export type Publication = {
   year: string;
   summary?: string;
   highlights?: string[];
+  url?: string;
 };
 
 export type EducationItem = {
@@ -239,30 +251,63 @@ export const EXPERIENCES: Experience[] = [
   },
 ];
 
-export const PROJECTS: Project[] = [
+export const FEATURED_PROJECT: FeaturedProject = {
+  title: 'Custom Point of Sale (POS) System',
+  meta: 'Next.js • Square POS • System Design • APIs',
+  overview:
+    'A full-featured point-of-sale system designed for real-world retail workflows, handling transactions, pricing logic, and system integration end-to-end.',
+  whatIBuilt: [
+    'Real-time transaction system integrated with Square POS',
+    'Square OAuth authentication for secure merchant account linking',
+    'Dynamic pricing engine handling taxes, discounts, and edge cases',
+    'Scalable frontend architecture using Next.js',
+    'Complete UI system designed for consistency and usability',
+    'API-driven workflows for orders and payments',
+  ],
+  systemThinking: [
+    'Designed the application as a long-term system rather than a single feature',
+    'Structured frontend around reusable modules and clear data flow',
+    'Treated pricing and checkout as critical logic layers, not just UI',
+    'Built UI and design system alongside product features for consistency',
+    'Focused on reliability under real-world usage scenarios',
+  ],
+  highlights: [
+    'Accurate and resilient transaction handling',
+    'Clean, extensible architecture',
+    'End-to-end ownership across UI, logic, and integration',
+  ],
+};
+
+export const EXPLORATIONS: ExplorationProject[] = [
   {
-    name: 'Custom POS System',
-    featured: true,
-    summary:
-      'A full-featured point-of-sale system designed for real-time retail workflows.',
-    highlights: [
-      'Built scalable frontend architecture using Next.js',
-      'Designed UI and reusable design system',
-      'Implemented complex pricing logic',
-      'Integrated APIs for seamless checkout',
+    title: 'Style Change Detection',
+    meta: 'PyTorch • LoRA • Mistral-7B',
+    description: 'Detects stylistic shifts in text for authorship analysis and content integrity.',
+    keyPoints: [
+      'Fine-tuned Mistral-7B using LoRA for efficient training',
+      'Built preprocessing and evaluation pipeline (F1 score, confusion matrix)',
+      'Explored trade-offs between efficiency and model performance',
     ],
   },
   {
-    name: 'Style Change Detection System',
-    summary: 'ML model for detecting stylistic shifts in text',
+    title: 'Music Generation from Prompt',
+    meta: 'TensorFlow • Transformers • LSTM',
+    description: 'Generates music based on user mood and emotional context.',
+    keyPoints: [
+      'Combined emotion classification with sequence generation',
+      'Achieved ~80% mood prediction accuracy',
+      'Explored interaction between input intent and generated output',
+    ],
   },
   {
-    name: 'Music Generation System',
-    summary: 'Prompt-based music generation using emotion classification',
-  },
-  {
-    name: 'Car Speed Detection',
-    summary: 'Real-time tracking system using YOLOv8',
+    title: 'Car Speed Detection',
+    meta: 'YOLOv8 • DeepSORT',
+    description: 'Real-time system for vehicle tracking and speed estimation.',
+    keyPoints: [
+      'Used object detection and tracking for motion analysis',
+      'Combined tracking with speed estimation logic',
+      'Achieved ~95% accuracy in controlled scenarios',
+    ],
   },
 ];
 
@@ -278,14 +323,53 @@ export const PUBLICATIONS: Publication[] = [
       'Focused on improving early-stage detection',
       'Designed model combining multiple data sources',
     ],
+    url: 'https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11359688',
   },
 ];
 
-export const SKILL_GROUPS: Array<{ label: string; skills: string[] }> = [
-  { label: 'Frontend', skills: ['React', 'Next.js', 'TypeScript', 'HTML', 'CSS'] },
-  { label: 'UI Systems', skills: ['Design tokens', 'Component composition', 'Accessibility'] },
-  { label: 'Tooling', skills: ['Git', 'ESLint', 'Prettier'] },
-  { label: 'Collaboration', skills: ['Product collaboration', 'Code reviews', 'Documentation'] },
+export type SkillGroup = {
+  title: string;
+  subtitle: string;
+  tags: string[];
+  description: string;
+};
+
+export const SKILL_GROUPS: SkillGroup[] = [
+  {
+    title: 'Frontend Systems',
+    subtitle: 'Building structured, scalable frontend applications',
+    tags: ['Next.js', 'React', 'TypeScript'],
+    description:
+      'Designing and maintaining production-grade frontend systems with a focus on architecture, reusability, and long-term maintainability. Comfortable handling complex state, modular codebases, and evolving product requirements.',
+  },
+  {
+    title: 'UI Engineering',
+    subtitle: 'Design systems, accessibility, and interface consistency',
+    tags: ['Component systems', 'Design tokens', 'Accessibility'],
+    description:
+      'Building consistent and reusable UI systems with strong emphasis on accessibility and composability. Focused on creating interfaces that are not only visually consistent, but resilient and scalable.',
+  },
+  {
+    title: 'System Integration',
+    subtitle: 'Connecting frontend systems with backend services',
+    tags: ['REST APIs', 'Node.js', 'Data flow'],
+    description:
+      'Experience integrating APIs into structured frontend workflows. Comfortable working across the boundary of frontend and backend to ensure smooth data flow and reliable system behavior.',
+  },
+  {
+    title: 'Performance & Quality',
+    subtitle: 'Optimizing systems for speed, clarity, and reliability',
+    tags: ['Code-splitting', 'Lazy loading', 'Lighthouse', 'Debugging'],
+    description:
+      'Improving application performance through structured optimization techniques. Focused on building fast, responsive interfaces while maintaining clean and maintainable code.',
+  },
+  {
+    title: 'Machine Learning & Research',
+    subtitle: 'Bridging ML systems with real-world applications',
+    tags: ['PyTorch', 'TensorFlow', 'NLP', 'RAG'],
+    description:
+      'Background in building and evaluating machine learning systems, with experience integrating ML pipelines into applications. Strong understanding of experimental design, evaluation, and practical deployment constraints.',
+  },
 ];
 
 export const EDUCATION: EducationItem[] = [
@@ -296,20 +380,34 @@ export const EDUCATION: EducationItem[] = [
   },
 ];
 
-export const ADDITIONAL: AdditionalItem[] = [
+export type Course = {
+  name: string;
+  provider: string;
+  focus?: string;
+};
+
+export const COURSES: Course[] = [
   {
-    title: 'Machine Learning Specialization — DeepLearning.AI',
-    meta: 'Advanced ML concepts and model building',
-    summary: '',
+    name: 'ML & DL Specialization',
+    provider: 'DeepLearning.AI (Coursera)',
+    focus: 'Core ML & DL concepts and practical model building.',
   },
   {
-    title: 'Web Development — Meta',
-    meta: 'React, JavaScript, version control',
-    summary: '',
+    name: 'Web Development',
+    provider: 'Meta (Coursera)',
+    focus: 'Frontend foundations and modern web tooling.',
   },
   {
-    title: 'Computer Networking — Cisco',
-    meta: 'Networking fundamentals',
-    summary: '',
+    name: 'Computer Networking',
+    provider: 'Cisco Networking Academy',
+    focus: 'Networking fundamentals and system-level basics.',
+  },
+  {
+    name: 'Project Management Certification',
+    provider: 'Coursera',
+    focus: 'Planning, execution, and stakeholder alignment basics.',
   },
 ];
+
+export const FOUNDATIONS_STATEMENT =
+  'Background in machine learning, NLP systems, and research-driven development, shaping a structured and systems-oriented approach to frontend engineering.';

@@ -34,11 +34,6 @@
   font-weight: var(--font-weight-medium);
   line-height: 1.2;
   color: var(--color-text-muted);
-  transition: color 0.15s ease;
-}
-
-.brand:hover {
-  color: var(--color-text);
 }
 
 .brandActive {
@@ -72,11 +67,6 @@
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-muted);
-  transition: color 0.15s ease;
-}
-
-.link:hover {
-  color: var(--color-text);
 }
 
 .linkIcon {

@@ -2,12 +2,14 @@
   display: flex;
   flex-direction: column;
   gap: calc(24 / var(--rem-base) * 1rem);
+  max-width: 100%;
 }
 
 .expGroup {
   display: flex;
   flex-direction: column;
   gap: calc(12 / var(--rem-base) * 1rem);
+  max-width: 100%;
 }
 
 .expGroupLabel {
@@ -18,7 +20,7 @@
   font-style: normal;
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-medium);
-  color: color-mix(in srgb, var(--color-text) 62%, transparent);
+  color: color-mix(in srgb, var(--color-text) 78%, transparent);
   padding-top: calc(8 / var(--rem-base) * 1rem);
   display: flex;
   align-items: center;
@@ -34,11 +36,34 @@
 
 .expCards {
   display: flex;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: calc(10 / var(--rem-base) * 1rem);
+  max-width: 100%;
+}
+
+.expCards .expCard {
+  min-width: 0;
+  width: 100%;
+  max-width: calc(520 / var(--rem-base) * 1rem);
+}
+
+.expCardsScrollable {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
   gap: calc(10 / var(--rem-base) * 1rem);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  max-width: 100%;
+}
+
+.expCardsScrollable::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 .expCard {
@@ -46,79 +71,31 @@
   border-radius: calc(14 / var(--rem-base) * 1rem);
   background-color: color-mix(in srgb, var(--color-text) 1.5%, transparent);
   overflow: hidden;
+  min-height: calc(198 / var(--rem-base) * 1rem);
   width: calc(520 / var(--rem-base) * 1rem);
   min-width: calc(520 / var(--rem-base) * 1rem);
   display: flex;
   flex-direction: column;
 }
 
-.expCardOpen {
-  border-color: color-mix(in srgb, var(--color-text) 14%, transparent);
-}
-
 .expCardInner {
   display: flex;
-  align-items: stretch;
-  min-height: calc(164 / var(--rem-base) * 1rem);
-  flex: 1;
+  flex-direction: column;
+  padding: calc(14 / var(--rem-base) * 1rem) calc(16 / var(--rem-base) * 1rem);
+  height: 100%;
 }
 
-.expCardButton {
-  flex: 1;
-  min-width: 0;
-  text-align: left;
-  appearance: none;
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid transparent;
-  padding: calc(14 / var(--rem-base) * 1rem) calc(16 / var(--rem-base) * 1rem);
-  cursor: pointer;
+.expCardTop {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: calc(8 / var(--rem-base) * 1rem);
 }
 
-.expCardOpen .expCardButton {
-  border-bottom-color: var(--color-border);
-}
-
-.expCardButton:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-text) 50%, transparent) inset;
-}
-
-.expArrowStrip {
-  appearance: none;
-  border: 0;
-  background-color: color-mix(in srgb, var(--color-text) 1.5%, transparent);
-  border-left: 1px solid var(--color-border);
-  width: calc(36 / var(--rem-base) * 1rem);
+.expCardBottom {
+  margin-top: auto;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--color-text-muted);
-  transition: background-color 0.18s ease, color 0.18s ease;
-  flex: 0 0 auto;
-}
-
-.expArrowStrip:hover {
-  background-color: color-mix(in srgb, var(--color-text) 3%, transparent);
-  color: var(--color-text);
-}
-
-.expCardOpen .expArrowStrip {
-  background-color: color-mix(in srgb, var(--color-background) 96%, var(--color-text));
-  border-bottom: 1px solid var(--color-border);
-}
-
-.expArrowStrip svg {
-  transition: transform 0.22s ease;
-}
-
-.expArrowStripOpen svg {
-  transform: rotate(180deg);
+  flex-direction: column;
+  gap: calc(8 / var(--rem-base) * 1rem);
 }
 
 .expHeaderBlock {
@@ -139,7 +116,7 @@
 }
 
 .expCompany {
-  color: color-mix(in srgb, var(--color-text-muted) 90%, transparent);
+  color: var(--color-text-muted);
   font-weight: var(--font-weight-medium);
 }
 
@@ -164,7 +141,7 @@
 }
 
 .expMetaItem svg {
-  color: color-mix(in srgb, var(--color-text-muted) 70%, transparent);
+  color: color-mix(in srgb, var(--color-text-muted) 85%, transparent);
   flex: 0 0 auto;
 }
 
@@ -172,7 +149,7 @@
   font-family: var(--font-family-body);
   font-size: var(--font-size);
   line-height: 1.55;
-  color: color-mix(in srgb, var(--color-text) 76%, transparent);
+  color: color-mix(in srgb, var(--color-text) 88%, transparent);
   max-width: 68ch;
 }
 
@@ -201,98 +178,20 @@
   white-space: nowrap;
 }
 
-.expDetailsWrap {
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  transition: max-height 280ms ease, opacity 220ms ease;
-  will-change: max-height, opacity;
+.stagger {
+  animation: staggerFadeIn 340ms ease both;
+  animation-delay: calc(var(--stagger, 0) * 80ms);
 }
 
-.expDetails {
-  padding: calc(14 / var(--rem-base) * 1rem) calc(16 / var(--rem-base) * 1rem) calc(16 / var(--rem-base) * 1rem);
-  background-color: color-mix(in srgb, var(--color-background) 96%, var(--color-text));
-}
-
-.expSectionsGrid {
-  display: flex;
-  flex-direction: column;
-  gap: calc(16 / var(--rem-base) * 1rem);
-}
-
-.expSection {
-  display: flex;
-  flex-direction: column;
-  gap: calc(8 / var(--rem-base) * 1rem);
-}
-
-.expSectionLabel {
-  font-family: var(--font-family-label);
-  text-transform: uppercase;
-  letter-spacing: var(--label-letter-spacing);
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-muted);
-}
-
-.expSectionBody {
-  display: flex;
-  flex-direction: column;
-  gap: calc(6 / var(--rem-base) * 1rem);
-  font-family: var(--font-family-body);
-  font-size: var(--font-size);
-  line-height: 1.55;
-  color: var(--color-text);
-  max-width: 78ch;
-}
-
-.expOverviewLine {
-  color: var(--color-text);
-}
-
-.expLine {
-  padding-left: calc(12 / var(--rem-base) * 1rem);
-  border-left: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
-  color: var(--color-text);
-}
-
-.keyword {
-  text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--color-text) 28%, transparent);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.18em;
-}
-
-.focusAreas {
-  display: flex;
-  flex-direction: column;
-  gap: calc(12 / var(--rem-base) * 1rem);
-}
-
-.focusArea {
-  display: flex;
-  flex-direction: column;
-  gap: calc(8 / var(--rem-base) * 1rem);
-}
-
-.focusAreaLabel {
-  font-family: var(--font-family-label);
-  text-transform: uppercase;
-  letter-spacing: var(--label-letter-spacing);
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  color: color-mix(in srgb, var(--color-text) 66%, transparent);
-}
-
-.focusAreaBody {
-  display: flex;
-  flex-direction: column;
-  gap: calc(6 / var(--rem-base) * 1rem);
-  color: var(--color-text);
+@keyframes staggerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(calc(8 / var(--rem-base) * 1rem));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .emptyState {
@@ -312,25 +211,26 @@
   gap: calc(14 / var(--rem-base) * 1rem);
   flex: 1;
   min-height: 0;
+  max-width: 100%;
 }
 
 .sectionBody {
   display: flex;
   flex-direction: column;
   gap: calc(20 / var(--rem-base) * 1rem);
+  max-width: 100%;
 }
 
 @media (max-width: 36rem) {
-  .expCard {
+  .expCardsScrollable .expCard {
     width: calc(400 / var(--rem-base) * 1rem);
     min-width: calc(400 / var(--rem-base) * 1rem);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .expArrowStrip,
-  .expArrowStrip svg,
-  .expDetailsWrap {
-    transition: none;
+  .stagger {
+    animation: none;
+    opacity: 1;
   }
 }

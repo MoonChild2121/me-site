@@ -1,15 +1,20 @@
+import type { CSSProperties } from 'react';
 import Link from 'next/link';
 import { FiBriefcase, FiChevronRight, FiGithub, FiLinkedin, FiMail, FiPhone } from 'react-icons/fi';
 
 import type { SectionId } from '../constants';
 import styles from './OverviewTab.module.css';
 
+function staggerStyle(index: number): CSSProperties {
+  return { '--stagger': index } as CSSProperties;
+}
+
 export default function OverviewTab({ goToSection }: { goToSection: (id: SectionId) => void }) {
   return (
     <section className={styles.section} aria-label="Overview">
       <div className={styles.body}>
         <div className={styles.left}>
-          <div className={styles.introWrap}>
+          <div className={`${styles.introWrap} ${styles.stagger}`} style={staggerStyle(0)}>
             <p className={styles.intro}>
               Frontend engineer focused on clear, scalable interface systems. I build production Next.js
               applications with a focus on structure, performance, and long-term maintainability. My background
@@ -17,7 +22,7 @@ export default function OverviewTab({ goToSection }: { goToSection: (id: Section
             </p>
           </div>
 
-          <div className={styles.contactCard} aria-label="Contact">
+          <div className={`${styles.contactCard} ${styles.stagger}`} style={staggerStyle(1)} aria-label="Contact">
             <div className={styles.contactHeading}>Contact</div>
             <div className={styles.contactStack}>
               <a className={styles.contactRow} href="tel:+923060040951">
@@ -54,7 +59,7 @@ export default function OverviewTab({ goToSection }: { goToSection: (id: Section
 
         <div className={styles.rightStack}>
           <div className={styles.highlightsGrid} aria-label="Highlights">
-            <button type="button" className={`${styles.tile} ${styles.tileButton}`} onClick={() => goToSection('experience')}>
+            <button type="button" className={`${styles.tile} ${styles.tileButton} ${styles.stagger}`} style={staggerStyle(2)} onClick={() => goToSection('experience')}>
               <div className={styles.tileLine}>
                 <span>Associate Frontend Engineer - Carbonteq</span>
                 <span className={styles.tileLineEnd}>
@@ -67,8 +72,8 @@ export default function OverviewTab({ goToSection }: { goToSection: (id: Section
                 </span>
               </div>
             </button>
-            <div className={styles.tile}>Next.js production systems</div>
-            <button type="button" className={`${styles.tile} ${styles.tileButton}`} onClick={() => goToSection('projects')}>
+            <div className={`${styles.tile} ${styles.stagger}`} style={staggerStyle(3)}>Next.js production systems</div>
+            <button type="button" className={`${styles.tile} ${styles.tileButton} ${styles.stagger}`} style={staggerStyle(4)} onClick={() => goToSection('projects')}>
               <div className={styles.tileLine}>
                 <span>Design systems + UI architecture</span>
                 <span className={styles.tileChevron} aria-hidden>
@@ -76,9 +81,9 @@ export default function OverviewTab({ goToSection }: { goToSection: (id: Section
                 </span>
               </div>
             </button>
-            <div className={styles.tile}>Performance + accessibility focus</div>
-            <div className={styles.tile}>ML / AI background</div>
-            <button type="button" className={`${styles.tile} ${styles.tileButton}`} onClick={() => goToSection('publications')}>
+            <div className={`${styles.tile} ${styles.stagger}`} style={staggerStyle(5)}>Performance + accessibility focus</div>
+            <div className={`${styles.tile} ${styles.stagger}`} style={staggerStyle(6)}>ML / AI background</div>
+            <button type="button" className={`${styles.tile} ${styles.tileButton} ${styles.stagger}`} style={staggerStyle(7)} onClick={() => goToSection('publications')}>
               <div className={styles.tileLine}>
                 <span>IEEE publication (2025)</span>
                 <span className={styles.tileChevron} aria-hidden>
