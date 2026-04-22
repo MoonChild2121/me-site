@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import SiteNav from "@/components/layout/SiteNav/SiteNav";
-import ConditionalFooter from "@/components/layout/ConditionalFooter";
 
 import "./globals.css";
 
@@ -49,7 +48,7 @@ export default function RootLayout({
         <main className="app-main">
           <div className="page-container">{children}</div>
         </main>
-        <ConditionalFooter />
+        
       </body>
     </html>
   );

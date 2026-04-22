@@ -374,20 +374,16 @@
 }
 
 .entriesList {
-  display: flex;
-  flex-direction: column;
-  gap: calc(14 / var(--rem-base) * 1rem);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(18 / var(--rem-base) * 1rem);
 }
 
 .entryCard {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  grid-template-areas:
-    'type title date'
-    'type preview preview';
-  column-gap: calc(14 / var(--rem-base) * 1rem);
-  row-gap: calc(6 / var(--rem-base) * 1rem);
-  padding: calc(18 / var(--rem-base) * 1rem) calc(18 / var(--rem-base) * 1rem);
+  display: flex;
+  flex-direction: column;
+  gap: calc(12 / var(--rem-base) * 1rem);
+  padding: calc(22 / var(--rem-base) * 1rem);
   border: 1px solid var(--color-border);
   border-radius: calc(14 / var(--rem-base) * 1rem);
   background-color: color-mix(in srgb, var(--color-text) 1.5%, transparent);
@@ -396,65 +392,53 @@
 
 .entryCard:hover {
   background-color: color-mix(in srgb, var(--color-text) 3%, transparent);
-  transform: translateY(calc(-1 / var(--rem-base) * 1rem));
+  transform: translateY(calc(-2 / var(--rem-base) * 1rem));
 }
 
 .entryTypePill {
-  grid-area: type;
-  align-self: start;
-  justify-self: start;
+  align-self: flex-start;
   font-family: var(--font-family-label);
   text-transform: uppercase;
   letter-spacing: var(--label-letter-spacing);
-  font-optical-sizing: auto;
-  font-style: normal;
   font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text);
-  border: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-text) 6%, transparent);
-  padding: calc(6 / var(--rem-base) * 1rem) calc(10 / var(--rem-base) * 1rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  padding: calc(4 / var(--rem-base) * 1rem) calc(10 / var(--rem-base) * 1rem);
   border-radius: calc(999 / var(--rem-base) * 1rem);
 }
 
 .entryTitle {
-  grid-area: title;
   font-family: var(--font-family-headline);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-medium);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-regular);
+  font-style: italic;
+  line-height: 1.3;
   color: var(--color-text);
 }
 
 .entryPreview {
-  grid-area: preview;
   font-family: var(--font-family-body);
   font-size: var(--font-size);
-  line-height: 1.6;
-  color: var(--color-secondary);
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--color-text) 78%, transparent);
   display: -webkit-box;
-  line-clamp: 2;
-  -webkit-line-clamp: 2;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 .entryMeta {
-  grid-area: date;
-  align-self: start;
-  justify-self: end;
+  margin-top: auto;
 }
 
 .entryDate {
   font-family: var(--font-family-label);
   text-transform: uppercase;
   letter-spacing: var(--label-letter-spacing);
-  font-optical-sizing: auto;
-  font-style: normal;
   font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-muted);
+  color: color-mix(in srgb, var(--color-text) 56%, transparent);
 }
 
 .entriesFooter {
@@ -463,20 +447,25 @@
 }
 
 .entriesLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(10 / var(--rem-base) * 1rem) calc(18 / var(--rem-base) * 1rem);
+  border-radius: calc(999 / var(--rem-base) * 1rem);
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text);
   font-family: var(--font-family-label);
   text-transform: uppercase;
   letter-spacing: var(--label-letter-spacing);
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-size: var(--font-size-md);
+  font-size: var(--font-size);
   font-weight: var(--font-weight-medium);
-  color: var(--color-text);
-  border-bottom: 1px solid var(--color-border);
-  width: fit-content;
+  transition: background-color 0.12s ease, transform 0.12s ease;
 }
 
 .entriesLink:hover {
-  border-bottom-color: var(--color-text);
+  background-color: color-mix(in srgb, var(--color-text) 6%, transparent);
+  transform: translateY(calc(-1 / var(--rem-base) * 1rem));
 }
 
 .closing {
@@ -602,6 +591,10 @@
   .choiceContent {
     grid-template-columns: 1fr;
   }
+
+  .entriesList {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 40rem) {
@@ -670,4 +663,9 @@
   .closingText {
     font-size: var(--font-size-xl);
   }
+
+  .entriesList {
+    grid-template-columns: 1fr;
+  }
 }
+

@@ -11,26 +11,6 @@ import {
 } from '../constants';
 import styles from './ExperienceTab.module.css';
 
-function normalize(text: string) {
-  return text.toLowerCase().trim();
-}
-
-function matchesQuery(text: string, query: string) {
-  if (!query) return true;
-  return normalize(text).includes(query);
-}
-
-function experienceSearchText(exp: Experience) {
-  return [
-    exp.title,
-    exp.company,
-    exp.dateRange,
-    exp.location ?? '',
-    exp.summary,
-    ...(exp.tags ?? []),
-  ].join(' ');
-}
-
 function staggerStyle(index: number): CSSProperties {
   return { '--stagger': index } as CSSProperties;
 }
@@ -84,28 +64,12 @@ const EXPERIENCE_GROUPS = [
   { id: 'early' as const, label: 'Early Experience' },
 ];
 
-export default function ExperienceTab({ query }: { query: string }) {
-  const normalizedQuery = useMemo(() => normalize(query), [query]);
-
-  const filtered = useMemo(() => {
-    return EXPERIENCES.filter(exp => matchesQuery(experienceSearchText(exp), normalizedQuery));
-  }, [normalizedQuery]);
-
+export default function ExperienceTab() {
   const byGroup = useMemo(() => {
     const groups: Record<ExperienceGroupId, Experience[]> = { current: [], previous: [], early: [] };
-    for (const exp of filtered) groups[exp.group].push(exp);
+    for (const exp of EXPERIENCES) groups[exp.group].push(exp);
     return groups;
-  }, [filtered]);
-
-  if (filtered.length === 0) {
-    return (
-      <section className={styles.section} aria-label="Experience">
-        <div className={styles.sectionBody}>
-          <div className={styles.emptyState}>No experience entries match your search.</div>
-        </div>
-      </section>
-    );
-  }
+  }, []);
 
   let globalIdx = 0;
 

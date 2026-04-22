@@ -1,0 +1,73 @@
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: calc(16 / var(--rem-base) * 1rem);
+}
+
+.skillCard {
+  border: 1px solid var(--color-border);
+  border-radius: calc(14 / var(--rem-base) * 1rem);
+  padding: calc(20 / var(--rem-base) * 1rem);
+  background-color: color-mix(in srgb, var(--color-text) 1.5%, transparent);
+  display: flex;
+  flex-direction: column;
+  gap: calc(12 / var(--rem-base) * 1rem);
+}
+
+.skillCardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: calc(4 / var(--rem-base) * 1rem);
+}
+
+.skillCardTitle {
+  font-family: var(--font-family-headline);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+}
+
+.skillCardSubtitle {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size);
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+.skillCardTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(6 / var(--rem-base) * 1rem);
+}
+
+.skillTag {
+  display: inline-flex;
+  align-items: center;
+  padding: calc(5 / var(--rem-base) * 1rem) calc(10 / var(--rem-base) * 1rem);
+  border-radius: calc(999 / var(--rem-base) * 1rem);
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-text) 6%, transparent);
+  color: var(--color-text);
+  font-family: var(--font-family-label);
+  text-transform: uppercase;
+  letter-spacing: var(--label-letter-spacing);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+.skillCardBody {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size);
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--color-text) 88%, transparent);
+}
+
+@media (max-width: 64rem) {
+  .skillsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+

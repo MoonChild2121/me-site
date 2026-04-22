@@ -2,9 +2,10 @@
 
 import { useHomeStyles } from './useHomeStyles';
 import Link from 'next/link';
-import { RECENT_ENTRIES } from '../../data/entries';
-import type { Entry } from '../../types/entry';
+import { LOG_ENTRIES } from '@/components/log/constants';
+import type { LogEntry } from '@/components/log/types';
 import { useEffect, useRef } from 'react';
+import HomeFooter from './HomeFooter';
 
 const ENTRY_DATE_FORMATTER = new Intl.DateTimeFormat('en-US', {
   month: 'short',
@@ -19,13 +20,25 @@ export default function Home() {
   const roundFlowerUrl = new URL('../../assets/roundFlower.svg', import.meta.url).toString();
 
   const formatEntryDate = (date: string) => {
-    // Ensure SSR + client render the same day (avoid timezone shifts).
-    const d = new Date(`${date}T00:00:00Z`);
-    if (Number.isNaN(d.getTime())) return date;
-    return ENTRY_DATE_FORMATTER.format(d);
+    if (/^\\d{4}-\\d{2}-\\d{2}$/.test(date)) {
+      // Ensure SSR + client render the same day (avoid timezone shifts).
+      const d = new Date(`${date}T00:00:00Z`);
+      if (!Number.isNaN(d.getTime())) return ENTRY_DATE_FORMATTER.format(d);
+    }
+    return date;
   };
 
-  const getTypeLabel = (type: Entry['type']) => type.toUpperCase();
+  const getTypeLabel = (type: LogEntry['type']) => type.toUpperCase();
+
+  const getEntryPreview = (entry: LogEntry) => {
+    if (entry.type === 'post') return entry.excerpt;
+    if (entry.type === 'book') return entry.quote;
+    return `Sketch lines: ${entry.sketchLines.length}`;
+  };
+
+  const homepageEntries = (['post', 'book', 'drawing'] as const)
+    .map(type => LOG_ENTRIES.find(e => e.type === type))
+    .filter((e): e is LogEntry => Boolean(e));
 
   useEffect(() => {
     const root = rootRef.current;
@@ -236,7 +249,7 @@ export default function Home() {
           </header>
 
           <div className={s.entriesList}>
-            {RECENT_ENTRIES.map((entry, idx) => (
+            {homepageEntries.map((entry, idx) => (
               <Link
                 key={entry.id}
                 href={`/log#${entry.id}`}
@@ -246,7 +259,7 @@ export default function Home() {
               >
                 <div className={s.entryTypePill}>{getTypeLabel(entry.type)}</div>
                 <div className={s.entryTitle}>{entry.title}</div>
-                <div className={s.entryPreview}>{entry.preview}</div>
+                <div className={s.entryPreview}>{getEntryPreview(entry)}</div>
                 <div className={s.entryMeta}>
                   <span className={s.entryDate}>{formatEntryDate(entry.date)}</span>
                 </div>
@@ -284,6 +297,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <HomeFooter />
     </div>
   );
 }
