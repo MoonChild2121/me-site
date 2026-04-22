@@ -2,8 +2,7 @@
 
 :root {
   background-color: #f9f7f2;
-  /* Header: 24px top/bottom padding + 1 line of text + 1px border-bottom */
-  --site-header-height: calc(49px + (var(--font-size) * 1.2));
+  --site-header-height: 0px;
 }
 
 html {

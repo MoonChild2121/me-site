@@ -18,13 +18,20 @@ import styles from './WorkDashboard.module.css';
 
 export default function Work() {
   useEffect(() => {
-    const html = document.documentElement;
-    const body = document.body;
-    html.style.overflow = 'hidden';
-    body.style.overflow = 'hidden';
+    const mq = window.matchMedia('(min-width: 64rem)');
+    const apply = (matches: boolean) => {
+      const html = document.documentElement;
+      const body = document.body;
+      html.style.overflow = matches ? 'hidden' : '';
+      body.style.overflow = matches ? 'hidden' : '';
+    };
+    apply(mq.matches);
+    const handler = (e: MediaQueryListEvent) => apply(e.matches);
+    mq.addEventListener('change', handler);
     return () => {
-      html.style.overflow = '';
-      body.style.overflow = '';
+      mq.removeEventListener('change', handler);
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
     };
   }, []);
 

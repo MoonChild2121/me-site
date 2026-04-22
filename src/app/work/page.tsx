@@ -1,4 +1,3 @@
-import PageShell from '@/components/layout/PageShell';
 import WorkContainer from '@/containers/work/workContainer';
 
 export const metadata = {
@@ -6,10 +5,6 @@ export const metadata = {
 };
 
 export default function WorkPage() {
-  return (
-    <PageShell>
-      <WorkContainer />
-    </PageShell>
-  );
+  return <WorkContainer />;
 }
 

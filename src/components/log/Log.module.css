@@ -109,6 +109,13 @@
   }
 }
 
+/* Stagger animation for non-card elements */
+
+.stagger {
+  animation: cardFadeIn var(--duration-slow) var(--ease-default) both;
+  animation-delay: calc(var(--stagger, 0) * 100ms);
+}
+
 /* Shared card base */
 
 .card {
@@ -330,8 +337,42 @@
   color: color-mix(in srgb, var(--color-text) 48%, transparent);
 }
 
+@media (max-width: 40rem) {
+  .wrap {
+    padding-top: var(--space-40);
+    padding-bottom: var(--space-60);
+  }
+
+  .header {
+    margin-bottom: var(--space-40);
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-sm);
+  }
+
+  .postCard {
+    padding: var(--space-18);
+  }
+
+  .bookCard {
+    padding: var(--space-18);
+  }
+
+  .drawingCard {
+    padding: var(--padding-md);
+  }
+
+  .postTitle {
+    font-size: var(--font-size-lg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .card {
+  .card,
+  .stagger {
     animation: none;
     opacity: 1;
   }

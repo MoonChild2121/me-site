@@ -41,6 +41,15 @@
   color: var(--color-text);
 }
 
+.linkIcon {
+  display: none;
+  line-height: 0;
+}
+
+.linkLabel {
+  display: inline;
+}
+
 @media (max-width: 40rem) {
   .footer {
     grid-template-columns: 1fr auto;
@@ -48,5 +57,13 @@
 
   .links {
     gap: var(--gap-lg);
+  }
+
+  .linkIcon {
+    display: inline-flex;
+  }
+
+  .linkLabel {
+    display: none;
   }
 }

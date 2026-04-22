@@ -22,7 +22,6 @@
 
 .header {
   margin-bottom: var(--section-lg);
-  animation: fadeUp 500ms var(--ease-default) both;
 }
 
 .kicker {
@@ -72,7 +71,7 @@
   text-decoration: none;
   color: inherit;
   animation: fadeUp 500ms var(--ease-default) both;
-  animation-delay: calc(var(--duration-normal) + var(--stagger, 0) * 100ms);
+  animation-delay: calc(var(--stagger, 0) * 100ms);
   transition:
     background-color var(--duration-normal) var(--ease-default),
     transform var(--duration-normal) var(--ease-default);
@@ -142,8 +141,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  animation: fadeUp 500ms var(--ease-default) both;
-  animation-delay: 600ms;
 }
 
 .footerLocation {
@@ -161,6 +158,11 @@
   color: color-mix(in srgb, var(--color-text) 48%, transparent);
 }
 
+.stagger {
+  animation: fadeUp 500ms var(--ease-default) both;
+  animation-delay: calc(var(--stagger, 0) * 100ms);
+}
+
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -173,9 +175,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .header,
-  .row,
-  .footer {
+  .stagger,
+  .row {
     animation: none;
     opacity: 1;
   }
@@ -190,8 +191,32 @@
 }
 
 @media (max-width: 40rem) {
+  .wrap {
+    padding-top: var(--space-40);
+    padding-bottom: var(--space-60);
+  }
+
+  .header {
+    margin-bottom: var(--space-40);
+  }
+
   .row {
     padding: var(--padding-md) var(--padding-md);
     gap: var(--gap-md);
+  }
+
+  .rowValue {
+    font-size: var(--font-size-md);
+    word-break: break-all;
+  }
+  t
+  .rowArrow {
+    display: none;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-sm);
   }
 }

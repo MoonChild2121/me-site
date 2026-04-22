@@ -260,4 +260,18 @@
     position: relative;
     top: auto;
   }
+
+  .explorationList {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 40rem) {
+  .featuredTitle {
+    font-size: var(--font-size-xl);
+  }
+
+  .explorationItem {
+    padding: var(--padding-sm) var(--space-14);
+  }
 }

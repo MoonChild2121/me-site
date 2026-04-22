@@ -99,3 +99,21 @@
   line-height: 1.55;
   color: color-mix(in srgb, var(--color-text) 84%, transparent);
 }
+
+@media (max-width: 40rem) {
+  .eduPrimary {
+    padding: var(--padding-md);
+  }
+
+  .eduPrimaryFirst {
+    padding-top: var(--padding-md) !important;
+  }
+
+  .eduPrimaryTitle {
+    font-size: var(--font-size-lg);
+  }
+
+  .courseProvider {
+    white-space: normal;
+  }
+}

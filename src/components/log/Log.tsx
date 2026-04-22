@@ -1,5 +1,6 @@
 'use client';
 
+import type { CSSProperties } from 'react';
 import { useState } from 'react';
 
 import { LOG_TAGS, LOG_ENTRIES } from './constants';
@@ -21,7 +22,7 @@ export default function Log() {
 
   return (
     <div className={styles.wrap}>
-      <header className={styles.header}>
+      <header className={`${styles.header} ${styles.stagger}`} style={{ '--stagger': 0 } as CSSProperties}>
         <div className={styles.headerRow}>
           <h1 className={styles.title}>log</h1>
           <span className={styles.year}>{new Date().getFullYear()}</span>
@@ -31,7 +32,7 @@ export default function Log() {
         </p>
       </header>
 
-      <div className={styles.filters} role="group" aria-label="Filter entries">
+      <div className={`${styles.filters} ${styles.stagger}`} style={{ '--stagger': 1 } as CSSProperties} role="group" aria-label="Filter entries">
         {LOG_TAGS.map(t => (
           <Pill
             key={t}
@@ -51,7 +52,7 @@ export default function Log() {
         ))}
       </div>
 
-      <footer className={styles.footer}>
+      <footer className={`${styles.footer} ${styles.stagger}`} style={{ '--stagger': 3 } as CSSProperties}>
         <span className={styles.footerNote}>updated whenever</span>
         <span className={styles.footerCount}>
           {filtered.length} {activeFilter === 'all' ? 'entries' : `${activeFilter}s`}

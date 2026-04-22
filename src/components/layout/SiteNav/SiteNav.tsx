@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useRef } from 'react';
 import { FiBriefcase, FiBookOpen, FiMail } from 'react-icons/fi';
 
 import { useNavStyles } from './useNavStyles';
@@ -29,8 +30,25 @@ export default function SiteNav() {
   const s = useNavStyles();
   const isHome = pathname === '/';
 
+  const headerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const node = headerRef.current;
+    if (!node) return;
+    const sync = () => {
+      document.documentElement.style.setProperty(
+        '--site-header-height',
+        `${node.offsetHeight}px`
+      );
+    };
+    sync();
+    const ro = new ResizeObserver(sync);
+    ro.observe(node);
+    return () => ro.disconnect();
+  }, []);
+
   return (
-    <header className={s.header}>
+    <header ref={headerRef} className={s.header}>
       <nav className={s.nav} aria-label="Main">
         <div className={s.bar}>
           <Link
