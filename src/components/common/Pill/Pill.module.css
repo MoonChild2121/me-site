@@ -1,0 +1,59 @@
+.pill {
+  font-family: var(--font-family-label);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--label-letter-spacing);
+  text-transform: uppercase;
+  line-height: var(--leading-tight);
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* ── filter: interactive toggle ── */
+
+.filter {
+  padding: var(--padding-xs) var(--space-14);
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-default),
+              color var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default);
+}
+
+.filterActive {
+  background: var(--color-text);
+  color: var(--color-background);
+  border-color: var(--color-text);
+}
+
+/* ── status: accent-colored label ── */
+
+.status {
+  padding: var(--space-4) var(--padding-sm);
+  background: var(--color-accent-subtle);
+  color: var(--color-accent);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
+}
+
+/* ── tag: small neutral chip ── */
+
+.tag {
+  padding: var(--space-4) var(--padding-sm);
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+  font-weight: var(--font-weight-medium);
+  border: none;
+}
+
+/* ── inverted: label on dark surface ── */
+
+.inverted {
+  padding: var(--space-4) var(--padding-sm);
+  border: 1px solid color-mix(in srgb, var(--color-background) 18%, transparent);
+  background: transparent;
+  color: var(--color-accent);
+}

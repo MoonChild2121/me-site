@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: calc(14 / var(--rem-base) * 1rem);
+  gap: var(--space-14);
   flex: 1;
   min-height: 0;
 }
@@ -23,10 +23,10 @@
   justify-self: end;
   width: 100%;
   max-width: calc(920 / var(--rem-base) * 1rem);
-  border-radius: calc(16 / var(--rem-base) * 1rem);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
-  background-color: color-mix(in srgb, var(--color-text) 1.5%, transparent);
+  background-color: var(--color-surface-raised);
   position: sticky;
   top: calc(var(--site-header-height) + var(--space-32));
 }
@@ -41,10 +41,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: calc(8 / var(--rem-base) * 1rem);
-  margin-top: calc(10 / var(--rem-base) * 1rem);
-  padding: calc(9 / var(--rem-base) * 1rem) calc(14 / var(--rem-base) * 1rem);
-  border-radius: calc(999 / var(--rem-base) * 1rem);
+  gap: var(--gap-sm);
+  margin-top: var(--section-xs);
+  padding: calc(9 / var(--rem-base) * 1rem) var(--space-14);
+  border-radius: var(--radius-pill);
   border: 1px solid var(--color-border);
   background: transparent;
   color: var(--color-text);
@@ -64,7 +64,7 @@
 
   .pubLayout {
     grid-template-columns: 1fr;
-    gap: var(--space-32);
+    gap: var(--gap-xl);
   }
 
   .pubMedia {
@@ -74,4 +74,3 @@
     justify-self: start;
   }
 }
-

@@ -1,7 +1,6 @@
 'use client';
 
-import Link from 'next/link';
-
+import ButtonLink from '@/components/common/ButtonLink/ButtonLink';
 import styles from './HomeFooter.module.css';
 
 const LINKS = [
@@ -29,15 +28,13 @@ export default function HomeFooter() {
       <ul className={styles.links} aria-label="Footer links">
         {LINKS.map(link => (
           <li key={link.label}>
-            {link.external ? (
-              <a className={styles.link} href={link.href} target="_blank" rel="noreferrer">
-                {link.label}
-              </a>
-            ) : (
-              <Link className={styles.link} href={link.href}>
-                {link.label}
-              </Link>
-            )}
+            <ButtonLink
+              href={link.href}
+              variant="ghost"
+              external={link.external}
+            >
+              {link.label}
+            </ButtonLink>
           </li>
         ))}
       </ul>

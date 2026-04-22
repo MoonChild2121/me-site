@@ -1,0 +1,84 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-sm);
+  font-family: var(--font-family-label);
+  text-transform: uppercase;
+  letter-spacing: var(--label-letter-spacing);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-tight);
+  border-radius: var(--radius-pill);
+  width: fit-content;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-default),
+              transform var(--duration-fast) var(--ease-default);
+}
+
+/* ── outline: bordered pill (primary CTA) ── */
+
+.outline {
+  padding: var(--padding-sm) var(--space-18);
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+}
+
+.outline:hover {
+  background-color: var(--color-surface-hover);
+  transform: translateY(calc(-1 / var(--rem-base) * 1rem));
+}
+
+.outline:active {
+  transform: translateY(0);
+}
+
+/* ── small: compact pill link ── */
+
+.small {
+  padding: var(--space-8) var(--space-14);
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text);
+  font-size: var(--font-size);
+}
+
+.small:hover {
+  background-color: var(--color-surface-hover);
+  transform: translateY(calc(-1 / var(--rem-base) * 1rem));
+}
+
+.small:active {
+  transform: translateY(0);
+}
+
+/* ── ghost: underline-only text link ── */
+
+.ghost {
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.ghost:hover {
+  color: var(--color-text);
+  border-bottom-color: var(--color-border);
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+
+  .outline:hover,
+  .small:hover {
+    transform: none;
+  }
+}

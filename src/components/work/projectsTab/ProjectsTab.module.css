@@ -7,13 +7,13 @@
 .featuredProject {
   display: flex;
   flex-direction: column;
-  gap: calc(14 / var(--rem-base) * 1rem);
+  gap: var(--space-14);
 }
 
 .featuredHeader {
   display: flex;
   flex-direction: column;
-  gap: calc(6 / var(--rem-base) * 1rem);
+  gap: var(--space-6);
 }
 
 .featuredKicker {
@@ -31,8 +31,8 @@
   font-family: var(--font-family-headline);
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-medium);
-  letter-spacing: -0.02em;
-  line-height: 1.15;
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
   color: var(--color-text);
   max-width: 34ch;
 }
@@ -51,7 +51,7 @@
 .featuredOverview {
   font-family: var(--font-family-body);
   font-size: var(--font-size);
-  line-height: 1.6;
+  line-height: var(--leading-normal);
   color: color-mix(in srgb, var(--color-text) 88%, transparent);
   max-width: 78ch;
 }
@@ -59,21 +59,21 @@
 .featuredMain {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-  gap: var(--space-32);
+  gap: var(--gap-xl);
   align-items: start;
 }
 
 .featuredBlocks {
   display: flex;
   flex-direction: column;
-  gap: calc(18 / var(--rem-base) * 1rem);
+  gap: var(--space-18);
   min-width: 0;
 }
 
 .featuredBlock {
   display: flex;
   flex-direction: column;
-  gap: calc(8 / var(--rem-base) * 1rem);
+  gap: var(--gap-sm);
 }
 
 .blockLabel {
@@ -89,13 +89,13 @@
 
 .blockList {
   margin: 0;
-  padding-left: calc(18 / var(--rem-base) * 1rem);
+  padding-left: var(--space-18);
   display: flex;
   flex-direction: column;
-  gap: calc(6 / var(--rem-base) * 1rem);
+  gap: var(--space-6);
   font-family: var(--font-family-body);
   font-size: var(--font-size);
-  line-height: 1.6;
+  line-height: var(--leading-normal);
   color: var(--color-text);
   max-width: 78ch;
 }
@@ -107,8 +107,8 @@
   align-self: start;
   position: sticky;
   top: 0;
-  --pos-crop-left: calc(2 / var(--rem-base) * 1rem);
-  border-radius: calc(10 / var(--rem-base) * 1rem);
+  --pos-crop-left: var(--space-2);
+  border-radius: var(--space-10);
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
   background-color: color-mix(in srgb, var(--color-text) 2%, transparent);
@@ -128,26 +128,26 @@
 
 .featuredImagePlaceholder {
   border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
-  background-color: color-mix(in srgb, var(--color-text) 1.5%, transparent);
+  background-color: var(--color-surface-raised);
   color: var(--color-text-muted);
   font-family: var(--font-family-body);
   font-size: var(--font-size);
   line-height: 1.5;
-  padding: calc(14 / var(--rem-base) * 1rem);
+  padding: var(--space-14);
 }
 
 .explorations {
   display: flex;
   flex-direction: column;
-  gap: calc(16 / var(--rem-base) * 1rem);
+  gap: var(--space-16);
   border-top: 1px solid var(--color-border);
-  padding-top: var(--space-32);
+  padding-top: var(--padding-xl);
 }
 
 .explorationsHeader {
   display: flex;
   flex-direction: column;
-  gap: calc(6 / var(--rem-base) * 1rem);
+  gap: var(--space-6);
   max-width: 78ch;
 }
 
@@ -155,7 +155,7 @@
   font-family: var(--font-family-headline);
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-medium);
-  letter-spacing: -0.02em;
+  letter-spacing: var(--tracking-tight);
   line-height: 1.2;
   color: var(--color-text);
 }
@@ -163,30 +163,30 @@
 .explorationsIntro {
   font-family: var(--font-family-body);
   font-size: var(--font-size);
-  line-height: 1.6;
+  line-height: var(--leading-normal);
   color: color-mix(in srgb, var(--color-text) 84%, transparent);
 }
 
 .explorationList {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(calc(300 / var(--rem-base) * 1rem), 1fr));
-  gap: calc(14 / var(--rem-base) * 1rem);
+  gap: var(--space-14);
 }
 
 .explorationItem {
   border: 1px solid var(--color-border);
-  border-radius: calc(14 / var(--rem-base) * 1rem);
-  padding: calc(18 / var(--rem-base) * 1rem);
-  background-color: color-mix(in srgb, var(--color-text) 1.5%, transparent);
+  border-radius: var(--radius-md);
+  padding: var(--space-18);
+  background-color: var(--color-surface-raised);
   display: flex;
   flex-direction: column;
-  gap: calc(8 / var(--rem-base) * 1rem);
+  gap: var(--gap-sm);
 }
 
 .explorationHeader {
   display: flex;
   flex-wrap: wrap;
-  gap: calc(10 / var(--rem-base) * 1rem);
+  gap: var(--space-10);
   align-items: baseline;
   justify-content: space-between;
 }
@@ -196,7 +196,7 @@
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-medium);
   line-height: 1.25;
-  letter-spacing: -0.01em;
+  letter-spacing: var(--tracking-snug);
   color: var(--color-text);
 }
 
@@ -214,7 +214,7 @@
 .explorationDesc {
   font-family: var(--font-family-body);
   font-size: var(--font-size);
-  line-height: 1.6;
+  line-height: var(--leading-normal);
   color: color-mix(in srgb, var(--color-text) 88%, transparent);
   max-width: 78ch;
 }
@@ -237,14 +237,14 @@
 }
 
 .explorationPoints {
-  margin: calc(10 / var(--rem-base) * 1rem) 0 0;
-  padding-left: calc(18 / var(--rem-base) * 1rem);
+  margin: var(--section-xs) 0 0;
+  padding-left: var(--space-18);
   display: flex;
   flex-direction: column;
-  gap: calc(6 / var(--rem-base) * 1rem);
+  gap: var(--space-6);
   font-family: var(--font-family-body);
   font-size: var(--font-size);
-  line-height: 1.6;
+  line-height: var(--leading-normal);
   color: var(--color-text);
 }
 
@@ -261,4 +261,3 @@
     top: auto;
   }
 }
-

@@ -4,7 +4,6 @@
   top: 0;
   z-index: 50;
   border-bottom: 1px solid var(--color-border);
-  background-color: #f9f7f2;
   background-color: var(--color-background);
 }
 
@@ -12,7 +11,7 @@
   width: 100%;
   max-width: none;
   margin: 0;
-  padding: 24px 32px;
+  padding: var(--space-24) var(--padding-xl);
   box-sizing: border-box;
 }
 
@@ -86,11 +85,11 @@
 
 @media (max-width: 40rem) {
   .nav {
-    padding: 16px 20px;
+    padding: var(--padding-md) var(--space-20);
   }
 
   .center {
-    gap: calc(24 / 14 * 1rem);
+    gap: var(--space-24);
   }
 
   .linkIcon {

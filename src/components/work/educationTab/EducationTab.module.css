@@ -1,22 +1,22 @@
 .eduPrimary {
-  border: 1px solid color-mix(in srgb, var(--color-text) 14%, transparent);
-  border-radius: calc(16 / var(--rem-base) * 1rem);
-  padding: calc(22 / var(--rem-base) * 1rem);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--padding-lg);
   background-color: color-mix(in srgb, var(--color-text) 2.75%, transparent);
 }
 
 .eduPrimaryFirst {
-  padding-top: calc(22 / var(--rem-base) * 1rem) !important;
-  border-top: 1px solid color-mix(in srgb, var(--color-text) 14%, transparent) !important;
+  padding-top: var(--padding-lg) !important;
+  border-top: 1px solid var(--color-border-subtle) !important;
 }
 
 .eduPrimaryTitle {
   font-size: var(--font-size-xl);
-  letter-spacing: -0.02em;
+  letter-spacing: var(--tracking-tight);
 }
 
 .eduPrimaryMeta {
-  color: color-mix(in srgb, var(--color-text) 78%, transparent);
+  color: var(--color-text-78);
 }
 
 .eduPrimaryBody {
@@ -26,17 +26,17 @@
 .cfWrap {
   display: flex;
   flex-direction: column;
-  gap: calc(12 / var(--rem-base) * 1rem);
+  gap: var(--gap-md);
   max-width: 78ch;
   border-top: 1px solid var(--color-border);
-  padding-top: calc(20 / var(--rem-base) * 1rem);
-  margin-top: calc(8 / var(--rem-base) * 1rem);
+  padding-top: var(--space-20);
+  margin-top: var(--space-8);
 }
 
 .cfBlock {
   display: flex;
   flex-direction: column;
-  gap: calc(10 / var(--rem-base) * 1rem);
+  gap: var(--space-10);
 }
 
 .cfLabel {
@@ -56,7 +56,7 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: calc(8 / var(--rem-base) * 1rem);
+  gap: var(--gap-sm);
 }
 
 .courseItem {
@@ -69,7 +69,7 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: calc(12 / var(--rem-base) * 1rem);
+  gap: var(--gap-md);
   flex-wrap: wrap;
 }
 
@@ -99,4 +99,3 @@
   line-height: 1.55;
   color: color-mix(in srgb, var(--color-text) 84%, transparent);
 }
-

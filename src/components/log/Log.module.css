@@ -1,34 +1,34 @@
 .wrap {
   max-width: calc(1200 / var(--rem-base) * 1rem);
   margin: 0 auto;
-  padding: calc(60 / var(--rem-base) * 1rem) calc(56 / var(--rem-base) * 1rem) calc(100 / var(--rem-base) * 1rem);
+  padding: var(--space-60) var(--padding-page) var(--space-100);
 }
 
 @media (max-width: 48rem) {
   .wrap {
-    padding-left: calc(28 / var(--rem-base) * 1rem);
-    padding-right: calc(28 / var(--rem-base) * 1rem);
+    padding-left: var(--space-28);
+    padding-right: var(--space-28);
   }
 }
 
 @media (max-width: 30rem) {
   .wrap {
-    padding-left: calc(18 / var(--rem-base) * 1rem);
-    padding-right: calc(18 / var(--rem-base) * 1rem);
+    padding-left: var(--space-18);
+    padding-right: var(--space-18);
   }
 }
 
 /* Header */
 
 .header {
-  margin-bottom: calc(56 / var(--rem-base) * 1rem);
+  margin-bottom: var(--section-lg);
 }
 
 .headerRow {
   display: flex;
   align-items: baseline;
-  gap: calc(16 / var(--rem-base) * 1rem);
-  margin-bottom: calc(10 / var(--rem-base) * 1rem);
+  gap: var(--space-16);
+  margin-bottom: var(--section-xs);
 }
 
 .title {
@@ -37,7 +37,7 @@
   font-weight: var(--font-weight-regular);
   font-style: italic;
   color: var(--color-text);
-  line-height: 1;
+  line-height: var(--leading-none);
 }
 
 .year {
@@ -46,14 +46,14 @@
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--label-letter-spacing);
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--color-text) 56%, transparent);
+  color: var(--color-text-56);
 }
 
 .subtitle {
   font-family: var(--font-family-body);
   font-size: var(--font-size-md);
   color: var(--color-text-muted);
-  line-height: 1.6;
+  line-height: var(--leading-normal);
   max-width: 60ch;
 }
 
@@ -61,8 +61,8 @@
 
 .filters {
   display: flex;
-  gap: calc(8 / var(--rem-base) * 1rem);
-  margin-bottom: calc(40 / var(--rem-base) * 1rem);
+  gap: var(--gap-sm);
+  margin-bottom: var(--space-40);
   flex-wrap: wrap;
 }
 
@@ -72,13 +72,15 @@
   font-size: var(--font-size-xs);
   letter-spacing: var(--label-letter-spacing);
   text-transform: uppercase;
-  padding: calc(7 / var(--rem-base) * 1rem) calc(14 / var(--rem-base) * 1rem);
-  border-radius: calc(999 / var(--rem-base) * 1rem);
+  padding: var(--padding-xs) var(--space-14);
+  border-radius: var(--radius-pill);
   border: 1px solid var(--color-border);
   background: transparent;
   color: var(--color-text-muted);
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  transition: background-color var(--duration-fast) var(--ease-default),
+              color var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default);
 }
 
 .filterPillActive {
@@ -92,7 +94,7 @@
 .feed {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: calc(20 / var(--rem-base) * 1rem);
+  gap: var(--gap-lg);
 }
 
 @media (max-width: 64rem) {
@@ -110,17 +112,17 @@
 /* Shared card base */
 
 .card {
-  border-radius: calc(14 / var(--rem-base) * 1rem);
+  border-radius: var(--radius-md);
   position: relative;
   overflow: hidden;
-  animation: cardFadeIn 340ms ease both;
+  animation: cardFadeIn var(--duration-slow) var(--ease-default) both;
   animation-delay: calc(var(--stagger, 0) * 70ms);
 }
 
 @keyframes cardFadeIn {
   from {
     opacity: 0;
-    transform: translateY(calc(12 / var(--rem-base) * 1rem));
+    transform: translateY(var(--space-12));
   }
   to {
     opacity: 1;
@@ -131,12 +133,12 @@
 /* Post card */
 
 .postCard {
-  background-color: color-mix(in srgb, var(--color-text) 1.5%, transparent);
+  background-color: var(--color-surface-raised);
   border: 1px solid var(--color-border);
-  padding: calc(24 / var(--rem-base) * 1rem);
+  padding: var(--space-24);
   display: flex;
   flex-direction: column;
-  gap: calc(12 / var(--rem-base) * 1rem);
+  gap: var(--gap-md);
 }
 
 .postTopRow {
@@ -152,16 +154,16 @@
   letter-spacing: var(--label-letter-spacing);
   text-transform: uppercase;
   color: var(--color-accent);
-  padding: calc(4 / var(--rem-base) * 1rem) calc(10 / var(--rem-base) * 1rem);
-  border-radius: calc(999 / var(--rem-base) * 1rem);
-  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  padding: var(--space-4) var(--padding-sm);
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-subtle);
 }
 
 .postMeta {
   font-family: var(--font-family-label);
   font-size: var(--font-size-xs);
-  color: color-mix(in srgb, var(--color-text) 56%, transparent);
-  letter-spacing: 0.03em;
+  color: var(--color-text-56);
+  letter-spacing: var(--tracking-meta);
 }
 
 .postTitle {
@@ -169,14 +171,14 @@
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-regular);
   color: var(--color-text);
-  line-height: 1.3;
+  line-height: var(--leading-snug);
   font-style: italic;
 }
 
 .postExcerpt {
   font-family: var(--font-family-body);
   font-size: var(--font-size);
-  color: color-mix(in srgb, var(--color-text) 78%, transparent);
+  color: var(--color-text-78);
   line-height: 1.65;
 }
 
@@ -184,10 +186,10 @@
 
 .bookCard {
   background-color: var(--color-text);
-  padding: calc(26 / var(--rem-base) * 1rem);
+  padding: var(--space-26);
   display: flex;
   flex-direction: column;
-  gap: calc(16 / var(--rem-base) * 1rem);
+  gap: var(--space-16);
 }
 
 .bookTopRow {
@@ -203,8 +205,8 @@
   letter-spacing: var(--label-letter-spacing);
   text-transform: uppercase;
   color: var(--color-accent);
-  padding: calc(4 / var(--rem-base) * 1rem) calc(10 / var(--rem-base) * 1rem);
-  border-radius: calc(999 / var(--rem-base) * 1rem);
+  padding: var(--space-4) var(--padding-sm);
+  border-radius: var(--radius-pill);
   border: 1px solid color-mix(in srgb, var(--color-background) 18%, transparent);
 }
 
@@ -212,12 +214,12 @@
   font-family: var(--font-family-label);
   font-size: var(--font-size-xs);
   color: color-mix(in srgb, var(--color-background) 38%, transparent);
-  letter-spacing: 0.03em;
+  letter-spacing: var(--tracking-meta);
 }
 
 .bookQuote {
   border-left: 2px solid var(--color-accent);
-  padding-left: calc(18 / var(--rem-base) * 1rem);
+  padding-left: var(--space-18);
   font-family: var(--font-family-headline);
   font-size: var(--font-size-lg);
   font-style: italic;
@@ -228,7 +230,7 @@
 .bookTitleRow {
   display: flex;
   align-items: baseline;
-  gap: calc(8 / var(--rem-base) * 1rem);
+  gap: var(--gap-sm);
   flex-wrap: wrap;
 }
 
@@ -251,16 +253,16 @@
   color: color-mix(in srgb, var(--color-background) 62%, transparent);
   line-height: 1.65;
   border-top: 1px solid color-mix(in srgb, var(--color-background) 12%, transparent);
-  padding-top: calc(14 / var(--rem-base) * 1rem);
+  padding-top: var(--space-14);
 }
 
 /* Drawing card */
 
 .drawingCard {
-  padding: calc(22 / var(--rem-base) * 1rem);
+  padding: var(--padding-lg);
   display: flex;
   flex-direction: column;
-  gap: calc(12 / var(--rem-base) * 1rem);
+  gap: var(--gap-md);
 }
 
 .drawingTopRow {
@@ -282,12 +284,12 @@
   font-family: var(--font-family-label);
   font-size: var(--font-size-xs);
   color: color-mix(in srgb, var(--color-text) 42%, transparent);
-  letter-spacing: 0.03em;
+  letter-spacing: var(--tracking-meta);
 }
 
 .drawingCanvas {
   background: rgba(255, 255, 255, 0.35);
-  border-radius: calc(8 / var(--rem-base) * 1rem);
+  border-radius: var(--radius-sm);
   height: calc(180 / var(--rem-base) * 1rem);
   display: flex;
   align-items: center;
@@ -305,8 +307,8 @@
 /* Footer */
 
 .footer {
-  margin-top: calc(64 / var(--rem-base) * 1rem);
-  padding-top: var(--space-32);
+  margin-top: var(--section-xl);
+  padding-top: var(--padding-xl);
   border-top: 1px solid var(--color-border);
   display: flex;
   justify-content: space-between;
@@ -317,7 +319,7 @@
   font-family: var(--font-family-headline);
   font-size: var(--font-size);
   font-style: italic;
-  color: color-mix(in srgb, var(--color-text) 56%, transparent);
+  color: var(--color-text-56);
 }
 
 .footerCount {

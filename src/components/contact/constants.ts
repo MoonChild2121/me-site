@@ -3,8 +3,8 @@ import type { ContactLink } from './types';
 export const CONTACT_LINKS: ContactLink[] = [
   {
     label: 'Email',
-    value: 'zeny@email.com',
-    href: 'mailto:zeny@email.com',
+    value: 'zkashif.bscs21seecs@seecs.edu.pk',
+    href: 'mailto:zkashif.bscs21seecs@seecs.edu.pk',
     description: 'for serious things',
     icon: 'email',
   },

@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react';
 
 import type { LogEntry, PostEntry, BookEntry, DrawingEntry } from './types';
+import Pill from '@/components/common/Pill/Pill';
 import styles from './Log.module.css';
 
 function stagger(index: number): CSSProperties {
@@ -11,7 +12,7 @@ function PostVariant({ entry }: { entry: PostEntry }) {
   return (
     <>
       <div className={styles.postTopRow}>
-        <span className={styles.postTag}>{entry.tag}</span>
+        <Pill as="span" variant="status">{entry.tag}</Pill>
         <span className={styles.postMeta}>
           {entry.readTime} · {entry.date}
         </span>
@@ -26,7 +27,7 @@ function BookVariant({ entry }: { entry: BookEntry }) {
   return (
     <>
       <div className={styles.bookTopRow}>
-        <span className={styles.bookLabel}>Book</span>
+        <Pill as="span" variant="inverted">Book</Pill>
         <span className={styles.bookDate}>{entry.date}</span>
       </div>
       <p className={styles.bookQuote}>&ldquo;{entry.quote}&rdquo;</p>

@@ -6,6 +6,8 @@ import { LOG_ENTRIES } from '@/components/log/constants';
 import type { LogEntry } from '@/components/log/types';
 import { useEffect, useRef } from 'react';
 import HomeFooter from './HomeFooter';
+import ButtonLink from '@/components/common/ButtonLink/ButtonLink';
+import Pill from '@/components/common/Pill/Pill';
 
 const ENTRY_DATE_FORMATTER = new Intl.DateTimeFormat('en-US', {
   month: 'short',
@@ -211,12 +213,12 @@ export default function Home() {
             </header>
 
             <div className={s.choiceButtons}>
-              <Link href="/work" className={s.choiceButton}>
+              <ButtonLink href="/work" variant="outline">
                 View Work
-              </Link>
-              <Link href="/log" className={s.choiceButton}>
+              </ButtonLink>
+              <ButtonLink href="/log" variant="outline">
                 Explore log
-              </Link>
+              </ButtonLink>
             </div>
           </div>
         </div>
@@ -257,7 +259,7 @@ export default function Home() {
                 data-reveal
                 style={{ ['--reveal-delay' as never]: `${120 + idx * 70}ms` }}
               >
-                <div className={s.entryTypePill}>{getTypeLabel(entry.type)}</div>
+                <Pill as="span" variant="status" className={s.entryTypePill}>{getTypeLabel(entry.type)}</Pill>
                 <div className={s.entryTitle}>{entry.title}</div>
                 <div className={s.entryPreview}>{getEntryPreview(entry)}</div>
                 <div className={s.entryMeta}>
@@ -272,9 +274,9 @@ export default function Home() {
             data-reveal
             style={{ ['--reveal-delay' as never]: '360ms' }}
           >
-            <Link href="/log" className={s.entriesLink}>
-              → View all entries
-            </Link>
+            <ButtonLink href="/log" variant="small">
+            View all entries
+            </ButtonLink>
           </footer>
         </div>
       </section>

@@ -2,7 +2,7 @@
   scroll-margin-top: calc(var(--site-header-height) + var(--space-32));
   display: flex;
   flex-direction: column;
-  gap: calc(14 / var(--rem-base) * 1rem);
+  gap: var(--space-14);
   flex: 1;
   min-height: 0;
 }
@@ -12,7 +12,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: calc(20 / var(--rem-base) * 1rem);
+  gap: var(--gap-lg);
 }
 
 .introWrap {
@@ -26,14 +26,14 @@
   flex-direction: column;
   min-height: 0;
   max-width: 78ch;
-  gap: var(--space-32);
+  gap: var(--gap-xl);
   justify-content: center;
 }
 
 .rightStack {
   display: flex;
   flex-direction: column;
-  gap: calc(12 / var(--rem-base) * 1rem);
+  gap: var(--gap-md);
   justify-content: center;
   align-items: center;
 }
@@ -41,16 +41,16 @@
 .intro {
   font-family: var(--font-family-body);
   font-size: var(--font-size);
-  line-height: 1.6;
+  line-height: var(--leading-normal);
   color: var(--color-text);
   max-width: 78ch;
 }
 
 .contactCard {
   border: 1px solid var(--color-border);
-  border-radius: calc(16 / var(--rem-base) * 1rem);
-  padding: calc(20 / var(--rem-base) * 1rem);
-  background: color-mix(in srgb, var(--color-background) 80%, transparent);
+  border-radius: var(--radius-lg);
+  padding: var(--space-20);
+  background: var(--color-glass);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   max-width: none;
@@ -65,19 +65,19 @@
   font-size: var(--font-size);
   font-weight: var(--font-weight-medium);
   color: var(--color-text);
-  margin-bottom: calc(10 / var(--rem-base) * 1rem);
+  margin-bottom: var(--section-xs);
 }
 
 .contactStack {
   display: flex;
   flex-direction: column;
-  gap: calc(10 / var(--rem-base) * 1rem);
+  gap: var(--space-10);
 }
 
 .contactRow {
   display: flex;
   align-items: center;
-  gap: calc(10 / var(--rem-base) * 1rem);
+  gap: var(--space-10);
   color: var(--color-text);
   text-decoration: none;
   width: fit-content;
@@ -89,7 +89,7 @@
   justify-content: center;
   width: calc(30 / var(--rem-base) * 1rem);
   height: calc(30 / var(--rem-base) * 1rem);
-  border-radius: calc(999 / var(--rem-base) * 1rem);
+  border-radius: var(--radius-pill);
   border: 1px solid var(--color-border);
   background-color: transparent;
   color: var(--color-text);
@@ -102,7 +102,7 @@
 
 .contactRowText {
   border-bottom: 1px solid transparent;
-  transition: border-color 0.12s ease;
+  transition: border-color var(--duration-fast) var(--ease-default);
 }
 
 .contactRow:hover .contactRowText {
@@ -110,7 +110,7 @@
 }
 
 .contactCta {
-  margin-top: calc(4 / var(--rem-base) * 1rem);
+  margin-top: var(--space-4);
   width: fit-content;
   color: var(--color-text);
   border-bottom: 1px solid var(--color-border);
@@ -122,14 +122,14 @@
 .highlightsGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: calc(12 / var(--rem-base) * 1rem);
+  gap: var(--gap-md);
 }
 
 .tile {
   border: 1px solid var(--color-border);
-  border-radius: calc(14 / var(--rem-base) * 1rem);
-  padding: calc(12 / var(--rem-base) * 1rem) calc(14 / var(--rem-base) * 1rem);
-  background-color: color-mix(in srgb, var(--color-text) 1.5%, transparent);
+  border-radius: var(--radius-md);
+  padding: var(--space-12) var(--space-14);
+  background-color: var(--color-surface-raised);
   color: var(--color-text);
   font-family: var(--font-family-body);
   font-size: var(--font-size);
@@ -143,12 +143,14 @@
   appearance: none;
   cursor: pointer;
   text-align: left;
-  transition: transform 0.12s ease, background-color 0.12s ease, border-color 0.12s ease;
+  transition: transform var(--duration-fast) var(--ease-default),
+    background-color var(--duration-fast) var(--ease-default),
+    border-color var(--duration-fast) var(--ease-default);
 }
 
 .tileButton:hover {
   transform: translateY(calc(-1 / var(--rem-base) * 1rem));
-  background-color: color-mix(in srgb, var(--color-text) 3%, transparent);
+  background-color: var(--color-surface-overlay);
   border-color: color-mix(in srgb, var(--color-text) 22%, transparent);
 }
 
@@ -165,23 +167,23 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: calc(10 / var(--rem-base) * 1rem);
+  gap: var(--space-10);
   min-width: 0;
 }
 
 .tileLineEnd {
   display: inline-flex;
   align-items: center;
-  gap: calc(6 / var(--rem-base) * 1rem);
+  gap: var(--space-6);
 }
 
 .tileChevron {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: calc(24 / var(--rem-base) * 1rem);
-  height: calc(24 / var(--rem-base) * 1rem);
-  border-radius: calc(999 / var(--rem-base) * 1rem);
+  width: var(--space-24);
+  height: var(--space-24);
+  border-radius: var(--radius-pill);
   border: 1px solid var(--color-border);
   background-color: transparent;
   color: var(--color-text-muted);
@@ -198,11 +200,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: calc(22 / var(--rem-base) * 1rem);
-  padding: 0 calc(10 / var(--rem-base) * 1rem);
-  border-radius: calc(999 / var(--rem-base) * 1rem);
+  height: var(--space-22);
+  padding: 0 var(--padding-sm);
+  border-radius: var(--radius-pill);
   border: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-text) 6%, transparent);
+  background: var(--color-surface-hover);
   color: var(--color-text);
   font-family: var(--font-family-label);
   text-transform: uppercase;
@@ -215,11 +217,11 @@
 @media (max-width: 64rem) {
   .body {
     grid-template-columns: 1fr;
-    gap: var(--space-32);
+    gap: var(--gap-xl);
   }
 
   .left {
-    gap: var(--space-32);
+    gap: var(--gap-xl);
   }
 
   .introWrap {
@@ -232,14 +234,14 @@
 }
 
 .stagger {
-  animation: staggerFadeIn 340ms ease both;
+  animation: staggerFadeIn var(--duration-slow) var(--ease-default) both;
   animation-delay: calc(var(--stagger, 0) * 80ms);
 }
 
 @keyframes staggerFadeIn {
   from {
     opacity: 0;
-    transform: translateY(calc(8 / var(--rem-base) * 1rem));
+    transform: translateY(var(--space-8));
   }
   to {
     opacity: 1;

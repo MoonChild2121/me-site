@@ -1,14 +1,14 @@
 .expGroups {
   display: flex;
   flex-direction: column;
-  gap: calc(24 / var(--rem-base) * 1rem);
+  gap: var(--space-24);
   max-width: 100%;
 }
 
 .expGroup {
   display: flex;
   flex-direction: column;
-  gap: calc(12 / var(--rem-base) * 1rem);
+  gap: var(--gap-md);
   max-width: 100%;
 }
 
@@ -20,11 +20,11 @@
   font-style: normal;
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-medium);
-  color: color-mix(in srgb, var(--color-text) 78%, transparent);
-  padding-top: calc(8 / var(--rem-base) * 1rem);
+  color: var(--color-text-78);
+  padding-top: var(--space-8);
   display: flex;
   align-items: center;
-  gap: calc(12 / var(--rem-base) * 1rem);
+  gap: var(--gap-md);
 }
 
 .expGroupLabel::after {
@@ -38,7 +38,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  gap: calc(10 / var(--rem-base) * 1rem);
+  gap: var(--space-10);
   max-width: 100%;
 }
 
@@ -52,7 +52,7 @@
   display: flex;
   flex-wrap: nowrap;
   align-items: stretch;
-  gap: calc(10 / var(--rem-base) * 1rem);
+  gap: var(--space-10);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -68,8 +68,8 @@
 
 .expCard {
   border: 1px solid var(--color-border);
-  border-radius: calc(14 / var(--rem-base) * 1rem);
-  background-color: color-mix(in srgb, var(--color-text) 1.5%, transparent);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface-raised);
   overflow: hidden;
   min-height: calc(198 / var(--rem-base) * 1rem);
   width: calc(520 / var(--rem-base) * 1rem);
@@ -81,28 +81,28 @@
 .expCardInner {
   display: flex;
   flex-direction: column;
-  padding: calc(14 / var(--rem-base) * 1rem) calc(16 / var(--rem-base) * 1rem);
+  padding: var(--space-14) var(--padding-md);
   height: 100%;
 }
 
 .expCardTop {
   display: flex;
   flex-direction: column;
-  gap: calc(8 / var(--rem-base) * 1rem);
+  gap: var(--gap-sm);
 }
 
 .expCardBottom {
   margin-top: auto;
   display: flex;
   flex-direction: column;
-  gap: calc(8 / var(--rem-base) * 1rem);
+  gap: var(--gap-sm);
 }
 
 .expHeaderBlock {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: calc(14 / var(--rem-base) * 1rem);
+  gap: var(--space-14);
 }
 
 .expTitle {
@@ -110,7 +110,7 @@
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-medium);
   line-height: 1.25;
-  letter-spacing: -0.01em;
+  letter-spacing: var(--tracking-snug);
   color: var(--color-text);
   min-width: 0;
 }
@@ -126,7 +126,7 @@
   align-items: flex-end;
   gap: calc(3 / var(--rem-base) * 1rem);
   flex: 0 0 auto;
-  padding-top: calc(2 / var(--rem-base) * 1rem);
+  padding-top: var(--space-2);
 }
 
 .expMetaItem {
@@ -156,17 +156,17 @@
 .tagRow {
   display: flex;
   flex-wrap: wrap;
-  gap: calc(6 / var(--rem-base) * 1rem);
-  padding-top: calc(2 / var(--rem-base) * 1rem);
+  gap: var(--space-6);
+  padding-top: var(--space-2);
 }
 
 .tag {
   display: inline-flex;
   align-items: center;
-  padding: calc(6 / var(--rem-base) * 1rem) calc(10 / var(--rem-base) * 1rem);
-  border-radius: calc(999 / var(--rem-base) * 1rem);
+  padding: var(--padding-xs) var(--padding-sm);
+  border-radius: var(--radius-pill);
   border: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-text) 6%, transparent);
+  background: var(--color-surface-hover);
   color: var(--color-text);
   font-family: var(--font-family-label);
   text-transform: uppercase;
@@ -179,14 +179,14 @@
 }
 
 .stagger {
-  animation: staggerFadeIn 340ms ease both;
+  animation: staggerFadeIn var(--duration-slow) var(--ease-default) both;
   animation-delay: calc(var(--stagger, 0) * 80ms);
 }
 
 @keyframes staggerFadeIn {
   from {
     opacity: 0;
-    transform: translateY(calc(8 / var(--rem-base) * 1rem));
+    transform: translateY(var(--space-8));
   }
   to {
     opacity: 1;
@@ -196,19 +196,19 @@
 
 .emptyState {
   border: 1px solid var(--color-border);
-  border-radius: calc(14 / var(--rem-base) * 1rem);
-  padding: calc(18 / var(--rem-base) * 1rem);
+  border-radius: var(--radius-md);
+  padding: var(--space-18);
   color: var(--color-text-muted);
   font-family: var(--font-family-body);
   font-size: var(--font-size);
-  line-height: 1.6;
+  line-height: var(--leading-normal);
 }
 
 .section {
   scroll-margin-top: calc(var(--site-header-height) + var(--space-32));
   display: flex;
   flex-direction: column;
-  gap: calc(14 / var(--rem-base) * 1rem);
+  gap: var(--space-14);
   flex: 1;
   min-height: 0;
   max-width: 100%;
@@ -217,7 +217,7 @@
 .sectionBody {
   display: flex;
   flex-direction: column;
-  gap: calc(20 / var(--rem-base) * 1rem);
+  gap: var(--gap-lg);
   max-width: 100%;
 }
 

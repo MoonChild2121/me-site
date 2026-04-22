@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import { LOG_TAGS, LOG_ENTRIES } from './constants';
 import LogCard from './LogCard';
+import Pill from '@/components/common/Pill/Pill';
 import styles from './Log.module.css';
 
 export default function Log() {
@@ -32,15 +33,15 @@ export default function Log() {
 
       <div className={styles.filters} role="group" aria-label="Filter entries">
         {LOG_TAGS.map(t => (
-          <button
+          <Pill
             key={t}
-            type="button"
-            className={`${styles.filterPill} ${activeFilter === t ? styles.filterPillActive : ''}`}
+            variant="filter"
+            active={activeFilter === t}
             aria-pressed={activeFilter === t}
             onClick={() => handleFilter(t)}
           >
             {t}
-          </button>
+          </Pill>
         ))}
       </div>
 

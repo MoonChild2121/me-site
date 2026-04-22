@@ -15,8 +15,8 @@
   bottom: 0;
   width: max(calc(220 / var(--rem-base) * 1rem), 18vw);
   border-right: 1px solid var(--color-border);
-  background-color: color-mix(in srgb, var(--color-text) 3%, transparent);
-  padding: var(--space-32);
+  background-color: var(--color-surface-overlay);
+  padding: var(--padding-xl);
   padding-top: 0;
   box-sizing: border-box;
   z-index: 20;
@@ -26,8 +26,8 @@
 .sidebarNav {
   display: flex;
   flex-direction: column;
-  gap: calc(10 / var(--rem-base) * 1rem);
-  padding-top: var(--space-32);
+  gap: var(--space-10);
+  padding-top: var(--padding-xl);
 }
 
 .sidebarLink {
@@ -37,8 +37,8 @@
   appearance: none;
   background: transparent;
   border: 1px solid transparent;
-  padding: calc(10 / var(--rem-base) * 1rem) calc(12 / var(--rem-base) * 1rem);
-  border-radius: calc(999 / var(--rem-base) * 1rem);
+  padding: var(--padding-sm) var(--space-12);
+  border-radius: var(--radius-pill);
   cursor: pointer;
   text-align: left;
   width: 100%;
@@ -58,7 +58,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background-color: color-mix(in srgb, var(--color-text) 6%, transparent);
+  background-color: var(--color-surface-hover);
   opacity: 0;
   transition: none;
   z-index: -1;
@@ -91,8 +91,8 @@
   bottom: 0;
   display: flex;
   flex-direction: column;
-  gap: calc(14 / var(--rem-base) * 1rem);
-  padding: var(--space-32);
+  gap: var(--space-14);
+  padding: var(--padding-xl);
   padding-top: 0;
   box-sizing: border-box;
   overflow: hidden;
@@ -103,15 +103,15 @@
   display: flex;
   justify-content: stretch;
   width: 100%;
-  padding-top: var(--space-32);
-  padding-bottom: calc(10 / var(--rem-base) * 1rem);
+  padding-top: var(--padding-xl);
+  padding-bottom: var(--padding-sm);
 }
 
 .controlsRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: calc(10 / var(--rem-base) * 1rem);
+  gap: var(--space-10);
   flex-wrap: wrap;
   width: 100%;
 }
@@ -120,7 +120,7 @@
   font-family: var(--font-family-headline);
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-medium);
-  letter-spacing: -0.02em;
+  letter-spacing: var(--tracking-tight);
   line-height: 1.2;
   color: var(--color-text);
 }
@@ -129,7 +129,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: calc(10 / var(--rem-base) * 1rem);
+  gap: var(--space-10);
   flex-wrap: wrap;
   margin-left: auto;
 }
@@ -151,8 +151,8 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: calc(6 / var(--rem-base) * 1rem) 0 0;
-  gap: var(--space-32);
+  padding: var(--padding-xs) 0 0;
+  gap: var(--gap-xl);
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -166,9 +166,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: calc(8 / var(--rem-base) * 1rem);
-  padding: calc(9 / var(--rem-base) * 1rem) calc(14 / var(--rem-base) * 1rem);
-  border-radius: calc(999 / var(--rem-base) * 1rem);
+  gap: var(--gap-sm);
+  padding: var(--space-8) var(--space-14);
+  border-radius: var(--radius-pill);
   border: 1px solid var(--color-border);
   background: transparent;
   color: var(--color-text);
@@ -177,7 +177,8 @@
   letter-spacing: var(--label-letter-spacing);
   font-size: var(--font-size);
   font-weight: var(--font-weight-medium);
-  transition: transform 0.12s ease, background-color 0.12s ease;
+  transition: transform var(--duration-fast) var(--ease-default),
+              background-color var(--duration-fast) var(--ease-default);
   width: fit-content;
 }
 
@@ -186,7 +187,7 @@
 }
 
 .buttonLink:hover {
-  background-color: color-mix(in srgb, var(--color-text) 6%, transparent);
+  background-color: var(--color-surface-hover);
   transform: translateY(calc(-1 / var(--rem-base) * 1rem));
 }
 
@@ -194,23 +195,25 @@
   transform: translateY(0);
 }
 
+/* ── Animations ── */
+
 .pageEnter {
-  animation: workPageEnter 260ms ease both;
+  animation: workPageEnter 260ms var(--ease-default) both;
 }
 
 .contentEnter {
-  animation: workContentEnter 320ms ease both;
+  animation: workContentEnter 320ms var(--ease-default) both;
 }
 
 .stagger {
-  animation: staggerFadeIn 340ms ease both;
+  animation: staggerFadeIn var(--duration-slow) var(--ease-default) both;
   animation-delay: calc(var(--stagger, 0) * 80ms);
 }
 
 @keyframes staggerFadeIn {
   from {
     opacity: 0;
-    transform: translateY(calc(8 / var(--rem-base) * 1rem));
+    transform: translateY(var(--space-8));
   }
   to {
     opacity: 1;
@@ -221,7 +224,7 @@
 @keyframes workPageEnter {
   from {
     opacity: 0;
-    transform: translateY(calc(6 / var(--rem-base) * 1rem));
+    transform: translateY(var(--space-6));
   }
   to {
     opacity: 1;
@@ -232,7 +235,7 @@
 @keyframes workContentEnter {
   from {
     opacity: 0;
-    transform: translateY(calc(10 / var(--rem-base) * 1rem));
+    transform: translateY(var(--space-10));
   }
   to {
     opacity: 1;
@@ -251,11 +254,11 @@
 }
 
 .sectionLeaving {
-  animation: sectionFadeOut 180ms ease forwards;
+  animation: sectionFadeOut 180ms var(--ease-default) forwards;
 }
 
 .sectionEntering {
-  animation: sectionFadeIn 220ms ease forwards;
+  animation: sectionFadeIn 220ms var(--ease-default) forwards;
 }
 
 @keyframes sectionFadeOut {
@@ -265,14 +268,14 @@
   }
   to {
     opacity: 0;
-    transform: translateY(calc(-6 / var(--rem-base) * 1rem));
+    transform: translateY(calc(-1 * var(--space-6)));
   }
 }
 
 @keyframes sectionFadeIn {
   from {
     opacity: 0;
-    transform: translateY(calc(6 / var(--rem-base) * 1rem));
+    transform: translateY(var(--space-6));
   }
   to {
     opacity: 1;
@@ -280,13 +283,13 @@
   }
 }
 
-/* Shared primitives used by simple tabs (projects, publications, skills, education, additional) */
+/* ── Shared primitives used by tabs ── */
 
 .section {
   scroll-margin-top: calc(var(--site-header-height) + var(--space-32));
   display: flex;
   flex-direction: column;
-  gap: calc(14 / var(--rem-base) * 1rem);
+  gap: var(--space-14);
   flex: 1;
   min-height: 0;
 }
@@ -294,13 +297,13 @@
 .sectionBody {
   display: flex;
   flex-direction: column;
-  gap: calc(20 / var(--rem-base) * 1rem);
+  gap: var(--gap-lg);
 }
 
 .body {
   font-family: var(--font-family-body);
   font-size: var(--font-size);
-  line-height: 1.6;
+  line-height: var(--leading-normal);
   color: var(--color-text);
   max-width: 78ch;
 }
@@ -308,15 +311,15 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-32);
+  gap: var(--gap-xl);
 }
 
 .item {
   border-top: 1px solid var(--color-border);
-  padding-top: var(--space-32);
+  padding-top: var(--padding-xl);
   display: flex;
   flex-direction: column;
-  gap: calc(10 / var(--rem-base) * 1rem);
+  gap: var(--space-10);
 }
 
 .item:first-child {
@@ -327,7 +330,7 @@
 .itemHeader {
   display: flex;
   flex-wrap: wrap;
-  gap: calc(10 / var(--rem-base) * 1rem);
+  gap: var(--space-10);
   align-items: baseline;
   justify-content: space-between;
 }
@@ -337,7 +340,7 @@
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-medium);
   line-height: 1.25;
-  letter-spacing: -0.01em;
+  letter-spacing: var(--tracking-snug);
   color: var(--color-text);
 }
 
@@ -353,35 +356,37 @@
 }
 
 .bullets {
-  margin-top: calc(12 / var(--rem-base) * 1rem);
-  padding-left: calc(18 / var(--rem-base) * 1rem);
+  margin-top: var(--space-12);
+  padding-left: var(--space-18);
   display: flex;
   flex-direction: column;
-  gap: calc(6 / var(--rem-base) * 1rem);
+  gap: var(--space-6);
 }
 
 .featuredPanel {
-  border: 1px solid color-mix(in srgb, var(--color-text) 16%, transparent);
-  border-radius: calc(16 / var(--rem-base) * 1rem);
-  padding: calc(20 / var(--rem-base) * 1rem);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-20);
   background-color: color-mix(in srgb, var(--color-text) 2.5%, transparent);
   box-shadow:
-    0 calc(10 / var(--rem-base) * 1rem) calc(30 / var(--rem-base) * 1rem)
+    0 var(--space-10) var(--space-32)
       color-mix(in srgb, var(--color-text) 10%, transparent);
   display: flex;
   flex-direction: column;
-  gap: calc(12 / var(--rem-base) * 1rem);
+  gap: var(--gap-md);
 }
 
 .emptyState {
   border: 1px solid var(--color-border);
-  border-radius: calc(14 / var(--rem-base) * 1rem);
-  padding: calc(18 / var(--rem-base) * 1rem);
+  border-radius: var(--radius-md);
+  padding: var(--space-18);
   color: var(--color-text-muted);
   font-family: var(--font-family-body);
   font-size: var(--font-size);
-  line-height: 1.6;
+  line-height: var(--leading-normal);
 }
+
+/* ── Responsive ── */
 
 @media (max-width: 64rem) {
   .layout {
