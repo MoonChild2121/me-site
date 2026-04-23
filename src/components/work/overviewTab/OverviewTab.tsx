@@ -42,6 +42,7 @@ export default function OverviewTab({ goToSection }: { goToSection: (id: Section
                 {currentRole.title}
                 <span className={styles.roleCompany}> — {currentRole.company}</span>
               </div>
+              <div className={styles.pubMeta}>{currentRole.location} · {currentRole.dateRange}</div>
             </button>
           ) : null}
 
