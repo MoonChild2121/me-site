@@ -68,7 +68,6 @@ export default function OverviewTab({ goToSection }: { goToSection: (id: Section
           </p>
           <Link href="/contact" className={styles.ctaButton}>
             Contact me
-            <span aria-hidden>→</span>
           </Link>
         </div>
       </div>

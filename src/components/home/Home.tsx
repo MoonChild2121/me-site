@@ -4,7 +4,9 @@ import { useHomeStyles } from './useHomeStyles';
 import Link from 'next/link';
 import { LOG_ENTRIES } from '@/components/log/constants';
 import type { LogEntry } from '@/components/log/types';
+import type { CSSProperties } from 'react';
 import { useEffect, useRef } from 'react';
+import nameFlower from '@/assets/name_flower.png';
 import HomeFooter from './HomeFooter';
 import ButtonLink from '@/components/common/ButtonLink/ButtonLink';
 import Pill from '@/components/common/Pill/Pill';
@@ -15,10 +17,35 @@ const ENTRY_DATE_FORMATTER = new Intl.DateTimeFormat('en-US', {
   timeZone: 'UTC'
 });
 
+const SKILL_PILLS: Array<{
+  label: string;
+  x: string;
+  y: string;
+  s: string;
+  d: string;
+}> = [
+  // Left arc (circular curve)
+  { label: 'Design Systems', x: '18%', y: '16%', s: '1.06', d: '0s' },
+  { label: 'Next.js', x: '12%', y: '26%', s: '1.04', d: '0.35s' },
+  { label: 'TypeScript', x: '8%', y: '36%', s: '1.02', d: '0.7s' },
+  { label: 'React', x: '6%', y: '48%', s: '1.02', d: '1.05s' },
+  { label: 'Performance', x: '8%', y: '60%', s: '1.02', d: '1.4s' },
+  { label: 'Accessibility', x: '12%', y: '72%', s: '1.04', d: '1.75s' },
+  { label: 'UI Architecture', x: '18%', y: '84%', s: '1.06', d: '2.1s' },
+
+  // Right arc (circular curve)
+  { label: 'CSS Modules', x: '82%', y: '16%', s: '1.06', d: '0.2s' },
+  { label: 'Interaction', x: '88%', y: '26%', s: '1.04', d: '0.55s' },
+  { label: 'State Systems', x: '92%', y: '36%', s: '1.02', d: '0.9s' },
+  { label: 'APIs', x: '94%', y: '48%', s: '1.02', d: '1.25s' },
+  { label: 'Quality', x: '92%', y: '60%', s: '1.02', d: '1.6s' },
+  { label: 'Tooling', x: '88%', y: '72%', s: '1.04', d: '1.95s' },
+  { label: 'Testing', x: '82%', y: '84%', s: '1.06', d: '2.3s' },
+];
+
 export default function Home() {
   const s = useHomeStyles();
   const rootRef = useRef<HTMLDivElement | null>(null);
-  const flowerUrl = new URL('../../assets/homeFlower.svg', import.meta.url).toString();
   const roundFlowerUrl = new URL('../../assets/roundFlower.svg', import.meta.url).toString();
 
   const formatEntryDate = (date: string) => {
@@ -135,6 +162,27 @@ export default function Home() {
   return (
     <div ref={rootRef} className={s.page}>
       <section className={`${s.intro} ${s.fadeSection}`} data-fade-section aria-label="Introduction">
+        <div className={s.skillPills} aria-hidden>
+          {SKILL_PILLS.map(p => (
+            <Pill
+              key={p.label}
+              as="span"
+              variant="tag"
+              className={s.skillPill}
+              style={
+                {
+                  ['--pill-x' as never]: p.x,
+                  ['--pill-y' as never]: p.y,
+                  ['--pill-s' as never]: p.s,
+                  ['--pill-d' as never]: p.d,
+                } as CSSProperties
+              }
+            >
+              {p.label}
+            </Pill>
+          ))}
+        </div>
+
         <div className={s.hero}>
           <div className={s.left}>
             <div
@@ -142,50 +190,49 @@ export default function Home() {
               data-reveal
               style={{ ['--reveal-delay' as never]: '0ms' }}
             >
-              Frontend Engineer with a focus on clarity &amp; craft
+              Frontend Engineer · Lahore, PK
             </div>
 
-            <h1 className={s.heading}>
-              <span
-                className={`${s.line} ${s.reveal}`}
-                data-reveal
-                style={{ ['--reveal-delay' as never]: '90ms' }}
-              >
-                Thoughtful
-              </span>
-              <span
-                className={`${s.line} ${s.reveal}`}
-                data-reveal
-                style={{ ['--reveal-delay' as never]: '160ms' }}
-              >
-                Interfaces,
-              </span>
-              <span
-                className={`${s.line} ${s.italic} ${s.reveal}`}
+            <div className={s.nameStack}>
+              <div className={s.nameRow} aria-label="Name">
+                <h1 className={s.heading}>
+                  <span
+                    className={`${s.line} ${s.reveal}`}
+                    data-reveal
+                    style={{ ['--reveal-delay' as never]: '90ms' }}
+                  >
+                    Zainab
+                  </span>
+                  <span
+                    className={`${s.line} ${s.reveal}`}
+                    data-reveal
+                    style={{ ['--reveal-delay' as never]: '160ms' }}
+                  >
+                    Kashif.
+                  </span>
+                </h1>
+
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  className={`${s.nameFlower} ${s.reveal}`}
+                  data-reveal
+                  style={{ ['--reveal-delay' as never]: '190ms' }}
+                  src={nameFlower.src}
+                  alt=""
+                  aria-hidden
+                />
+              </div>
+
+              <p
+                className={`${s.body} ${s.nameBody} ${s.reveal}`}
                 data-reveal
                 style={{ ['--reveal-delay' as never]: '230ms' }}
               >
-                Built to Last.
-              </span>
-            </h1>
+                I build interfaces for a living — structured, considered, and built to hold up.
+                Outside of that I read obsessively, draw occasionally, and write things down.
+              </p>
+            </div>
 
-            <p
-              className={`${s.body} ${s.reveal}`}
-              data-reveal
-              style={{ ['--reveal-delay' as never]: '300ms' }}
-            >
-              I build reliable, well-structured web experiences with an emphasis on usability and
-              long-term maintainability. I also document what I learn along the way.
-            </p>
-          </div>
-
-          <div
-            className={`${s.right} ${s.reveal}`}
-            data-reveal
-            style={{ ['--reveal-delay' as never]: '180ms' }}
-            aria-hidden
-          >
-            <img src={flowerUrl} width={436} height={436} alt="" />
           </div>
         </div>
       </section>

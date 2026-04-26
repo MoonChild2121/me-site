@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import posScreenshot from '@/assets/pos.png';
 
 import { EXPLORATIONS, FEATURED_PROJECT } from '../constants';
@@ -7,9 +9,27 @@ import { staggerStyle } from '../staggerStyle';
 import shared from '../WorkDashboard.module.css';
 import styles from './ProjectsTab.module.css';
 import ExplorationCard from './ExplorationCard';
-import FeaturedListBlock from './FeaturedListBlock';
 
 export default function ProjectsTab() {
+  const [mediaOpen, setMediaOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const closeBtnRef = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mediaOpen) return;
+    closeBtnRef.current?.focus();
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMediaOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [mediaOpen]);
+
   return (
     <section className={shared.section} aria-label="Projects">
       <div className={shared.sectionBody}>
@@ -21,49 +41,29 @@ export default function ProjectsTab() {
           >
             <header className={styles.featuredHeader}>
               <div className={styles.featuredKicker}>Featured System</div>
-              <div className={styles.featuredTitle}>{FEATURED_PROJECT.title}</div>
+              <div className={styles.featuredTitleRow}>
+                <div className={styles.featuredTitle}>{FEATURED_PROJECT.title}</div>
+                <button
+                  type="button"
+                  className={styles.mediaCta}
+                  onClick={() => setMediaOpen(true)}
+                  aria-haspopup="dialog"
+                >
+                  View interface
+                  <span aria-hidden>↗</span>
+                </button>
+              </div>
               <div className={styles.featuredMeta}>{FEATURED_PROJECT.meta}</div>
             </header>
 
             <div className={styles.featuredOverview}>{FEATURED_PROJECT.overview}</div>
 
             <div className={styles.featuredMain}>
-              <div className={styles.featuredBlocks}>
-                <FeaturedListBlock
-                  label="What I Built"
-                  items={FEATURED_PROJECT.whatIBuilt}
-                  index={1}
-                  ariaLabel="What I built"
-                />
-
-                <FeaturedListBlock
-                  label="System Thinking"
-                  items={FEATURED_PROJECT.systemThinking}
-                  index={2}
-                  ariaLabel="System thinking"
-                />
-
-                <FeaturedListBlock
-                  label="Highlights"
-                  items={FEATURED_PROJECT.highlights}
-                  index={3}
-                  ariaLabel="Highlights"
-                />
-              </div>
-
-              <div
-                className={`${styles.featuredMedia} ${shared.stagger}`}
-                style={staggerStyle(2)}
-                aria-label="Featured project image"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  className={styles.featuredImage}
-                  src={posScreenshot.src}
-                  alt="Custom POS system interface screenshot"
-                  loading="lazy"
-                />
-              </div>
+              <ul className={styles.blockList} aria-label="What I built">
+                {FEATURED_PROJECT.whatIBuilt.map(item => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
             </div>
           </section>
 
@@ -87,6 +87,45 @@ export default function ProjectsTab() {
           </section>
         </div>
       </div>
+
+      {mounted && mediaOpen
+        ? createPortal(
+        <div
+          className={styles.mediaOverlay}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Featured project interface screenshot"
+          onMouseDown={e => {
+            if (e.target === e.currentTarget) setMediaOpen(false);
+          }}
+        >
+          <div className={styles.mediaDialog}>
+            <div className={styles.mediaDialogHeader}>
+              <div className={styles.mediaDialogTitle}>{FEATURED_PROJECT.title}</div>
+              <button
+                ref={closeBtnRef}
+                type="button"
+                className={styles.mediaClose}
+                onClick={() => setMediaOpen(false)}
+              >
+                Close
+              </button>
+            </div>
+            <div className={styles.mediaDialogBody}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className={styles.mediaImage}
+                src={posScreenshot.src}
+                alt="Custom POS system interface screenshot"
+                loading="eager"
+              />
+            </div>
+          </div>
+        </div>
+          ,
+          document.body
+        )
+        : null}
     </section>
   );
 }
