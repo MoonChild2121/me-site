@@ -5,14 +5,14 @@
   z-index: 50;
   border-bottom: 1px solid var(--color-border);
   background-color: var(--color-background);
-  cursor: var(--cursor-default, auto);
+  cursor: var(--cursor-default);
 }
 
 .nav {
   width: 100%;
   max-width: none;
   margin: 0;
-  padding: var(--space-24) var(--padding-xl);
+  padding: var(--space-10) var(--space-12);
   box-sizing: border-box;
 }
 
@@ -25,16 +25,61 @@
 
 .brand {
   justify-self: start;
-  font-family: var(--font-family-label);
-  text-transform: uppercase;
-  letter-spacing: var(--label-letter-spacing);
+  font-family: var(--font-family-headline);
+  font-style: italic;
+  font-size: var(--font-size-xl);
+  letter-spacing: var(--tracking-tight);
   font-optical-sizing: auto;
-  font-style: normal;
-  font-size: var(--font-size-md);
   font-weight: var(--font-weight-medium);
   line-height: 1.2;
   color: var(--color-text-muted);
-  cursor: var(--cursor-pointer, var(--cursor-default, auto)) !important;
+  cursor: var(--cursor-pointer) !important;
+  position: relative;
+  padding: var(--space-6) var(--space-12);
+  border-radius: var(--radius-pill);
+  transition:
+    background-color var(--duration-fast) var(--ease-default),
+    color var(--duration-fast) var(--ease-default),
+    transform var(--duration-fast) var(--ease-default);
+}
+
+.brand::before {
+  content: "";
+  position: absolute;
+  inset-block: calc(-2 / var(--rem-base) * 1rem);
+  inset-inline: calc(-6 / var(--rem-base) * 1rem);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface-hover);
+  opacity: 0;
+  transition:
+    opacity var(--duration-fast) var(--ease-default),
+    transform var(--duration-fast) var(--ease-default);
+  z-index: 0;
+}
+
+.brand {
+  z-index: 1;
+}
+
+.brand:hover {
+  color: var(--color-text);
+  background-color: transparent;
+  transform: translateY(calc(-1 / var(--rem-base) * 1rem));
+}
+
+.brand:hover::before {
+  opacity: 1;
+}
+
+.brand:focus-visible {
+  color: var(--color-text);
+  background-color: transparent;
+  outline: 2px solid color-mix(in srgb, var(--color-text) 22%, transparent);
+  outline-offset: calc(2 / var(--rem-base) * 1rem);
+}
+
+.brand:focus-visible::before {
+  opacity: 1;
 }
 
 .brandActive {
@@ -68,7 +113,53 @@
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-muted);
-  cursor: var(--cursor-pointer, var(--cursor-default, auto)) !important;
+  cursor: var(--cursor-pointer) !important;
+  position: relative;
+  padding: var(--space-6) var(--space-12);
+  border-radius: var(--radius-pill);
+  transition:
+    background-color var(--duration-fast) var(--ease-default),
+    color var(--duration-fast) var(--ease-default),
+    transform var(--duration-fast) var(--ease-default);
+}
+
+.link::before {
+  content: "";
+  position: absolute;
+  inset-block: calc(-2 / var(--rem-base) * 1rem);
+  inset-inline: calc(-6 / var(--rem-base) * 1rem);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface-hover);
+  opacity: 0;
+  transition:
+    opacity var(--duration-fast) var(--ease-default),
+    transform var(--duration-fast) var(--ease-default);
+  z-index: 0;
+}
+
+.link {
+  z-index: 1;
+}
+
+.link:hover {
+  color: var(--color-text);
+  background-color: transparent;
+  transform: translateY(calc(-1 / var(--rem-base) * 1rem));
+}
+
+.link:hover::before {
+  opacity: 1;
+}
+
+.link:focus-visible {
+  color: var(--color-text);
+  background-color: transparent;
+  outline: 2px solid color-mix(in srgb, var(--color-text) 22%, transparent);
+  outline-offset: calc(2 / var(--rem-base) * 1rem);
+}
+
+.link:focus-visible::before {
+  opacity: 1;
 }
 
 .linkIcon {
@@ -88,7 +179,7 @@
 
 @media (max-width: 40rem) {
   .nav {
-    padding: var(--padding-md) var(--space-20);
+    padding: var(--space-6) var(--space-8);
   }
 
   .center {

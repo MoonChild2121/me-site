@@ -24,23 +24,21 @@ const SKILL_PILLS: Array<{
   s: string;
   d: string;
 }> = [
-  // Left arc (circular curve)
-  { label: 'Design Systems', x: '18%', y: '16%', s: '1.06', d: '0s' },
-  { label: 'Next.js', x: '12%', y: '26%', s: '1.04', d: '0.35s' },
-  { label: 'TypeScript', x: '8%', y: '36%', s: '1.02', d: '0.7s' },
-  { label: 'React', x: '6%', y: '48%', s: '1.02', d: '1.05s' },
-  { label: 'Performance', x: '8%', y: '60%', s: '1.02', d: '1.4s' },
-  { label: 'Accessibility', x: '12%', y: '72%', s: '1.04', d: '1.75s' },
-  { label: 'UI Architecture', x: '18%', y: '84%', s: '1.06', d: '2.1s' },
+  // Left arc (circular curve, slightly scattered)
+  { label: 'Design Systems', x: '20%', y: '16%', s: '1.06', d: '0s' },
+  { label: 'Next.js', x: '11%', y: '26%', s: '1.04', d: '0.35s' },
+  { label: 'TypeScript', x: '9%', y: '36%', s: '1.02', d: '0.7s' },
+  { label: 'React', x: '5%', y: '48%', s: '1.02', d: '1.05s' },
+  { label: 'Performance', x: '10%', y: '60%', s: '1.02', d: '1.4s' },
+  { label: 'Accessibility', x: '13%', y: '72%', s: '1.04', d: '1.75s' },
 
-  // Right arc (circular curve)
-  { label: 'CSS Modules', x: '82%', y: '16%', s: '1.06', d: '0.2s' },
-  { label: 'Interaction', x: '88%', y: '26%', s: '1.04', d: '0.55s' },
-  { label: 'State Systems', x: '92%', y: '36%', s: '1.02', d: '0.9s' },
-  { label: 'APIs', x: '94%', y: '48%', s: '1.02', d: '1.25s' },
-  { label: 'Quality', x: '92%', y: '60%', s: '1.02', d: '1.6s' },
-  { label: 'Tooling', x: '88%', y: '72%', s: '1.04', d: '1.95s' },
-  { label: 'Testing', x: '82%', y: '84%', s: '1.06', d: '2.3s' },
+  // Right arc (circular curve, slightly scattered)
+  { label: 'CSS Modules', x: '80%', y: '16%', s: '1.06', d: '0.2s' },
+  { label: 'Interaction', x: '89%', y: '26%', s: '1.04', d: '0.55s' },
+  { label: 'State Systems', x: '93%', y: '36%', s: '1.02', d: '0.9s' },
+  { label: 'APIs', x: '96%', y: '48%', s: '1.02', d: '1.25s' },
+  { label: 'Quality', x: '90%', y: '60%', s: '1.02', d: '1.6s' },
+  { label: 'Tooling', x: '86%', y: '72%', s: '1.04', d: '1.95s' },
 ];
 
 export default function Home() {
@@ -321,8 +319,8 @@ export default function Home() {
             data-reveal
             style={{ ['--reveal-delay' as never]: '360ms' }}
           >
-            <ButtonLink href="/log" variant="small">
-            View all entries
+            <ButtonLink href="/log" variant="outline" className={s.entriesLink}>
+              View all entries
             </ButtonLink>
           </footer>
         </div>

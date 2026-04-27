@@ -17,10 +17,9 @@ export default function OverviewTab({ goToSection }: { goToSection: (id: Section
       <div className={styles.flow}>
         {/* Bio */}
         <div className={`${styles.bioBlock} ${shared.stagger}`} style={staggerStyle(0)}>
-          <h1 className={styles.name}>Zainab Kashif</h1>
           <p className={styles.bioPrimary}>
-            Frontend engineer focused on clear, scalable interface systems. I build production Next.js
-            applications with a focus on structure, performance, and long-term maintainability.
+            I build production Next.js applications with a focus on structure, performance, and long-term
+            maintainability.
           </p>
           <p className={styles.bioSecondary}>
             My background in machine learning and research shapes how I reason about systems,

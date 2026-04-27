@@ -3,9 +3,8 @@
 :root {
   background-color: #f9f7f2;
   --site-header-height: 0px;
-  --cursor-default: url("/bumblebee_cursor_diag.png") 48 48, auto;
-  /* Keep it a bee even on hover (no hand fallback) */
-  --cursor-pointer: url("/bumblebee_cursor_diag.png") 48 48, auto;
+  --cursor-default: url("/bumblebee_cursor_v3.png") 27 27, auto;
+  --cursor-pointer: url("/bumblebee_cursor_v3.png") 27 27, pointer;
 }
 
 html {
@@ -13,7 +12,7 @@ html {
   font-size: 14px;
   background-color: #f9f7f2;
   background-color: var(--color-background);
-  cursor: var(--cursor-default, auto);
+  cursor: var(--cursor-default);
 }
 
 @media (min-width: 90rem) {
@@ -42,7 +41,7 @@ body {
   font-family: var(--font-family-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  cursor: var(--cursor-default, auto);
+  cursor: var(--cursor-default);
 }
 
 .app-body {
@@ -111,7 +110,7 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  cursor: var(--cursor-default, auto);
+  cursor: var(--cursor-default);
 }
 
 a {
@@ -125,7 +124,7 @@ button,
 summary,
 label,
 select {
-  cursor: var(--cursor-pointer, var(--cursor-default, auto)) !important;
+  cursor: var(--cursor-pointer) !important;
 }
 
 input,
