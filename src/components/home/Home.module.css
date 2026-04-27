@@ -70,7 +70,9 @@
   position: absolute;
   left: var(--pill-x);
   top: var(--pill-y);
-  transform: translate(-50%, -50%) scale(var(--pill-s));
+  --pill-enter: 0px;
+  --pill-float: 0px;
+  transform: translate(-50%, -50%) scale(var(--pill-s)) translateY(calc(var(--pill-enter) + var(--pill-float)));
   opacity: 0.78;
   filter: none;
   animation:
@@ -85,6 +87,18 @@
   padding: var(--padding-sm) var(--space-16);
 }
 
+@property --pill-enter {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --pill-float {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
 .skillPill.skillPill {
   background-color: color-mix(in srgb, var(--color-surface-raised) 70%, transparent);
   border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
@@ -94,24 +108,24 @@
 
 @keyframes pillFloat {
   0% {
-    transform: translate(-50%, -50%) scale(var(--pill-s)) translateY(0);
+    --pill-float: 0px;
   }
   50% {
-    transform: translate(-50%, -50%) scale(var(--pill-s)) translateY(calc(-10 / var(--rem-base) * 1rem));
+    --pill-float: calc(-10 / var(--rem-base) * 1rem);
   }
   100% {
-    transform: translate(-50%, -50%) scale(var(--pill-s)) translateY(0);
+    --pill-float: 0px;
   }
 }
 
 @keyframes pillFadeIn {
   from {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(var(--pill-s)) translateY(calc(12 / var(--rem-base) * 1rem));
+    --pill-enter: calc(12 / var(--rem-base) * 1rem);
   }
   to {
     opacity: 0.78;
-    transform: translate(-50%, -50%) scale(var(--pill-s)) translateY(0);
+    --pill-enter: 0px;
   }
 }
 
