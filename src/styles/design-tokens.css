@@ -3,11 +3,13 @@
 
   --rem-base: 14;
 
+  /* ── Palette ── */
   --color-neutral: #f9f7f2;
   --color-primary: #1a1a1a;
   --color-secondary: #635f58;
   --color-tertiary: #a69076;
 
+  /* ── Semantic colors ── */
   --color-background: var(--color-neutral);
   --color-surface: var(--color-neutral);
   --color-text: var(--color-primary);
@@ -15,22 +17,99 @@
   --color-accent: var(--color-tertiary);
   --color-border: color-mix(in srgb, var(--color-primary) 12%, transparent);
 
-  /* Spacing tokens (px → rem) */
-  --space-32-px: 32;
-  --space-40-px: 40;
-  --space-32: calc(var(--space-32-px) / var(--rem-base) * 1rem);
-  --space-40: calc(var(--space-40-px) / var(--rem-base) * 1rem);
+  /* Surface / elevation (semantic color-mix recipes) */
+  --color-surface-raised: color-mix(in srgb, var(--color-text) 1.5%, transparent);
+  --color-surface-overlay: color-mix(in srgb, var(--color-text) 3%, transparent);
+  --color-surface-hover: color-mix(in srgb, var(--color-text) 6%, transparent);
+  --color-border-subtle: color-mix(in srgb, var(--color-text) 14%, transparent);
+  --color-accent-subtle: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  --color-glass: color-mix(in srgb, var(--color-background) 80%, transparent);
 
+  /* Muted text tints */
+  --color-text-56: color-mix(in srgb, var(--color-text) 56%, transparent);
+  --color-text-78: color-mix(in srgb, var(--color-text) 78%, transparent);
+
+  /* ── Spacing scale (px → rem) ── */
+  --space-2: calc(2 / var(--rem-base) * 1rem);
+  --space-4: calc(4 / var(--rem-base) * 1rem);
+  --space-6: calc(6 / var(--rem-base) * 1rem);
+  --space-8: calc(8 / var(--rem-base) * 1rem);
+  --space-10: calc(10 / var(--rem-base) * 1rem);
+  --space-12: calc(12 / var(--rem-base) * 1rem);
+  --space-14: calc(14 / var(--rem-base) * 1rem);
+  --space-16: calc(16 / var(--rem-base) * 1rem);
+  --space-18: calc(18 / var(--rem-base) * 1rem);
+  --space-20: calc(20 / var(--rem-base) * 1rem);
+  --space-22: calc(22 / var(--rem-base) * 1rem);
+  --space-24: calc(24 / var(--rem-base) * 1rem);
+  --space-26: calc(26 / var(--rem-base) * 1rem);
+  --space-28: calc(28 / var(--rem-base) * 1rem);
+  --space-32: calc(32 / var(--rem-base) * 1rem);
+  --space-40: calc(40 / var(--rem-base) * 1rem);
+  --space-48: calc(48 / var(--rem-base) * 1rem);
+  --space-56: calc(56 / var(--rem-base) * 1rem);
+  --space-60: calc(60 / var(--rem-base) * 1rem);
+  --space-64: calc(64 / var(--rem-base) * 1rem);
+  --space-72: calc(72 / var(--rem-base) * 1rem);
+  --space-100: calc(100 / var(--rem-base) * 1rem);
+
+  /* ── Semantic spacing: gap ── */
+  --gap-xs: var(--space-4);
+  --gap-sm: var(--space-8);
+  --gap-md: var(--space-12);
+  --gap-lg: var(--space-20);
+  --gap-xl: var(--space-32);
+
+  /* ── Semantic spacing: padding ── */
+  --padding-xs: var(--space-6);
+  --padding-sm: var(--space-10);
+  --padding-md: var(--space-16);
+  --padding-lg: var(--space-22);
+  --padding-xl: var(--space-32);
+  --padding-page: var(--space-56);
+
+  /* ── Semantic spacing: section (vertical rhythm between groups) ── */
+  --section-xs: var(--space-10);
+  --section-sm: var(--space-16);
+  --section-md: var(--space-32);
+  --section-lg: var(--space-56);
+  --section-xl: var(--space-64);
+
+  /* ── Border-radius scale ── */
+  --radius-xs: calc(4 / var(--rem-base) * 1rem);
+  --radius-sm: calc(8 / var(--rem-base) * 1rem);
+  --radius-md: calc(14 / var(--rem-base) * 1rem);
+  --radius-lg: calc(16 / var(--rem-base) * 1rem);
+  --radius-pill: calc(999 / var(--rem-base) * 1rem);
+
+  /* ── Motion ── */
+  --duration-fast: 120ms;
+  --duration-normal: 200ms;
+  --duration-slow: 340ms;
+  --ease-default: ease;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* ── Typography ── */
   --font-family-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-family-label: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-family-headline: "Newsreader", ui-serif, Georgia, "Times New Roman", serif;
 
   --label-letter-spacing: 0.06em;
+  --tracking-tight: -0.02em;
+  --tracking-snug: -0.01em;
+  --tracking-meta: 0.03em;
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
+
+  /* Line-heights */
+  --leading-none: 1;
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.7;
 
   /* Font sizes (px tokens + derived rem) */
   --font-size-xs-px: 12;

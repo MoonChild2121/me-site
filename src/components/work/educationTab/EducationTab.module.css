@@ -1,0 +1,119 @@
+.eduPrimary {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--padding-lg);
+  background-color: color-mix(in srgb, var(--color-text) 2.75%, transparent);
+}
+
+.eduPrimaryFirst {
+  padding-top: var(--padding-lg) !important;
+  border-top: 1px solid var(--color-border-subtle) !important;
+}
+
+.eduPrimaryTitle {
+  font-size: var(--font-size-xl);
+  letter-spacing: var(--tracking-tight);
+}
+
+.eduPrimaryMeta {
+  color: var(--color-text-78);
+}
+
+.eduPrimaryBody {
+  color: var(--color-text-muted);
+}
+
+.cfWrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+  max-width: 78ch;
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-20);
+  margin-top: var(--space-8);
+}
+
+.cfBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.cfLabel {
+  font-family: var(--font-family-label);
+  text-transform: uppercase;
+  letter-spacing: var(--label-letter-spacing);
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+}
+
+.courseList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}
+
+.courseItem {
+  display: flex;
+  flex-direction: column;
+  gap: calc(3 / var(--rem-base) * 1rem);
+}
+
+.courseTopRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--gap-md);
+  flex-wrap: wrap;
+}
+
+.courseName {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+  color: var(--color-text);
+}
+
+.courseProvider {
+  font-family: var(--font-family-label);
+  text-transform: uppercase;
+  letter-spacing: var(--label-letter-spacing);
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: color-mix(in srgb, var(--color-text) 72%, transparent);
+  white-space: nowrap;
+}
+
+.courseFocus {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size);
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--color-text) 84%, transparent);
+}
+
+@media (max-width: 40rem) {
+  .eduPrimary {
+    padding: var(--padding-md);
+  }
+
+  .eduPrimaryFirst {
+    padding-top: var(--padding-md) !important;
+  }
+
+  .eduPrimaryTitle {
+    font-size: var(--font-size-lg);
+  }
+
+  .courseProvider {
+    white-space: normal;
+  }
+}

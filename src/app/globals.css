@@ -2,8 +2,9 @@
 
 :root {
   background-color: #f9f7f2;
-  /* Approx header height: 24px top/bottom padding + 1 line of text */
-  --site-header-height: calc(48px + (var(--font-size) * 1.2));
+  --site-header-height: 0px;
+  --cursor-default: url("/bumblebee_cursor_v3.png") 27 27, auto;
+  --cursor-pointer: url("/bumblebee_cursor_v3.png") 27 27, pointer;
 }
 
 html {
@@ -11,6 +12,7 @@ html {
   font-size: 14px;
   background-color: #f9f7f2;
   background-color: var(--color-background);
+  cursor: var(--cursor-default);
 }
 
 @media (min-width: 90rem) {
@@ -39,6 +41,7 @@ body {
   font-family: var(--font-family-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: var(--cursor-default);
 }
 
 .app-body {
@@ -107,11 +110,26 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  cursor: var(--cursor-default);
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+a,
+button,
+[role="button"],
+summary,
+label,
+select {
+  cursor: var(--cursor-pointer) !important;
+}
+
+input,
+textarea {
+  cursor: text !important;
 }
 
 .font-body {

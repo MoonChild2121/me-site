@@ -2,9 +2,14 @@
 
 import { useHomeStyles } from './useHomeStyles';
 import Link from 'next/link';
-import { RECENT_ENTRIES } from '../../data/entries';
-import type { Entry } from '../../types/entry';
+import { LOG_ENTRIES } from '@/components/log/constants';
+import type { LogEntry } from '@/components/log/types';
+import type { CSSProperties } from 'react';
 import { useEffect, useRef } from 'react';
+import nameFlower from '@/assets/name_flower.png';
+import HomeFooter from './HomeFooter';
+import ButtonLink from '@/components/common/ButtonLink/ButtonLink';
+import Pill from '@/components/common/Pill/Pill';
 
 const ENTRY_DATE_FORMATTER = new Intl.DateTimeFormat('en-US', {
   month: 'short',
@@ -12,20 +17,55 @@ const ENTRY_DATE_FORMATTER = new Intl.DateTimeFormat('en-US', {
   timeZone: 'UTC'
 });
 
+const SKILL_PILLS: Array<{
+  label: string;
+  x: string;
+  y: string;
+  s: string;
+  d: string;
+}> = [
+  // Left arc (circular curve, slightly scattered)
+  { label: 'Design Systems', x: '20%', y: '16%', s: '1.06', d: '0s' },
+  { label: 'Next.js', x: '11%', y: '26%', s: '1.04', d: '0.35s' },
+  { label: 'TypeScript', x: '9%', y: '36%', s: '1.02', d: '0.7s' },
+  { label: 'React', x: '5%', y: '48%', s: '1.02', d: '1.05s' },
+  { label: 'Performance', x: '10%', y: '60%', s: '1.02', d: '1.4s' },
+  { label: 'Accessibility', x: '13%', y: '72%', s: '1.04', d: '1.75s' },
+
+  // Right arc (circular curve, slightly scattered)
+  { label: 'CSS Modules', x: '80%', y: '16%', s: '1.06', d: '0.2s' },
+  { label: 'Interaction', x: '89%', y: '26%', s: '1.04', d: '0.55s' },
+  { label: 'State Systems', x: '93%', y: '36%', s: '1.02', d: '0.9s' },
+  { label: 'APIs', x: '96%', y: '48%', s: '1.02', d: '1.25s' },
+  { label: 'Quality', x: '90%', y: '60%', s: '1.02', d: '1.6s' },
+  { label: 'Tooling', x: '86%', y: '72%', s: '1.04', d: '1.95s' },
+];
+
 export default function Home() {
   const s = useHomeStyles();
   const rootRef = useRef<HTMLDivElement | null>(null);
-  const flowerUrl = new URL('../../assets/homeFlower.svg', import.meta.url).toString();
   const roundFlowerUrl = new URL('../../assets/roundFlower.svg', import.meta.url).toString();
 
   const formatEntryDate = (date: string) => {
-    // Ensure SSR + client render the same day (avoid timezone shifts).
-    const d = new Date(`${date}T00:00:00Z`);
-    if (Number.isNaN(d.getTime())) return date;
-    return ENTRY_DATE_FORMATTER.format(d);
+    if (/^\\d{4}-\\d{2}-\\d{2}$/.test(date)) {
+      // Ensure SSR + client render the same day (avoid timezone shifts).
+      const d = new Date(`${date}T00:00:00Z`);
+      if (!Number.isNaN(d.getTime())) return ENTRY_DATE_FORMATTER.format(d);
+    }
+    return date;
   };
 
-  const getTypeLabel = (type: Entry['type']) => type.toUpperCase();
+  const getTypeLabel = (type: LogEntry['type']) => type.toUpperCase();
+
+  const getEntryPreview = (entry: LogEntry) => {
+    if (entry.type === 'post') return entry.excerpt;
+    if (entry.type === 'book') return entry.quote;
+    return `Sketch lines: ${entry.sketchLines.length}`;
+  };
+
+  const homepageEntries = (['post', 'book', 'drawing'] as const)
+    .map(type => LOG_ENTRIES.find(e => e.type === type))
+    .filter((e): e is LogEntry => Boolean(e));
 
   useEffect(() => {
     const root = rootRef.current;
@@ -120,6 +160,27 @@ export default function Home() {
   return (
     <div ref={rootRef} className={s.page}>
       <section className={`${s.intro} ${s.fadeSection}`} data-fade-section aria-label="Introduction">
+        <div className={s.skillPills} aria-hidden>
+          {SKILL_PILLS.map(p => (
+            <Pill
+              key={p.label}
+              as="span"
+              variant="tag"
+              className={s.skillPill}
+              style={
+                {
+                  ['--pill-x' as never]: p.x,
+                  ['--pill-y' as never]: p.y,
+                  ['--pill-s' as never]: p.s,
+                  ['--pill-d' as never]: p.d,
+                } as CSSProperties
+              }
+            >
+              {p.label}
+            </Pill>
+          ))}
+        </div>
+
         <div className={s.hero}>
           <div className={s.left}>
             <div
@@ -127,50 +188,49 @@ export default function Home() {
               data-reveal
               style={{ ['--reveal-delay' as never]: '0ms' }}
             >
-              Frontend Engineer with a focus on clarity &amp; craft
+              Frontend Engineer · Lahore, PK
             </div>
 
-            <h1 className={s.heading}>
-              <span
-                className={`${s.line} ${s.reveal}`}
-                data-reveal
-                style={{ ['--reveal-delay' as never]: '90ms' }}
-              >
-                Thoughtful
-              </span>
-              <span
-                className={`${s.line} ${s.reveal}`}
-                data-reveal
-                style={{ ['--reveal-delay' as never]: '160ms' }}
-              >
-                Interfaces,
-              </span>
-              <span
-                className={`${s.line} ${s.italic} ${s.reveal}`}
+            <div className={s.nameStack}>
+              <div className={s.nameRow} aria-label="Name">
+                <h1 className={s.heading}>
+                  <span
+                    className={`${s.line} ${s.reveal}`}
+                    data-reveal
+                    style={{ ['--reveal-delay' as never]: '90ms' }}
+                  >
+                    Zainab
+                  </span>
+                  <span
+                    className={`${s.line} ${s.reveal}`}
+                    data-reveal
+                    style={{ ['--reveal-delay' as never]: '160ms' }}
+                  >
+                    Kashif.
+                  </span>
+                </h1>
+
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  className={`${s.nameFlower} ${s.reveal}`}
+                  data-reveal
+                  style={{ ['--reveal-delay' as never]: '190ms' }}
+                  src={nameFlower.src}
+                  alt=""
+                  aria-hidden
+                />
+              </div>
+
+              <p
+                className={`${s.body} ${s.nameBody} ${s.reveal}`}
                 data-reveal
                 style={{ ['--reveal-delay' as never]: '230ms' }}
               >
-                Built to Last.
-              </span>
-            </h1>
+                I build interfaces for a living — structured, considered, and built to hold up.
+                Outside of that I read obsessively, draw occasionally, and write things down.
+              </p>
+            </div>
 
-            <p
-              className={`${s.body} ${s.reveal}`}
-              data-reveal
-              style={{ ['--reveal-delay' as never]: '300ms' }}
-            >
-              I build reliable, well-structured web experiences with an emphasis on usability and
-              long-term maintainability. I also document what I learn along the way.
-            </p>
-          </div>
-
-          <div
-            className={`${s.right} ${s.reveal}`}
-            data-reveal
-            style={{ ['--reveal-delay' as never]: '180ms' }}
-            aria-hidden
-          >
-            <img src={flowerUrl} width={436} height={436} alt="" />
           </div>
         </div>
       </section>
@@ -198,12 +258,12 @@ export default function Home() {
             </header>
 
             <div className={s.choiceButtons}>
-              <Link href="/work" className={s.choiceButton}>
+              <ButtonLink href="/work" variant="outline">
                 View Work
-              </Link>
-              <Link href="/log" className={s.choiceButton}>
+              </ButtonLink>
+              <ButtonLink href="/log" variant="outline">
                 Explore log
-              </Link>
+              </ButtonLink>
             </div>
           </div>
         </div>
@@ -236,7 +296,7 @@ export default function Home() {
           </header>
 
           <div className={s.entriesList}>
-            {RECENT_ENTRIES.map((entry, idx) => (
+            {homepageEntries.map((entry, idx) => (
               <Link
                 key={entry.id}
                 href={`/log#${entry.id}`}
@@ -244,9 +304,9 @@ export default function Home() {
                 data-reveal
                 style={{ ['--reveal-delay' as never]: `${120 + idx * 70}ms` }}
               >
-                <div className={s.entryTypePill}>{getTypeLabel(entry.type)}</div>
+                <Pill as="span" variant="status" className={s.entryTypePill}>{getTypeLabel(entry.type)}</Pill>
                 <div className={s.entryTitle}>{entry.title}</div>
-                <div className={s.entryPreview}>{entry.preview}</div>
+                <div className={s.entryPreview}>{getEntryPreview(entry)}</div>
                 <div className={s.entryMeta}>
                   <span className={s.entryDate}>{formatEntryDate(entry.date)}</span>
                 </div>
@@ -259,9 +319,9 @@ export default function Home() {
             data-reveal
             style={{ ['--reveal-delay' as never]: '360ms' }}
           >
-            <Link href="/log" className={s.entriesLink}>
-              → View all entries
-            </Link>
+            <ButtonLink href="/log" variant="outline" className={s.entriesLink}>
+              View all entries
+            </ButtonLink>
           </footer>
         </div>
       </section>
@@ -284,6 +344,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <HomeFooter />
     </div>
   );
 }
