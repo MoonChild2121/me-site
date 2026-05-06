@@ -12,25 +12,37 @@ type ContactRowProps = {
 export default function ContactRow({ link, index }: ContactRowProps) {
   const isMailto = link.href.startsWith('mailto');
 
+  const iconClass =
+    link.icon === 'email'
+      ? styles.rowIconEmail
+      : link.icon === 'linkedin'
+        ? styles.rowIconLinkedin
+        : styles.rowIconGithub;
+
+  const toneClass =
+    link.icon === 'email'
+      ? styles.rowToneEmail
+      : link.icon === 'linkedin'
+        ? styles.rowToneLinkedin
+        : styles.rowToneGithub;
+
   return (
     <a
       href={link.href}
       target={isMailto ? undefined : '_blank'}
       rel="noopener noreferrer"
-      className={styles.row}
+      className={`${styles.row} ${toneClass}`}
       style={{ '--stagger': index } as CSSProperties}
+      aria-label={`${link.label}: ${link.value}`}
     >
-      <span className={styles.rowIcon}>
-        <ContactIcon name={link.icon} />
-      </span>
-
       <div className={styles.rowBody}>
-        <span className={styles.rowLabel}>{link.label}</span>
         <span className={styles.rowValue}>{link.value}</span>
         <span className={styles.rowDesc}>{link.description}</span>
       </div>
 
-      <span className={styles.rowArrow}>&rarr;</span>
+      <span className={`${styles.rowIcon} ${iconClass}`} aria-hidden>
+        <ContactIcon name={link.icon} />
+      </span>
     </a>
   );
 }

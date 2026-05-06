@@ -6,6 +6,10 @@
   bottom: 0;
   z-index: 0;
   pointer-events: none;
+  --work-flower-amber: #D7A24A;
+  --work-flower-cream: #F6E7C9;
+  --work-flower-brown: #8A6A4D;
+  --work-flower-cocoa: #6A4A34;
 }
 
 .sidebar {
@@ -15,12 +19,32 @@
   bottom: 0;
   width: max(calc(220 / var(--rem-base) * 1rem), 18vw);
   border-right: 1px solid var(--color-border);
-  background-color: var(--color-surface-overlay);
+  background-color: color-mix(in srgb, var(--color-surface-overlay) 90%, var(--work-flower-cream) 10%);
   padding: var(--padding-xl);
   padding-top: 0;
   box-sizing: border-box;
   z-index: 20;
   pointer-events: auto;
+}
+
+.sidebarFlower {
+  position: absolute;
+  left: 50%;
+  right: auto;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: min(calc(340 / var(--rem-base) * 1rem), 92%);
+  height: auto;
+  max-height: min(
+    58vh,
+    calc(100vh - var(--site-header-height) - var(--space-24))
+  );
+  object-fit: contain;
+  object-position: bottom center;
+  opacity: 0.4;
+  pointer-events: none;
+  user-select: none;
+  filter: saturate(0.95) contrast(0.95);
 }
 
 .sidebarNav {
@@ -81,6 +105,22 @@
 .sidebarLinkActive::before {
   opacity: 1;
   background-color: color-mix(in srgb, var(--color-text) 4%, transparent);
+}
+
+@media (min-width: 64rem) {
+  /* Match Contact / solid CTAs: cream fill + brown border */
+  .sidebarLink:hover::before,
+  .sidebarLink:focus-visible::before {
+    background-color: color-mix(in srgb, var(--color-surface-overlay) 78%, var(--work-flower-cream) 22%);
+  }
+
+  .sidebarLinkActive {
+    border-color: color-mix(in srgb, var(--work-flower-brown) 22%, transparent);
+  }
+
+  .sidebarLinkActive::before {
+    background-color: color-mix(in srgb, var(--color-surface-raised) 82%, var(--work-flower-cream) 18%);
+  }
 }
 
 .main {
@@ -182,10 +222,6 @@
   width: fit-content;
 }
 
-.buttonLink :is(img, svg) {
-  display: block;
-}
-
 .buttonLink:hover {
   background-color: var(--color-surface-hover);
   transform: translateY(calc(-1 / var(--rem-base) * 1rem));
@@ -193,6 +229,23 @@
 
 .buttonLink:active {
   transform: translateY(0);
+}
+
+@media (min-width: 64rem) {
+  .buttonLink {
+    height: calc(38 / var(--rem-base) * 1rem);
+    border: 1px solid color-mix(in srgb, var(--work-flower-brown) 26%, transparent);
+    background-color: color-mix(in srgb, var(--color-surface-overlay) 80%, var(--work-flower-cream) 20%);
+    box-shadow: none;
+  }
+
+  .buttonLink:hover {
+    background-color: color-mix(in srgb, var(--color-surface-overlay) 74%, var(--work-flower-cream) 26%);
+  }
+}
+
+.buttonLink :is(img, svg) {
+  display: block;
 }
 
 /* ── Animations ── */
@@ -415,6 +468,10 @@
     background-color: var(--color-background);
     pointer-events: auto;
     z-index: 30;
+  }
+
+  .sidebarFlower {
+    display: none;
   }
 
   .sidebarNav {

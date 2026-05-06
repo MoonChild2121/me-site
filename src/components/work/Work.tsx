@@ -1,7 +1,10 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { FiDownload } from 'react-icons/fi';
+import {
+  FiDownload,
+} from 'react-icons/fi';
+import workFlower from '@/assets/workFlower.png';
 
 import {
   SECTIONS,
@@ -119,6 +122,14 @@ export default function Work() {
             );
           })}
         </nav>
+
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={workFlower.src}
+          className={styles.sidebarFlower}
+          alt=""
+          aria-hidden
+        />
       </aside>
 
       <div className={`${styles.main} ${styles.pageEnter}`}>
