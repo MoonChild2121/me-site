@@ -23,22 +23,23 @@ const SKILL_PILLS: Array<{
   y: string;
   s: string;
   d: string;
+  c: string;
 }> = [
   // Left arc (circular curve, slightly scattered)
-  { label: 'Design Systems', x: '20%', y: '16%', s: '1.06', d: '0s' },
-  { label: 'Next.js', x: '11%', y: '26%', s: '1.04', d: '0.35s' },
-  { label: 'TypeScript', x: '9%', y: '36%', s: '1.02', d: '0.7s' },
-  { label: 'React', x: '5%', y: '48%', s: '1.02', d: '1.05s' },
-  { label: 'Performance', x: '10%', y: '60%', s: '1.02', d: '1.4s' },
-  { label: 'Accessibility', x: '13%', y: '72%', s: '1.04', d: '1.75s' },
+  { label: 'Design Systems', x: '20%', y: '16%', s: '1.06', d: '0s', c: '#6E3A7C' },
+  { label: 'Next.js', x: '11%', y: '26%', s: '1.04', d: '0.35s', c: '#D9792A' },
+  { label: 'TypeScript', x: '9%', y: '36%', s: '1.02', d: '0.7s', c: '#B79AC7' },
+  { label: 'React', x: '5%', y: '48%', s: '1.02', d: '1.05s', c: '#D8C6B2' },
+  { label: 'Performance', x: '10%', y: '60%', s: '1.02', d: '1.4s', c: '#6E3A7C' },
+  { label: 'Accessibility', x: '13%', y: '72%', s: '1.04', d: '1.75s', c: '#D9792A' },
 
   // Right arc (circular curve, slightly scattered)
-  { label: 'CSS Modules', x: '80%', y: '16%', s: '1.06', d: '0.2s' },
-  { label: 'Interaction', x: '89%', y: '26%', s: '1.04', d: '0.55s' },
-  { label: 'State Systems', x: '93%', y: '36%', s: '1.02', d: '0.9s' },
-  { label: 'APIs', x: '96%', y: '48%', s: '1.02', d: '1.25s' },
-  { label: 'Quality', x: '90%', y: '60%', s: '1.02', d: '1.6s' },
-  { label: 'Tooling', x: '86%', y: '72%', s: '1.04', d: '1.95s' },
+  { label: 'CSS Modules', x: '80%', y: '16%', s: '1.06', d: '0.2s', c: '#B79AC7' },
+  { label: 'Interaction', x: '89%', y: '26%', s: '1.04', d: '0.55s', c: '#6E3A7C' },
+  { label: 'State Systems', x: '93%', y: '36%', s: '1.02', d: '0.9s', c: '#D8C6B2' },
+  { label: 'APIs', x: '96%', y: '48%', s: '1.02', d: '1.25s', c: '#D9792A' },
+  { label: 'Quality', x: '90%', y: '60%', s: '1.02', d: '1.6s', c: '#B79AC7' },
+  { label: 'Tooling', x: '86%', y: '72%', s: '1.04', d: '1.95s', c: '#6E3A7C' },
 ];
 
 export default function Home() {
@@ -85,8 +86,7 @@ export default function Home() {
         for (const entry of entries) {
           if (entry.isIntersecting) {
             (entry.target as HTMLElement).classList.add(s.revealVisible);
-          } else {
-            (entry.target as HTMLElement).classList.remove(s.revealVisible);
+            io.unobserve(entry.target);
           }
         }
       },
@@ -173,6 +173,7 @@ export default function Home() {
                   ['--pill-y' as never]: p.y,
                   ['--pill-s' as never]: p.s,
                   ['--pill-d' as never]: p.d,
+                    ['--pill-tint' as never]: p.c,
                 } as CSSProperties
               }
             >
@@ -188,7 +189,11 @@ export default function Home() {
               data-reveal
               style={{ ['--reveal-delay' as never]: '0ms' }}
             >
-              Frontend Engineer · Lahore, PK
+              <span className={s.kickerRole}>Frontend Engineer</span>
+              <span className={s.kickerDot} aria-hidden>
+                ·
+              </span>
+              <span className={s.kickerLocation}>Lahore, PK</span>
             </div>
 
             <div className={s.nameStack}>
@@ -226,8 +231,9 @@ export default function Home() {
                 data-reveal
                 style={{ ['--reveal-delay' as never]: '230ms' }}
               >
-                I build interfaces for a living — structured, considered, and built to hold up.
-                Outside of that I read obsessively, draw occasionally, and write things down.
+                I build interfaces for a living: <span className={s.italic}>structured</span>,{' '}
+                <span className={s.italic}>considered</span>, and built to hold up. Outside of that
+                I read obsessively, draw occasionally, and write things down.
               </p>
             </div>
 
@@ -258,10 +264,10 @@ export default function Home() {
             </header>
 
             <div className={s.choiceButtons}>
-              <ButtonLink href="/work" variant="outline">
+              <ButtonLink href="/work" variant="outline" className={s.choiceCta} style={{ ['--cta-tint' as never]: '#6E3A7C' } as CSSProperties}>
                 View Work
               </ButtonLink>
-              <ButtonLink href="/log" variant="outline">
+              <ButtonLink href="/log" variant="outline" className={s.choiceCta} style={{ ['--cta-tint' as never]: '#D9792A' } as CSSProperties}>
                 Explore log
               </ButtonLink>
             </div>
@@ -323,25 +329,6 @@ export default function Home() {
               View all entries
             </ButtonLink>
           </footer>
-        </div>
-      </section>
-
-      <section className={`${s.closing} ${s.fadeSection}`} data-fade-section aria-label="Closing">
-        <div className={s.closingInner}>
-          <div
-            className={`${s.closingText} ${s.reveal}`}
-            data-reveal
-            style={{ ['--reveal-delay' as never]: '0ms' }}
-          >
-            An ongoing record of how I think and build.
-          </div>
-          <div
-            className={`${s.closingSignature} ${s.reveal}`}
-            data-reveal
-            style={{ ['--reveal-delay' as never]: '120ms' }}
-          >
-            -Zainab Kashif
-          </div>
         </div>
       </section>
 

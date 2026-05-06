@@ -12,33 +12,58 @@ type PublicationItemProps = {
   index: number;
 };
 
+function VenueLine({ venue }: { venue: string }) {
+  const i = venue.indexOf('IEEE');
+  if (i === -1) {
+    return <span className={styles.pubVenue}>{venue}</span>;
+  }
+  return (
+    <span className={styles.pubVenue}>
+      {venue.slice(0, i)}
+      <span className={styles.pubVenueHighlight}>IEEE</span>
+      {venue.slice(i + 4)}
+    </span>
+  );
+}
+
 export default function PublicationItem({ pub, index }: PublicationItemProps) {
   return (
     <article
-      className={`${shared.item} ${shared.stagger}`}
+      className={`${shared.item} ${styles.pubCard} ${shared.stagger}`}
       style={staggerStyle(index) as CSSProperties}
     >
-      <header className={shared.itemHeader}>
-        <div className={shared.itemTitle}>{pub.title}</div>
-        <div className={shared.itemMeta}>
-          {pub.venue} — {pub.year}
+      <header className={styles.pubHeader}>
+        <div className={styles.pubKicker}>Journal paper</div>
+
+        <h2 className={styles.pubTitle}>{pub.title}</h2>
+
+        <div className={styles.pubMeta}>
+          <VenueLine venue={pub.venue} />
+          <span className={styles.pubMetaDot} aria-hidden>
+            ·
+          </span>
+          <span className={styles.pubYear}>{pub.year}</span>
         </div>
       </header>
-      {pub.summary ? <div className={shared.body}>{pub.summary}</div> : null}
+
+      {pub.summary ? <div className={styles.pubSummary}>{pub.summary}</div> : null}
       {pub.highlights?.length ? (
-        <ul className={shared.bullets}>
+        <ul className={`${shared.bullets} ${styles.pubBullets}`}>
           {pub.highlights.map(h => (
             <li key={h}>{h}</li>
           ))}
         </ul>
       ) : null}
-      {pub.url ? (
-        <a className={styles.pubLink} href={pub.url} target="_blank" rel="noopener noreferrer">
-          View Publication
-        </a>
-      ) : (
-        <span className={styles.pubLink}>View Publication</span>
-      )}
+
+      <div className={styles.pubFooter}>
+        {pub.url ? (
+          <a className={styles.pubLink} href={pub.url} target="_blank" rel="noopener noreferrer">
+            View publication
+          </a>
+        ) : (
+          <span className={styles.pubLinkMuted}>View publication</span>
+        )}
+      </div>
     </article>
   );
 }

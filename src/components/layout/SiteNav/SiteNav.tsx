@@ -14,14 +14,14 @@ const navLinks = [
     icon: <FiBriefcase size={18} aria-hidden />,
   },
   {
-    href: '/log',
-    label: 'Log',
-    icon: <FiBookOpen size={18} aria-hidden />,
-  },
-  {
     href: '/contact',
     label: 'Contact',
     icon: <FiMail size={18} aria-hidden />,
+  },
+  {
+    href: '/log',
+    label: 'Log',
+    icon: <FiBookOpen size={18} aria-hidden />,
   },
 ];
 
@@ -64,12 +64,19 @@ export default function SiteNav() {
             {navLinks.map(({ href, label, icon }) => {
               const active =
                 pathname === href || pathname?.startsWith(`${href}/`);
+              const emphasized = href === '/log';
 
               return (
                 <li key={href}>
                   <Link
                     href={href}
-                    className={active ? `${s.link} ${s.linkActive}` : s.link}
+                    className={[
+                      s.link,
+                      active ? s.linkActive : '',
+                      emphasized ? s.logLink : '',
+                    ]
+                      .filter(Boolean)
+                      .join(' ')}
                     aria-label={label}
                   >
                     <span className={s.linkIcon}>{icon}</span>

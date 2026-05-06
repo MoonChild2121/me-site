@@ -156,6 +156,17 @@
   background-color: var(--color-surface-hover);
 }
 
+@media (min-width: 64rem) {
+  .ctaButton {
+    border: 1px solid color-mix(in srgb, var(--work-flower-brown) 22%, transparent);
+    background: color-mix(in srgb, var(--color-surface-raised) 82%, var(--work-flower-cream) 18%);
+  }
+
+  .ctaButton:hover {
+    background-color: color-mix(in srgb, var(--color-surface-overlay) 78%, var(--work-flower-cream) 22%);
+  }
+}
+
 /* ── Responsive ── */
 
 @media (max-width: 64rem) {

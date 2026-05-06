@@ -15,6 +15,7 @@ export function useNavStyles() {
       link: styles.link,
       linkIcon: styles.linkIcon,
       linkLabel: styles.linkLabel,
+      logLink: styles.logLink,
       linkActive: styles.linkActive,
     }),
     []

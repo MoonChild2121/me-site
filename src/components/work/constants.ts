@@ -319,10 +319,12 @@ export const PUBLICATIONS: Publication[] = [
     venue: 'IEEE Access',
     year: '2025',
     summary:
-      'A multi-modal deep learning framework combining MRI and clinical data.',
+      'I trained an ensemble over several data types: cognitive scores, genetic risk (APOE ε4), and demographics, with neuroimaging preprocessing done in SPM12. In our study, that stack reached 0.897 accuracy and 0.948 specificity, outperforming conventional models on the same feature set.',
     highlights: [
-      'Focused on improving early-stage detection',
-      'Designed model combining multiple data sources',
+      'Trained an ensemble (temporal, similarity, and structured branches) instead of a single classifier, so complementary signals from different modalities could reinforce each other.',
+      'Combined multiple data types (cognitive assessments, genetic risk, and age/demographics) rather than relying on one input family alone.',
+      'Used SPM12 for neuroimaging preprocessing as part of the workflow that feeds the broader multimodal diagnostic design.',
+      'Achieved the strongest results among the baselines we compared using the same feature set.',
     ],
     url: 'https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=11359688',
   },
