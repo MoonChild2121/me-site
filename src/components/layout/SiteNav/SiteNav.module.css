@@ -1,7 +1,7 @@
 .header {
   width: 100%;
-  position: sticky;
-  top: 0;
+  flex-shrink: 0;
+  position: relative;
   z-index: 50;
   border-bottom: 1px solid var(--color-border);
   background-color: var(--color-background);
@@ -12,7 +12,7 @@
   width: 100%;
   max-width: none;
   margin: 0;
-  padding: var(--space-10) var(--space-12);
+  padding: calc(10 * var(--rpx)) calc(12 * var(--rpx));
   box-sizing: border-box;
 }
 
@@ -27,7 +27,7 @@
   justify-self: start;
   font-family: var(--font-family-headline);
   font-style: italic;
-  font-size: var(--font-size-xl);
+  font-size: var(--text-title);
   letter-spacing: var(--tracking-tight);
   font-optical-sizing: auto;
   font-weight: var(--font-weight-medium);
@@ -38,8 +38,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-  padding: var(--space-8) var(--space-14);
-  padding-left: var(--space-18);
+  padding: calc(8 * var(--rpx)) calc(14 * var(--rpx));
+  padding-left: calc(18 * var(--rpx));
   border-radius: var(--radius-pill);
   transition:
     background-color var(--duration-fast) var(--ease-default),
@@ -50,9 +50,9 @@
 .brand::before {
   content: "";
   position: absolute;
-  inset-block: calc(-2 / var(--rem-base) * 1rem);
-  inset-inline-start: calc(-4 / var(--rem-base) * 1rem);
-  inset-inline-end: calc(-14 / var(--rem-base) * 1rem);
+  inset-block: calc(-2 * var(--rpx));
+  inset-inline-start: calc(-4 * var(--rpx));
+  inset-inline-end: calc(-14 * var(--rpx));
   border-radius: var(--radius-pill);
   background-color: var(--color-surface-hover);
   opacity: 0;
@@ -80,7 +80,7 @@
   color: var(--color-text);
   background-color: transparent;
   outline: 2px solid color-mix(in srgb, var(--color-text) 22%, transparent);
-  outline-offset: calc(2 / var(--rem-base) * 1rem);
+  outline-offset: calc(2 * var(--rpx));
 }
 
 .brand:focus-visible::before {
@@ -100,8 +100,8 @@
   justify-content: flex-end;
   justify-self: end;
   list-style: none;
-  gap: var(--space-40);
-  padding-right: var(--space-10);
+  gap: var(--gap-stack-2xl);
+  padding-right: calc(10 * var(--rpx));
 }
 
 .spacer {
@@ -116,12 +116,12 @@
   letter-spacing: var(--label-letter-spacing);
   font-optical-sizing: auto;
   font-style: normal;
-  font-size: var(--font-size-md);
+  font-size: var(--text-body-lg);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-muted);
   cursor: var(--cursor-pointer) !important;
   position: relative;
-  padding: var(--space-6) var(--space-12);
+  padding: calc(6 * var(--rpx)) calc(12 * var(--rpx));
   border-radius: var(--radius-pill);
   transition:
     background-color var(--duration-fast) var(--ease-default),
@@ -132,8 +132,8 @@
 .link::before {
   content: "";
   position: absolute;
-  inset-block: calc(-2 / var(--rem-base) * 1rem);
-  inset-inline: calc(-6 / var(--rem-base) * 1rem);
+  inset-block: calc(-2 * var(--rpx));
+  inset-inline: calc(-6 * var(--rpx));
   border-radius: var(--radius-pill);
   background-color: var(--color-surface-hover);
   opacity: 0;
@@ -150,7 +150,7 @@
 .link:hover {
   color: var(--color-text);
   background-color: transparent;
-  transform: translateY(calc(-1 / var(--rem-base) * 1rem));
+  transform: translateY(calc(-1 * var(--rpx)));
 }
 
 .link:hover::before {
@@ -161,7 +161,7 @@
   color: var(--color-text);
   background-color: transparent;
   outline: 2px solid color-mix(in srgb, var(--color-text) 22%, transparent);
-  outline-offset: calc(2 / var(--rem-base) * 1rem);
+  outline-offset: calc(2 * var(--rpx));
 }
 
 .link:focus-visible::before {
@@ -180,17 +180,17 @@
 .logLink {
   color: var(--color-text);
   border: none;
-  padding-inline: var(--space-18);
+  padding-inline: calc(18 * var(--rpx));
 }
 
 .logLink::before {
   opacity: 1;
-  inset-block: calc(-3 / var(--rem-base) * 1rem);
-  inset-inline: calc(-12 / var(--rem-base) * 1rem);
+  inset-block: calc(-3 * var(--rpx));
+  inset-inline: calc(-12 * var(--rpx));
   background: linear-gradient(
     90deg,
-    color-mix(in srgb, #6E3A7C 20%, transparent),
-    color-mix(in srgb, #D9792A 18%, transparent)
+    color-mix(in srgb, var(--brand-plum) 20%, transparent),
+    color-mix(in srgb, var(--brand-amber) 18%, transparent)
   );
   box-shadow:
     inset 0 0 0 1px color-mix(in srgb, var(--color-text) 16%, transparent),
@@ -198,15 +198,15 @@
 }
 
 .logLink:hover {
-  transform: translateY(calc(-1 / var(--rem-base) * 1rem));
+  transform: translateY(calc(-1 * var(--rpx)));
 }
 
 .logLink:hover::before {
   opacity: 1;
   background: linear-gradient(
     90deg,
-    color-mix(in srgb, #6E3A7C 26%, transparent),
-    color-mix(in srgb, #D9792A 24%, transparent)
+    color-mix(in srgb, var(--brand-plum) 26%, transparent),
+    color-mix(in srgb, var(--brand-amber) 24%, transparent)
   );
   box-shadow:
     inset 0 0 0 1px color-mix(in srgb, var(--color-text) 20%, transparent),
@@ -221,12 +221,12 @@
 
 @media (max-width: 40rem) {
   .nav {
-    padding: var(--space-6) var(--space-8);
+    padding: calc(6 * var(--rpx)) calc(8 * var(--rpx));
   }
 
   .center {
-    gap: var(--space-24);
-    padding-right: var(--space-6);
+    gap: calc(24 * var(--rpx));
+    padding-right: calc(6 * var(--rpx));
   }
 
   .linkIcon {

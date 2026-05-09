@@ -1,5 +1,7 @@
+import type { ContactChannel } from './types';
+
 type ContactIconProps = {
-  name: 'email' | 'linkedin' | 'github';
+  name: ContactChannel;
 };
 
 export default function ContactIcon({ name }: ContactIconProps) {

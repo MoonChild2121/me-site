@@ -7,7 +7,6 @@ export function useHomeStyles() {
     reveal: styles.reveal,
     revealVisible: styles.revealVisible,
     intro: styles.intro,
-    carouselStrip: styles.carouselStrip,
     hero: styles.hero,
     left: styles.left,
     skillPills: styles.skillPills,
@@ -20,7 +19,6 @@ export function useHomeStyles() {
     choiceHeading: styles.choiceHeading,
     choiceSubheading: styles.choiceSubheading,
     choiceButtons: styles.choiceButtons,
-    choiceButton: styles.choiceButton,
     choiceCta: styles.choiceCta,
     entries: styles.entries,
     entriesMain: styles.entriesMain,
@@ -35,10 +33,6 @@ export function useHomeStyles() {
     entryDate: styles.entryDate,
     entriesFooter: styles.entriesFooter,
     entriesLink: styles.entriesLink,
-    closing: styles.closing,
-    closingInner: styles.closingInner,
-    closingText: styles.closingText,
-    closingSignature: styles.closingSignature,
     headlineCarousel: styles.headlineCarousel,
     headlineTrack: styles.headlineTrack,
     headlineRow: styles.headlineRow,
@@ -53,7 +47,6 @@ export function useHomeStyles() {
     nameBody: styles.nameBody,
     line: styles.line,
     italic: styles.italic,
-    body: styles.body
+    body: styles.body,
   };
 }
-

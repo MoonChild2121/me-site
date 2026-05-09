@@ -2,7 +2,7 @@ import type { ButtonHTMLAttributes, HTMLAttributes } from 'react';
 
 import styles from './Pill.module.css';
 
-type PillVariant = 'filter' | 'status' | 'tag' | 'inverted';
+type PillVariant = 'filter' | 'status' | 'tag' | 'inverted' | 'work' | 'workSentence';
 
 type PillBaseProps = {
   variant?: PillVariant;
@@ -29,7 +29,10 @@ export default function Pill(props: PillProps) {
 
   const cls = [
     styles.pill,
-    styles[variant],
+    variant === 'work' || variant === 'workSentence'
+      ? styles.work
+      : styles[variant as Exclude<PillVariant, 'work' | 'workSentence'>],
+    variant === 'workSentence' ? styles.workSentence : '',
     variant === 'filter' && active ? styles.filterActive : '',
     className ?? '',
   ]

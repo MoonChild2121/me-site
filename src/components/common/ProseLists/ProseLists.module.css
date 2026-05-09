@@ -1,0 +1,15 @@
+/* Lists */
+
+.bullets {
+  margin-top: calc(12 * var(--rpx));
+  padding-left: calc(18 * var(--rpx));
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2xs);
+}
+
+@media (max-width: 40rem) {
+  .bullets {
+    padding-left: calc(14 * var(--rpx));
+  }
+}

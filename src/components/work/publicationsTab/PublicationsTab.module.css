@@ -1,9 +1,9 @@
 .pubSection {
-  scroll-margin-top: calc(var(--site-header-height) + var(--space-32));
+  scroll-margin-top: calc(var(--site-header-height) + var(--page-gutter-inline));
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: var(--space-14);
+  gap: calc(14 * var(--rpx));
   flex: 1;
   min-height: 0;
 }
@@ -11,7 +11,7 @@
 .pubLayout {
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-  gap: var(--space-40);
+  gap: var(--gap-stack-2xl);
   align-items: start;
 }
 
@@ -20,13 +20,13 @@
 }
 
 .pubCard {
-  gap: var(--space-16);
+  gap: var(--gap-stack-md);
 }
 
 .pubHeader {
   display: flex;
   flex-direction: column;
-  gap: var(--space-10);
+  gap: calc(10 * var(--rpx));
 }
 
 .pubKicker {
@@ -35,85 +35,66 @@
   letter-spacing: var(--label-letter-spacing);
   font-optical-sizing: auto;
   font-style: normal;
-  font-size: var(--font-size-xs);
+  font-size: var(--text-caption);
   font-weight: var(--font-weight-medium);
   color: color-mix(in srgb, var(--color-text) 76%, transparent);
 }
 
 .pubTitle {
   font-family: var(--font-family-headline);
-  font-size: var(--font-size-2xl);
+  font-size: var(--text-title-lg);
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--tracking-tight);
-  line-height: var(--leading-tight);
+  line-height: var(--leading-snug);
   color: var(--color-text);
   max-width: 34ch;
   margin: 0;
 }
 
-.pubMeta {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-10);
-  font-family: var(--font-family-label);
-  text-transform: uppercase;
-  letter-spacing: var(--label-letter-spacing);
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-muted);
+.pubMetaPills {
+  margin-top: calc(2 * var(--rpx));
 }
 
-.pubMetaDot {
-  color: color-mix(in srgb, var(--color-text) 22%, transparent);
+.pubMetaPills .pubVenue {
+  color: inherit;
 }
 
-.pubVenue {
-  color: var(--color-text-muted);
-}
-
-.pubVenueHighlight {
-  color: color-mix(in srgb, var(--work-flower-brown) 72%, var(--color-text));
-  font-weight: var(--font-weight-bold);
-}
-
-.pubYear {
-  color: color-mix(in srgb, var(--color-text) 80%, transparent);
+.pubMetaPills .pubVenueHighlight {
+  color: color-mix(in srgb, var(--work-flower-brown) 82%, var(--color-text));
+  font-weight: var(--font-weight-semibold);
 }
 
 .pubSummary {
   font-family: var(--font-family-body);
-  font-size: var(--font-size);
+  font-size: var(--text-body);
   line-height: 1.75;
   color: color-mix(in srgb, var(--color-text) 88%, transparent);
   max-width: 78ch;
 }
 
 .pubBullets {
-  margin-top: var(--space-6);
+  margin-top: calc(6 * var(--rpx));
 }
 
 .pubCard .pubBullets {
-  gap: var(--space-12);
+  gap: calc(12 * var(--rpx));
 }
 
 .pubFooter {
-  margin-top: var(--space-24);
+  margin-top: calc(24 * var(--rpx));
 }
 
 .pubLinkMuted {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: calc(9 / var(--rem-base) * 1rem) var(--space-14);
+  padding: calc(9 * var(--rpx)) calc(14 * var(--rpx));
   border-radius: var(--radius-pill);
   border: 1px solid var(--color-border);
   font-family: var(--font-family-label);
   text-transform: uppercase;
   letter-spacing: var(--label-letter-spacing);
-  font-size: var(--font-size);
+  font-size: var(--text-body);
   font-weight: var(--font-weight-medium);
   width: fit-content;
   color: var(--color-text-muted);
@@ -123,13 +104,13 @@
 .pubMedia {
   justify-self: end;
   width: 100%;
-  max-width: calc(920 / var(--rem-base) * 1rem);
+  max-width: calc(920 * var(--rpx));
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
   background-color: var(--color-surface-raised);
   position: sticky;
-  top: calc(var(--site-header-height) + var(--space-32));
+  top: calc(var(--site-header-height) + var(--page-gutter-inline));
 }
 
 .pubImage {
@@ -144,7 +125,7 @@
   justify-content: center;
   gap: var(--gap-sm);
   margin-top: 0;
-  padding: calc(9 / var(--rem-base) * 1rem) var(--space-14);
+  padding: calc(9 * var(--rpx)) calc(14 * var(--rpx));
   border-radius: var(--radius-pill);
   border: 1px solid var(--color-border);
   background: transparent;
@@ -152,10 +133,21 @@
   font-family: var(--font-family-label);
   text-transform: uppercase;
   letter-spacing: var(--label-letter-spacing);
-  font-size: var(--font-size);
+  font-size: var(--text-body);
   font-weight: var(--font-weight-medium);
   width: fit-content;
   text-decoration: none;
+  transition: background-color var(--duration-normal) var(--ease-default),
+    border-color var(--duration-normal) var(--ease-default),
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-default);
+}
+
+.pubLink:hover {
+  background-color: color-mix(in srgb, var(--color-text) 10%, transparent);
+  border-color: color-mix(in srgb, var(--color-text) 32%, transparent);
+  transform: translateY(calc(-2 * var(--rpx)));
+  box-shadow: 0 calc(4 * var(--rpx)) calc(14 * var(--rpx)) color-mix(in srgb, var(--color-text) 6%, transparent);
 }
 
 @media (min-width: 64rem) {
@@ -165,7 +157,9 @@
   }
 
   .pubLink:hover {
-    background-color: color-mix(in srgb, var(--color-surface-overlay) 78%, var(--work-flower-cream) 22%);
+    background-color: color-mix(in srgb, var(--color-surface-overlay) 54%, var(--work-flower-cream) 46%);
+    border-color: color-mix(in srgb, var(--work-flower-brown) 44%, transparent);
+    box-shadow: 0 calc(6 * var(--rpx)) calc(16 * var(--rpx)) color-mix(in srgb, var(--work-flower-brown) 9%, transparent);
   }
 }
 
@@ -184,5 +178,22 @@
     top: auto;
     max-width: none;
     justify-self: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pubLink {
+    transition: none;
+  }
+
+  .pubLink:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  @media (min-width: 64rem) {
+    .pubLink:hover {
+      box-shadow: none;
+    }
   }
 }

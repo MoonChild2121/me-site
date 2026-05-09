@@ -402,7 +402,6 @@ export default function LogPage() {
         fontFamily: "'Inter', sans-serif",
       }}
     >
-      {/* Grain overlay */}
       <div
         style={{
           position: "fixed",
@@ -416,7 +415,6 @@ export default function LogPage() {
 
       <div style={{ maxWidth: "820px", margin: "0 auto", padding: "60px 32px 100px" }}>
 
-        {/* Header */}
         <header style={{ marginBottom: "56px" }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: "16px", marginBottom: "10px" }}>
             <h1
@@ -459,7 +457,6 @@ export default function LogPage() {
           </p>
         </header>
 
-        {/* Filter pills */}
         <div style={{ display: "flex", gap: "8px", marginBottom: "48px", flexWrap: "wrap" }}>
           {tags.map((t) => (
             <button
@@ -485,7 +482,6 @@ export default function LogPage() {
           ))}
         </div>
 
-        {/* Feed */}
         <div
           style={{
             display: "grid",
@@ -506,7 +502,6 @@ export default function LogPage() {
           })}
         </div>
 
-        {/* Footer note */}
         <div
           style={{
             marginTop: "72px",

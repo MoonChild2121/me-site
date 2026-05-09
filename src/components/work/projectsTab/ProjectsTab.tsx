@@ -2,25 +2,61 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import posScreenshot from '@/assets/pos.png';
+import { FiX } from 'react-icons/fi';
+import posScreenshot from '@/assets/work/pos.png';
 
 import { EXPLORATIONS, FEATURED_PROJECT } from '../constants';
-import { staggerStyle } from '../staggerStyle';
-import shared from '../WorkDashboard.module.css';
+import WorkMetaPills from '../primitives/WorkMetaPills';
+import WorkTabShell from '../primitives/WorkTabShell';
+import { workStaggerProps } from '../primitives/workStaggerProps';
 import styles from './ProjectsTab.module.css';
-import ExplorationCard from './ExplorationCard';
+import OtherProjectCard from './OtherProjectCard';
+
+const FEATURED_INLINE_HIGHLIGHT =
+  /(Square integration|React Scan|Lighthouse score|UI system)/g;
+
+function featuredLineWithHighlights(text: string) {
+  const parts = text.split(FEATURED_INLINE_HIGHLIGHT);
+  return parts.map((part, i) => {
+    switch (part) {
+      case 'Square integration':
+      case 'React Scan':
+      case 'Lighthouse score':
+      case 'UI system':
+        return (
+          <span key={`${i}-${part}`} className={styles.featuredEmphasis}>
+            {part}
+          </span>
+        );
+      default:
+        return part;
+    }
+  });
+}
 
 export default function ProjectsTab() {
   const [mediaOpen, setMediaOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [portalMounted, setPortalMounted] = useState(false);
+  const [overlayEntered, setOverlayEntered] = useState(false);
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
+  const mediaOpenRef = useRef(mediaOpen);
+
+  mediaOpenRef.current = mediaOpen;
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    if (!mediaOpen) {
+      setOverlayEntered(false);
+      return;
+    }
+    setPortalMounted(true);
+    const raf = requestAnimationFrame(() => {
+      requestAnimationFrame(() => setOverlayEntered(true));
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [mediaOpen]);
 
   useEffect(() => {
-    if (!mediaOpen) return;
+    if (!mediaOpen || !overlayEntered) return;
     closeBtnRef.current?.focus();
 
     const onKeyDown = (e: KeyboardEvent) => {
@@ -28,17 +64,21 @@ export default function ProjectsTab() {
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [mediaOpen]);
+  }, [mediaOpen, overlayEntered]);
+
+  const closeMediaModal = () => setMediaOpen(false);
+
+  const handleOverlayTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
+    if (e.target !== e.currentTarget) return;
+    if (e.propertyName !== 'opacity') return;
+    if (!mediaOpenRef.current) setPortalMounted(false);
+  };
 
   return (
-    <section className={shared.section} aria-label="Projects">
-      <div className={shared.sectionBody}>
+    <>
+      <WorkTabShell aria-label="Projects">
         <div className={styles.projectsFlow} aria-label="Projects content">
-          <section
-            className={`${styles.featuredProject} ${shared.stagger}`}
-            style={staggerStyle(0)}
-            aria-label="Featured project"
-          >
+          <section {...workStaggerProps(0, styles.featuredProject)} aria-label="Featured project">
             <header className={styles.featuredHeader}>
               <div className={styles.featuredKicker}>Featured System</div>
               <div className={styles.featuredTitleRow}>
@@ -50,10 +90,9 @@ export default function ProjectsTab() {
                   aria-haspopup="dialog"
                 >
                   View interface
-                  <span aria-hidden>↗</span>
                 </button>
               </div>
-              <div className={styles.featuredMeta}>{FEATURED_PROJECT.meta}</div>
+              <WorkMetaPills meta={FEATURED_PROJECT.meta} />
             </header>
 
             <div className={styles.featuredOverview}>{FEATURED_PROJECT.overview}</div>
@@ -61,42 +100,36 @@ export default function ProjectsTab() {
             <div className={styles.featuredMain}>
               <ul className={styles.blockList} aria-label="What I built">
                 {FEATURED_PROJECT.whatIBuilt.map(item => (
-                  <li key={item}>{item}</li>
+                  <li key={item}>{featuredLineWithHighlights(item)}</li>
                 ))}
               </ul>
             </div>
           </section>
 
-          <section
-            className={`${styles.explorations} ${shared.stagger}`}
-            style={staggerStyle(5)}
-            aria-label="Explorations"
-          >
-            <header className={styles.explorationsHeader}>
-              <div className={styles.explorationsTitle}>Explorations</div>
-              <div className={styles.explorationsIntro}>
-                Smaller projects exploring different systems, models, and problem spaces.
-              </div>
+          <section {...workStaggerProps(5, styles.otherProjects)} aria-label="Other projects">
+            <header className={styles.otherProjectsHeader}>
+              <div className={styles.otherProjectsTitle}>Other projects</div>
             </header>
 
-            <div className={styles.explorationList} aria-label="Exploration projects">
+            <div className={styles.otherProjectsList} aria-label="Other projects list">
               {EXPLORATIONS.map((p, i) => (
-                <ExplorationCard key={p.title} project={p} index={6 + i} />
+                <OtherProjectCard key={p.title} project={p} index={6 + i} />
               ))}
             </div>
           </section>
         </div>
-      </div>
+      </WorkTabShell>
 
-      {mounted && mediaOpen
+      {portalMounted
         ? createPortal(
         <div
-          className={styles.mediaOverlay}
+          className={`${styles.mediaOverlay} ${overlayEntered ? styles.mediaOverlayVisible : ''}`}
           role="dialog"
           aria-modal="true"
           aria-label="Featured project interface screenshot"
+          onTransitionEnd={handleOverlayTransitionEnd}
           onMouseDown={e => {
-            if (e.target === e.currentTarget) setMediaOpen(false);
+            if (e.target === e.currentTarget) closeMediaModal();
           }}
         >
           <div className={styles.mediaDialog}>
@@ -106,9 +139,10 @@ export default function ProjectsTab() {
                 ref={closeBtnRef}
                 type="button"
                 className={styles.mediaClose}
-                onClick={() => setMediaOpen(false)}
+                onClick={closeMediaModal}
+                aria-label="Close dialog"
               >
-                Close
+                <FiX size={22} strokeWidth={2} aria-hidden />
               </button>
             </div>
             <div className={styles.mediaDialogBody}>
@@ -126,7 +160,7 @@ export default function ProjectsTab() {
           document.body
         )
         : null}
-    </section>
+    </>
   );
 }
 

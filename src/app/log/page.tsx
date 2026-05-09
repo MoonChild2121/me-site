@@ -1,4 +1,3 @@
-import PageShell from '@/components/layout/PageShell';
 import LogContainer from '@/containers/log/logContainer';
 
 export const metadata = {
@@ -6,9 +5,5 @@ export const metadata = {
 };
 
 export default function LogPage() {
-  return (
-    <PageShell>
-      <LogContainer />
-    </PageShell>
-  );
+  return <LogContainer />;
 }

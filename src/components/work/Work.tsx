@@ -1,10 +1,11 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import type { ComponentType } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import {
   FiDownload,
 } from 'react-icons/fi';
-import workFlower from '@/assets/workFlower.png';
+import workFlower from '@/assets/work/workFlower.png';
 
 import {
   SECTIONS,
@@ -19,25 +20,16 @@ import SkillsTab from './skillsTab/SkillsTab';
 import EducationTab from './educationTab/EducationTab';
 import styles from './WorkDashboard.module.css';
 
-export default function Work() {
-  useEffect(() => {
-    const mq = window.matchMedia('(min-width: 64rem)');
-    const apply = (matches: boolean) => {
-      const html = document.documentElement;
-      const body = document.body;
-      html.style.overflow = matches ? 'hidden' : '';
-      body.style.overflow = matches ? 'hidden' : '';
-    };
-    apply(mq.matches);
-    const handler = (e: MediaQueryListEvent) => apply(e.matches);
-    mq.addEventListener('change', handler);
-    return () => {
-      mq.removeEventListener('change', handler);
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
-    };
-  }, []);
+const SECTION_COMPONENTS = {
+  overview: OverviewTab,
+  experience: ExperienceTab,
+  projects: ProjectsTab,
+  publications: PublicationsTab,
+  skills: SkillsTab,
+  education: EducationTab,
+} satisfies Record<SectionId, ComponentType>;
 
+export default function Work() {
   const [activeSection, setActiveSection] = useState<SectionId>('overview');
   const [transition, setTransition] = useState<'idle' | 'leaving' | 'entering'>('idle');
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -78,30 +70,7 @@ export default function Work() {
   const activeLabel = SECTIONS[activeIndex]?.label ?? 'Work';
   const isOverview = activeSection === 'overview';
 
-  const renderSection = () => {
-    switch (activeSection) {
-      case 'overview':
-        return <OverviewTab goToSection={goToSection} />;
-
-      case 'experience':
-        return <ExperienceTab />;
-
-      case 'projects':
-        return <ProjectsTab />;
-
-      case 'publications':
-        return <PublicationsTab />;
-
-      case 'skills':
-        return <SkillsTab />;
-
-      case 'education':
-        return <EducationTab />;
-
-      default:
-        return null;
-    }
-  };
+  const ActiveSection = SECTION_COMPONENTS[activeSection];
 
   return (
     <div className={styles.layout}>
@@ -154,7 +123,7 @@ export default function Work() {
             <div
               className={`${styles.sectionFrame} ${isOverview ? styles.sectionFrameCenter : ''} ${sectionTransitionClass}`}
             >
-              {renderSection()}
+              <ActiveSection />
             </div>
           </div>
         </div>

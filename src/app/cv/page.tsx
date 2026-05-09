@@ -1,10 +1,7 @@
-import PageShell from '@/components/layout/PageShell';
-
 export const metadata = {
-  title: 'CV'
+  title: 'CV',
 };
 
 export default function CvPage() {
-  return <PageShell title="CV" />;
+  return <h1 className="font-headline">CV</h1>;
 }
-

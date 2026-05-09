@@ -9,7 +9,7 @@
 
 .reveal {
   opacity: 0;
-  transform: translateY(var(--space-12));
+  transform: translateY(calc(12 * var(--rpx)));
   transition:
     opacity 600ms var(--ease-out),
     transform 600ms var(--ease-out);
@@ -29,19 +29,6 @@
   height: calc(100svh - var(--site-header-height));
   position: relative;
   overflow: hidden;
-}
-
-.carouselStrip {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  height: var(--space-64);
-  background-image: none;
-  background-repeat: repeat-x;
-  background-size: auto 100%;
-  background-position: 0 50%;
-  opacity: 0.9;
-  animation: stripScrollReverse 22s linear infinite;
 }
 
 .hero {
@@ -82,9 +69,9 @@
     var(--pill-d),
     calc(var(--pill-d) + 800ms);
   will-change: transform, opacity;
-  font-size: var(--font-size-sm);
+  font-size: var(--text-body);
   font-weight: var(--font-weight-medium);
-  padding: var(--padding-sm) var(--space-16);
+  padding: var(--padding-sm) calc(16 * var(--rpx));
 }
 
 @property --pill-enter {
@@ -120,7 +107,7 @@
     --pill-float: 0px;
   }
   50% {
-    --pill-float: calc(-10 / var(--rem-base) * 1rem);
+    --pill-float: calc(-10 * var(--rpx));
   }
   100% {
     --pill-float: 0px;
@@ -130,7 +117,7 @@
 @keyframes pillFadeIn {
   from {
     opacity: 0;
-    --pill-enter: calc(12 / var(--rem-base) * 1rem);
+    --pill-enter: calc(12 * var(--rpx));
   }
   to {
     opacity: 0.78;
@@ -144,15 +131,15 @@
   letter-spacing: var(--label-letter-spacing);
   font-optical-sizing: auto;
   font-style: normal;
-  font-size: var(--font-size);
+  font-size: var(--text-body);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-muted);
   display: inline-flex;
   align-items: center;
-  gap: var(--space-10);
+  gap: calc(10 * var(--rpx));
   flex-wrap: wrap;
-  row-gap: var(--space-6);
-  padding: var(--space-10) var(--space-14);
+  row-gap: calc(6 * var(--rpx));
+  padding: calc(10 * var(--rpx)) calc(14 * var(--rpx));
   border-radius: var(--radius-pill);
   border: 1px solid color-mix(in srgb, var(--color-text) 12%, transparent);
   background: color-mix(in srgb, var(--color-surface-raised) 62%, transparent);
@@ -173,20 +160,20 @@
 .kickerLocation {
   color: color-mix(in srgb, var(--color-text) 86%, transparent);
   font-weight: var(--font-weight-medium);
-  padding: var(--space-6) var(--space-10);
-  border-radius: 999px;
+  padding: calc(6 * var(--rpx)) calc(10 * var(--rpx));
+  border-radius: var(--radius-pill);
   border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
   background: linear-gradient(
     90deg,
-    color-mix(in srgb, #6E3A7C 14%, transparent),
-    color-mix(in srgb, #D9792A 12%, transparent)
+    color-mix(in srgb, var(--brand-plum) 14%, transparent),
+    color-mix(in srgb, var(--brand-amber) 12%, transparent)
   );
 }
 
 .heading {
   margin-top: var(--section-md);
   font-family: var(--font-family-headline);
-  font-size: var(--font-size-hero);
+  font-size: var(--text-hero);
   font-weight: var(--font-weight-regular);
   line-height: var(--leading-none);
   letter-spacing: normal;
@@ -203,26 +190,25 @@
 .nameRow {
   display: flex;
   align-items: flex-end;
-  gap: var(--space-14);
+  gap: calc(14 * var(--rpx));
   width: fit-content;
   max-width: 100%;
 }
 
 .nameFlower {
   display: block;
-  height: calc(var(--font-size-hero) * 2.65);
+  height: calc(var(--text-hero) * 2.65);
   width: auto;
-  max-height: min(44vh, calc(560 / var(--rem-base) * 1rem));
-  max-width: min(46vw, calc(520 / var(--rem-base) * 1rem));
+  max-height: min(44vh, calc(560 * var(--rpx)));
+  max-width: min(46vw, calc(520 * var(--rpx)));
   object-fit: contain;
   align-self: end;
-  /* let it hang into the gap above the subtext */
-  margin-bottom: calc(-8 / var(--rem-base) * 1rem);
+  margin-bottom: calc(-8 * var(--rpx));
 }
 
 .nameBody {
   max-width: 78ch;
-  margin-top: var(--space-6);
+  margin-top: calc(6 * var(--rpx));
 }
 
 .line {
@@ -237,25 +223,19 @@
 .body {
   margin-top: var(--section-md);
   font-family: var(--font-family-body);
-  font-size: var(--font-size-lg);
+  font-size: var(--text-title-sm);
   line-height: var(--leading-normal);
   color: var(--color-secondary);
 }
-
-.ctaRow {
-  display: flex;
-  align-items: center;
-  gap: var(--gap-xl);
-}
-
-/* ── Choice section ── */
 
 .choice {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: calc(100svh - var(--site-header-height) - var(--space-32));
-  padding-bottom: var(--space-64);
+  min-height: calc(
+    100svh - var(--site-header-height) - var(--page-gutter-inline)
+  );
+  padding-bottom: calc(64 * var(--rpx));
   overflow: hidden;
 }
 
@@ -263,7 +243,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: min(calc(700 / var(--rem-base) * 1rem), 90vw);
+  width: min(calc(700 * var(--rpx)), 90vw);
   height: auto;
   opacity: 0.4;
   pointer-events: none;
@@ -282,7 +262,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--space-40);
+  gap: var(--gap-stack-2xl);
 }
 
 .choicePanel {
@@ -296,7 +276,7 @@
   background: var(--color-glass);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  max-width: min(calc(640 / var(--rem-base) * 1rem), 100%);
+  max-width: min(calc(640 * var(--rpx)), 100%);
 }
 
 .choiceHeader {
@@ -309,16 +289,16 @@
 
 .choiceHeading {
   font-family: var(--font-family-headline);
-  font-size: var(--font-size-3xl);
+  font-size: var(--text-title-lg);
   font-weight: var(--font-weight-regular);
-  line-height: var(--leading-tight);
+  line-height: var(--leading-snug);
   letter-spacing: var(--tracking-tight);
   color: var(--color-text);
 }
 
 .choiceSubheading {
   font-family: var(--font-family-body);
-  font-size: var(--font-size-lg);
+  font-size: var(--text-title-sm);
   line-height: var(--leading-normal);
   color: var(--color-secondary);
   max-width: 70ch;
@@ -334,7 +314,7 @@
 }
 
 .choiceCta.choiceCta {
-  --cta-tint: #6E3A7C;
+  --cta-tint: var(--brand-amber);
   border: 1px solid color-mix(in srgb, var(--cta-tint) 34%, transparent);
   background: linear-gradient(
     90deg,
@@ -357,127 +337,13 @@
   );
 }
 
-.choiceButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-12) var(--space-18);
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--color-border);
-  background: transparent;
-  color: var(--color-text);
-  font-family: var(--font-family-label);
-  text-transform: uppercase;
-  letter-spacing: var(--label-letter-spacing);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-medium);
-  transition: transform var(--duration-fast) var(--ease-default),
-              background-color var(--duration-fast) var(--ease-default);
-  will-change: transform;
-  width: fit-content;
-}
-
-.choiceButton:hover {
-  background-color: var(--color-surface-hover);
-  transform: translateY(calc(-1 / var(--rem-base) * 1rem));
-}
-
-.choiceButton:active {
-  transform: translateY(0);
-}
-
-.choiceCard {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  gap: var(--gap-lg);
-  padding: var(--space-28);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border);
-  background-color: var(--color-surface-overlay);
-  box-shadow:
-    0 var(--space-10) var(--space-32)
-      color-mix(in srgb, var(--color-text) 10%, transparent);
-  width: min(calc(420 / var(--rem-base) * 1rem), 100%);
-  height: min(calc(420 / var(--rem-base) * 1rem), 100%);
-  cursor: pointer;
-  transition: scale var(--duration-slow) var(--ease-out),
-              box-shadow var(--duration-slow) var(--ease-default);
-}
-
-.choiceCard:hover {
-  scale: 1.04;
-  box-shadow:
-    0 var(--space-14) var(--space-40)
-      var(--color-border-subtle);
-}
-
-.choiceCard:active {
-  scale: 1.02;
-}
-
-.choiceCardHeader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-14);
-}
-
-.choiceCardHeader img {
-  --icon-size: calc(84 / var(--rem-base) * 1rem);
-  width: var(--icon-size);
-  height: var(--icon-size);
-  display: block;
-}
-
-.choiceCardTitle {
-  font-family: var(--font-family-headline);
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--leading-tight);
-  letter-spacing: var(--tracking-tight);
-  color: var(--color-text);
-}
-
-.choiceCardBody {
-  font-family: var(--font-family-body);
-  font-size: var(--font-size);
-  line-height: var(--leading-normal);
-  color: var(--color-secondary);
-  max-width: 44ch;
-}
-
-.choiceCardCta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-12) var(--space-18);
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--color-border);
-  background: transparent;
-  color: var(--color-text);
-  font-family: var(--font-family-label);
-  text-transform: uppercase;
-  letter-spacing: var(--label-letter-spacing);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-medium);
-  width: fit-content;
-  pointer-events: none;
-}
-
-/* ── Headline carousel ── */
-
 .headlineCarousel {
   width: 100vw;
   margin-left: calc(50% - 50vw);
-  margin-top: calc(var(--section-md) + var(--space-24));
+  margin-top: calc(var(--section-md) + calc(24 * var(--rpx)));
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
-  padding-block: var(--space-14);
+  padding-block: calc(14 * var(--rpx));
   overflow: hidden;
 }
 
@@ -496,17 +362,17 @@
   letter-spacing: var(--label-letter-spacing);
   font-optical-sizing: auto;
   font-style: normal;
-  font-size: var(--font-size-md);
+  font-size: var(--text-body-lg);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-muted);
 }
 
-/* ── Entries section ── */
-
 .entries {
   display: flex;
   flex-direction: column;
-  min-height: calc(100svh - var(--site-header-height) - var(--space-32));
+  min-height: calc(
+    100svh - var(--site-header-height) - var(--page-gutter-inline)
+  );
 }
 
 .entriesMain {
@@ -526,7 +392,7 @@
 
 .entriesTitle {
   font-family: var(--font-family-headline);
-  font-size: var(--font-size-2xl);
+  font-size: var(--text-title-lg);
   font-weight: var(--font-weight-medium);
   letter-spacing: var(--tracking-tight);
   line-height: 1.2;
@@ -536,7 +402,7 @@
 .entriesList {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-18);
+  gap: calc(18 * var(--rpx));
 }
 
 .entryCard {
@@ -553,7 +419,7 @@
 
 .entryCard:hover {
   background-color: var(--color-surface-overlay);
-  transform: translateY(var(--space-2));
+  transform: translateY(calc(2 * var(--rpx)));
 }
 
 .entryTypePill {
@@ -562,7 +428,7 @@
 
 .entryTitle {
   font-family: var(--font-family-headline);
-  font-size: var(--font-size-xl);
+  font-size: var(--text-title);
   font-weight: var(--font-weight-regular);
   font-style: italic;
   line-height: var(--leading-snug);
@@ -571,7 +437,7 @@
 
 .entryPreview {
   font-family: var(--font-family-body);
-  font-size: var(--font-size);
+  font-size: var(--text-body);
   line-height: 1.65;
   color: var(--color-text-78);
   display: -webkit-box;
@@ -589,27 +455,27 @@
   font-family: var(--font-family-label);
   text-transform: uppercase;
   letter-spacing: var(--label-letter-spacing);
-  font-size: var(--font-size-xs);
+  font-size: var(--text-caption);
   color: var(--color-text-56);
 }
 
 .entriesFooter {
   display: flex;
   justify-content: center;
-  margin-top: var(--space-56);
+  margin-top: calc(56 * var(--rpx));
 }
 
 .entriesLink.entriesLink {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-12) var(--space-22);
+  padding: calc(12 * var(--rpx)) calc(22 * var(--rpx));
   border-radius: var(--radius-pill);
   border: none;
   background: linear-gradient(
     90deg,
-    color-mix(in srgb, #6E3A7C 16%, transparent),
-    color-mix(in srgb, #D9792A 14%, transparent)
+    color-mix(in srgb, var(--brand-plum) 16%, transparent),
+    color-mix(in srgb, var(--brand-amber) 14%, transparent)
   );
   box-shadow:
     inset 0 0 0 1px color-mix(in srgb, var(--color-text) 14%, transparent),
@@ -618,7 +484,7 @@
   font-family: var(--font-family-label);
   text-transform: uppercase;
   letter-spacing: var(--label-letter-spacing);
-  font-size: var(--font-size-md);
+  font-size: var(--text-body-lg);
   font-weight: var(--font-weight-medium);
   transition: background-color var(--duration-fast) var(--ease-default),
               transform var(--duration-fast) var(--ease-default);
@@ -627,59 +493,13 @@
 .entriesLink.entriesLink:hover {
   background: linear-gradient(
     90deg,
-    color-mix(in srgb, #6E3A7C 22%, transparent),
-    color-mix(in srgb, #D9792A 20%, transparent)
+    color-mix(in srgb, var(--brand-plum) 22%, transparent),
+    color-mix(in srgb, var(--brand-amber) 20%, transparent)
   );
   box-shadow:
     inset 0 0 0 1px color-mix(in srgb, var(--color-text) 18%, transparent),
     0 14px 34px color-mix(in srgb, var(--color-text) 7%, transparent);
-  transform: translateY(calc(-1 / var(--rem-base) * 1rem));
-}
-
-/* ── Closing section ── */
-
-.closing {
-  min-height: calc(100svh - var(--site-header-height) - var(--space-32));
-  display: flex;
-  align-items: center;
-}
-
-.closingInner {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-xl);
-}
-
-.closingText {
-  font-family: var(--font-family-headline);
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-regular);
-  line-height: 1.25;
-  color: var(--color-text);
-  max-width: 42ch;
-}
-
-.closingSignature {
-  font-family: var(--font-family-label);
-  text-transform: uppercase;
-  letter-spacing: var(--label-letter-spacing);
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-muted);
-}
-
-/* ── Keyframes ── */
-
-@keyframes stripScrollReverse {
-  from {
-    background-position: calc(-800 / var(--rem-base) * 1rem) 50%;
-  }
-  to {
-    background-position: 0 50%;
-  }
+  transform: translateY(calc(-1 * var(--rpx)));
 }
 
 @keyframes marquee {
@@ -690,8 +510,6 @@
     transform: translateX(-50%);
   }
 }
-
-/* ── Reduced motion ── */
 
 @media (prefers-reduced-motion: reduce) {
   .headlineTrack {
@@ -724,34 +542,16 @@
     opacity: 1 !important;
   }
 
-  .choiceCard {
-    transition: none;
-  }
-
-  .choiceCard:hover {
-    scale: 1;
-  }
-
-  .choiceButton {
-    transition: none;
-  }
-
   .choiceFlower {
     will-change: auto;
     transform: translate(-50%, -50%) scale(1) !important;
   }
 }
 
-/* ── Responsive ── */
-
 @media (max-width: 64rem) {
   .intro {
     margin-top: 0;
     height: auto;
-  }
-
-  .carouselStrip {
-    height: var(--space-48);
   }
 
   .hero {
@@ -767,10 +567,6 @@
   .left {
     justify-self: start;
     max-width: min(62ch, 100%);
-  }
-
-  .choiceContent {
-    grid-template-columns: 1fr;
   }
 
   .entriesList {
@@ -813,14 +609,14 @@
   }
 
   .heading {
-    font-size: var(--font-size-4xl);
+    font-size: var(--text-display);
     width: 100%;
   }
 
   .nameRow {
     width: 100%;
     justify-content: center;
-    gap: var(--space-12);
+    gap: calc(12 * var(--rpx));
   }
 
   .nameFlower {
@@ -829,7 +625,7 @@
     top: 50%;
     transform: translate(-50%, -50%) rotate(-8deg);
     height: auto;
-    width: min(88vw, calc(520 / var(--rem-base) * 1rem));
+    width: min(88vw, calc(520 * var(--rpx)));
     max-width: none;
     opacity: 0.16;
     margin-bottom: 0;
@@ -837,7 +633,7 @@
   }
 
   .nameBody {
-    margin-top: var(--space-6);
+    margin-top: calc(6 * var(--rpx));
     text-align: center;
   }
 
@@ -846,7 +642,7 @@
   }
 
   .body {
-    font-size: var(--font-size);
+    font-size: var(--text-body);
   }
 
   .skillPills {
@@ -854,19 +650,15 @@
   }
 
   .choicePanel {
-    padding: var(--space-28) var(--space-24);
+    padding: calc(28 * var(--rpx)) calc(24 * var(--rpx));
   }
 
   .choiceHeading {
-    font-size: var(--font-size-2xl);
+    font-size: var(--text-title-lg);
   }
 
   .choiceSubheading {
-    font-size: var(--font-size);
-  }
-
-  .closingText {
-    font-size: var(--font-size-xl);
+    font-size: var(--text-body);
   }
 
   .entriesList {

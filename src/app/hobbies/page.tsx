@@ -1,9 +1,7 @@
-import PageShell from '@/components/layout/PageShell';
-
 export const metadata = {
-  title: 'Hobbies'
+  title: 'Hobbies',
 };
 
 export default function HobbiesPage() {
-  return <PageShell title="Hobbies" />;
+  return <h1 className="font-headline">Hobbies</h1>;
 }

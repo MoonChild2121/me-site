@@ -1,0 +1,94 @@
+/* Layout */
+
+.root {
+  display: flex;
+  min-width: 0;
+}
+
+.col {
+  flex-direction: column;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+/* Alignment */
+
+.alignStart {
+  align-items: flex-start;
+}
+
+.alignCenter {
+  align-items: center;
+}
+
+.alignStretch {
+  align-items: stretch;
+}
+
+.alignBaseline {
+  align-items: baseline;
+}
+
+.justifyBetween {
+  justify-content: space-between;
+}
+
+/* Gap */
+
+.gap2xs {
+  gap: var(--gap-2xs);
+}
+
+.gapXs {
+  gap: var(--gap-xs);
+}
+
+.gapSm {
+  gap: var(--gap-sm);
+}
+
+.gapMd {
+  gap: var(--gap-md);
+}
+
+.gapLg {
+  gap: var(--gap-lg);
+}
+
+.gapXl {
+  gap: var(--gap-xl);
+}
+
+.gapStackSm {
+  gap: var(--gap-stack-sm);
+}
+
+.gapStackMd {
+  gap: var(--gap-stack-md);
+}
+
+.gapStack2xl {
+  gap: var(--gap-stack-2xl);
+}
+
+.gapClusterSm {
+  gap: var(--gap-cluster-sm);
+}
+
+.gapClusterMd {
+  gap: var(--gap-cluster-md);
+}
+
+.gapClusterLg {
+  gap: var(--gap-cluster-lg);
+}
+
+.gapPaddingMd {
+  gap: var(--padding-md);
+}
