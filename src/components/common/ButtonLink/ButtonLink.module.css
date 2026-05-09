@@ -1,3 +1,5 @@
+/* Base */
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -7,7 +9,7 @@
   text-transform: uppercase;
   letter-spacing: var(--label-letter-spacing);
   font-weight: var(--font-weight-medium);
-  line-height: var(--leading-tight);
+  line-height: var(--leading-snug);
   border-radius: var(--radius-pill);
   width: fit-content;
   cursor: pointer;
@@ -16,45 +18,77 @@
               transform var(--duration-fast) var(--ease-default);
 }
 
-/* ── outline: bordered pill (primary CTA) ── */
+/* Outline */
 
 .outline {
-  padding: var(--padding-sm) var(--space-18);
+  padding: var(--pad-control-default);
   border: 1px solid var(--color-border);
   background: transparent;
   color: var(--color-text);
-  font-size: var(--font-size-md);
+  font-size: var(--text-body-lg);
 }
 
 .outline:hover {
   background-color: var(--color-surface-hover);
-  transform: translateY(calc(-1 / var(--rem-base) * 1rem));
+  transform: translateY(calc(-1 * var(--rpx)));
 }
 
 .outline:active {
   transform: translateY(0);
 }
 
-/* ── small: compact pill link ── */
+/* Work chrome */
+
+.outlineChromeWork {
+  transition:
+    background-color var(--duration-normal) var(--ease-default),
+    border-color var(--duration-normal) var(--ease-default),
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-default);
+}
+
+.outlineChromeWork:hover {
+  background-color: color-mix(in srgb, var(--color-text) 10%, transparent);
+  border-color: color-mix(in srgb, var(--color-text) 30%, transparent);
+  transform: translateY(calc(-2 * var(--rpx)));
+  box-shadow: 0 calc(4 * var(--rpx)) calc(14 * var(--rpx))
+    color-mix(in srgb, var(--color-text) 6%, transparent);
+}
+
+@media (min-width: 64rem) {
+  .outlineChromeWork {
+    border: 1px solid color-mix(in srgb, var(--work-flower-brown) 22%, transparent);
+    background: color-mix(in srgb, var(--color-surface-raised) 82%, var(--work-flower-cream) 18%);
+  }
+
+  .outlineChromeWork:hover {
+    background-color: color-mix(in srgb, var(--color-surface-overlay) 55%, var(--work-flower-cream) 45%);
+    border-color: color-mix(in srgb, var(--work-flower-brown) 42%, transparent);
+    box-shadow: 0 calc(6 * var(--rpx)) calc(16 * var(--rpx))
+      color-mix(in srgb, var(--work-flower-brown) 9%, transparent);
+  }
+}
+
+/* Small */
 
 .small {
-  padding: var(--space-8) var(--space-14);
+  padding: var(--pad-control-dense);
   border: 1px solid var(--color-border);
   background: transparent;
   color: var(--color-text);
-  font-size: var(--font-size);
+  font-size: var(--text-body);
 }
 
 .small:hover {
   background-color: var(--color-surface-hover);
-  transform: translateY(calc(-1 / var(--rem-base) * 1rem));
+  transform: translateY(calc(-1 * var(--rpx)));
 }
 
 .small:active {
   transform: translateY(0);
 }
 
-/* ── ghost: underline-only text link ── */
+/* Ghost */
 
 .ghost {
   padding: 0;
@@ -63,7 +97,7 @@
   border-radius: 0;
   background: transparent;
   color: var(--color-text-muted);
-  font-size: var(--font-size-xs);
+  font-size: var(--text-caption);
 }
 
 .ghost:hover {
@@ -71,6 +105,8 @@
   border-bottom-color: var(--color-border);
   transform: none;
 }
+
+/* Reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
   .btn {
@@ -80,5 +116,10 @@
   .outline:hover,
   .small:hover {
     transform: none;
+  }
+
+  .outlineChromeWork:hover {
+    transform: none;
+    box-shadow: none;
   }
 }

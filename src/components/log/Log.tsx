@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { LOG_TAGS, LOG_ENTRIES } from './constants';
 import LogCard from './LogCard';
 import Pill from '@/components/common/Pill/Pill';
+import Stack from '@/components/common/Stack/Stack';
 import styles from './Log.module.css';
 
 export default function Log() {
@@ -32,7 +33,16 @@ export default function Log() {
         </p>
       </header>
 
-      <div className={`${styles.filters} ${styles.stagger}`} style={{ '--stagger': 1 } as CSSProperties} role="group" aria-label="Filter entries">
+      <Stack
+        direction="row"
+        gap="clusterSm"
+        wrap
+        align="baseline"
+        className={`${styles.filters} ${styles.stagger}`}
+        style={{ '--stagger': 1 } as CSSProperties}
+        role="group"
+        aria-label="Filter entries"
+      >
         {LOG_TAGS.map(t => (
           <Pill
             key={t}
@@ -44,7 +54,7 @@ export default function Log() {
             {t}
           </Pill>
         ))}
-      </div>
+      </Stack>
 
       <div className={styles.feed} key={animKey}>
         {filtered.map((entry, i) => (

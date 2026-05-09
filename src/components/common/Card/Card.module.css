@@ -1,3 +1,5 @@
+/* Base */
+
 .card {
   border-radius: var(--radius-md);
   display: flex;
@@ -6,24 +8,20 @@
   overflow: hidden;
 }
 
-/* ── surface: light bg + border (most common) ── */
+/* Surfaces */
 
 .surface {
   background-color: var(--color-surface-raised);
   border: 1px solid var(--color-border);
 }
 
-/* ── elevated: shadow, slightly stronger bg ── */
-
 .elevated {
   background-color: var(--color-surface-overlay);
   border: 1px solid var(--color-border-subtle);
   box-shadow:
-    0 var(--space-10) var(--space-32)
+    0 calc(10 * var(--rpx)) calc(32 * var(--rpx))
       color-mix(in srgb, var(--color-text) 10%, transparent);
 }
-
-/* ── glass: frosted backdrop ── */
 
 .glass {
   background: var(--color-glass);
@@ -32,14 +30,12 @@
   border: 1px solid var(--color-border);
 }
 
-/* ── dark: inverted surface ── */
-
 .dark {
   background-color: var(--color-text);
   border: none;
 }
 
-/* ── Interactive modifier ── */
+/* Interactive */
 
 .interactive {
   transition: transform var(--duration-fast) var(--ease-default),
@@ -48,17 +44,17 @@
 
 .interactive:hover {
   background-color: var(--color-surface-overlay);
-  transform: translateY(calc(-1 / var(--rem-base) * 1rem));
+  transform: translateY(calc(-1 * var(--rpx)));
 }
 
 .dark.interactive:hover {
   background-color: color-mix(in srgb, var(--color-text) 92%, transparent);
 }
 
-/* ── Padding presets ── */
+/* Padding */
 
 .padSm {
-  padding: var(--space-18);
+  padding: calc(18 * var(--rpx));
 }
 
 .padMd {
@@ -66,14 +62,16 @@
 }
 
 .padLg {
-  padding: var(--space-28);
+  padding: calc(28 * var(--rpx));
 }
 
-/* ── Radius override for lg variant ── */
+/* Radius */
 
 .radiusLg {
   border-radius: var(--radius-lg);
 }
+
+/* Reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
   .interactive {

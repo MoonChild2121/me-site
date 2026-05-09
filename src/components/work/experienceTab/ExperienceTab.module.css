@@ -1,7 +1,7 @@
 .expGroups {
   display: flex;
   flex-direction: column;
-  gap: var(--space-24);
+  gap: calc(24 * var(--rpx));
   max-width: 100%;
 }
 
@@ -18,10 +18,10 @@
   letter-spacing: var(--label-letter-spacing);
   font-optical-sizing: auto;
   font-style: normal;
-  font-size: var(--font-size-md);
+  font-size: var(--text-body-lg);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-78);
-  padding-top: var(--space-8);
+  padding-top: calc(8 * var(--rpx));
   display: flex;
   align-items: center;
   gap: var(--gap-md);
@@ -38,21 +38,21 @@
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  gap: var(--space-10);
+  gap: calc(10 * var(--rpx));
   max-width: 100%;
 }
 
 .expCards .expCard {
   min-width: 0;
   width: 100%;
-  max-width: calc(520 / var(--rem-base) * 1rem);
+  max-width: calc(520 * var(--rpx));
 }
 
 .expCardsScrollable {
   display: flex;
   flex-wrap: nowrap;
   align-items: stretch;
-  gap: var(--space-10);
+  gap: calc(10 * var(--rpx));
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -71,9 +71,9 @@
   border-radius: var(--radius-md);
   background-color: var(--color-surface-raised);
   overflow: hidden;
-  min-height: calc(198 / var(--rem-base) * 1rem);
-  width: calc(520 / var(--rem-base) * 1rem);
-  min-width: calc(520 / var(--rem-base) * 1rem);
+  min-height: calc(198 * var(--rpx));
+  width: calc(520 * var(--rpx));
+  min-width: calc(520 * var(--rpx));
   display: flex;
   flex-direction: column;
 }
@@ -81,7 +81,7 @@
 .expCardInner {
   display: flex;
   flex-direction: column;
-  padding: var(--space-14) var(--padding-md);
+  padding: calc(14 * var(--rpx)) var(--padding-md);
   height: 100%;
 }
 
@@ -102,39 +102,48 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: var(--space-14);
+  gap: calc(14 * var(--rpx));
 }
 
-.expTitle {
-  font-family: var(--font-family-headline);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-medium);
-  line-height: 1.25;
-  letter-spacing: var(--tracking-snug);
-  color: var(--color-text);
+.expTitleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: calc(4 * var(--rpx));
   min-width: 0;
 }
 
-.expCompany {
-  color: var(--color-text-muted);
+.expRole {
+  font-family: var(--font-family-headline);
+  font-size: var(--text-title-sm);
   font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+}
+
+.expCompany {
+  font-family: var(--font-family-body);
+  font-size: var(--text-body-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-snug);
+  color: var(--color-text-muted);
 }
 
 .expMetaStack {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: calc(3 / var(--rem-base) * 1rem);
+  gap: calc(3 * var(--rpx));
   flex: 0 0 auto;
-  padding-top: var(--space-2);
+  padding-top: calc(2 * var(--rpx));
 }
 
 .expMetaItem {
   display: inline-flex;
   align-items: center;
-  gap: calc(5 / var(--rem-base) * 1rem);
+  gap: calc(5 * var(--rpx));
   font-family: var(--font-family-label);
-  font-size: var(--font-size-xs);
+  font-size: var(--text-caption);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-muted);
   white-space: nowrap;
@@ -147,7 +156,7 @@
 
 .expSummaryLine {
   font-family: var(--font-family-body);
-  font-size: var(--font-size);
+  font-size: var(--text-body);
   line-height: 1.55;
   color: color-mix(in srgb, var(--color-text) 88%, transparent);
   max-width: 68ch;
@@ -156,74 +165,13 @@
 .tagRow {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-6);
-  padding-top: var(--space-2);
-}
-
-.tag {
-  display: inline-flex;
-  align-items: center;
-  padding: var(--padding-xs) var(--padding-sm);
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--color-border);
-  background: var(--color-surface-hover);
-  color: var(--color-text);
-  font-family: var(--font-family-label);
-  text-transform: uppercase;
-  letter-spacing: var(--label-letter-spacing);
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  white-space: nowrap;
-}
-
-.stagger {
-  animation: staggerFadeIn var(--duration-slow) var(--ease-default) both;
-  animation-delay: calc(var(--stagger, 0) * 80ms);
-}
-
-@keyframes staggerFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(var(--space-8));
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.emptyState {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-18);
-  color: var(--color-text-muted);
-  font-family: var(--font-family-body);
-  font-size: var(--font-size);
-  line-height: var(--leading-normal);
-}
-
-.section {
-  scroll-margin-top: calc(var(--site-header-height) + var(--space-32));
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-14);
-  flex: 1;
-  min-height: 0;
-  max-width: 100%;
-}
-
-.sectionBody {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-lg);
-  max-width: 100%;
+  gap: calc(6 * var(--rpx));
+  padding-top: calc(2 * var(--rpx));
 }
 
 @media (max-width: 64rem) {
   .expCard {
-    width: min(100%, calc(520 / var(--rem-base) * 1rem));
+    width: min(100%, calc(520 * var(--rpx)));
     min-width: 0;
   }
 
@@ -232,8 +180,8 @@
   }
 
   .expCardsScrollable .expCard {
-    width: calc(400 / var(--rem-base) * 1rem);
-    min-width: calc(400 / var(--rem-base) * 1rem);
+    width: calc(400 * var(--rpx));
+    min-width: calc(400 * var(--rpx));
   }
 }
 
@@ -244,7 +192,7 @@
   }
 
   .expCardInner {
-    padding: var(--space-12) var(--space-14);
+    padding: calc(12 * var(--rpx)) calc(14 * var(--rpx));
   }
 
   .expHeaderBlock {
@@ -257,12 +205,5 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: var(--gap-sm);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .stagger {
-    animation: none;
-    opacity: 1;
   }
 }

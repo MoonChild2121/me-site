@@ -75,12 +75,6 @@ export type EducationItem = {
   summary: string;
 };
 
-export type AdditionalItem = {
-  title: string;
-  meta: string;
-  summary: string;
-};
-
 export const EXPERIENCES: Experience[] = [
   {
     group: 'current',
@@ -411,6 +405,3 @@ export const COURSES: Course[] = [
     focus: 'Planning, execution, and stakeholder alignment basics.',
   },
 ];
-
-export const FOUNDATIONS_STATEMENT =
-  'Background in machine learning, NLP systems, and research-driven development, shaping a structured and systems-oriented approach to frontend engineering.';

@@ -1,9 +1,9 @@
 .footer {
-  margin-top: var(--space-40);
+  margin-top: var(--gap-stack-2xl);
   border-top: 1px solid var(--color-border);
-  width: calc(100% + var(--space-32) + var(--space-32));
-  margin-left: calc(-1 * var(--space-32));
-  margin-right: calc(-1 * var(--space-32));
+  width: calc(100% + 2 * var(--page-gutter-inline));
+  margin-left: calc(-1 * var(--page-gutter-inline));
+  margin-right: calc(-1 * var(--page-gutter-inline));
   margin-bottom: calc(-1 * 3rem);
   padding-block: var(--padding-md);
   box-sizing: border-box;
@@ -14,12 +14,12 @@
   grid-template-columns: 1fr auto;
   align-items: center;
   gap: var(--gap-lg);
-  padding-inline: var(--space-32);
+  padding-inline: var(--page-gutter-inline);
 }
 
 .copy {
   font-family: var(--font-family-label);
-  font-size: var(--font-size-xs);
+  font-size: var(--text-caption);
   line-height: 1.4;
   text-transform: uppercase;
   letter-spacing: var(--label-letter-spacing);
@@ -35,21 +35,6 @@
   gap: var(--gap-xl);
 }
 
-.link {
-  font-family: var(--font-family-label);
-  text-transform: uppercase;
-  letter-spacing: var(--label-letter-spacing);
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
-  transition: color var(--duration-fast) var(--ease-default);
-}
-
-.link:hover {
-  color: var(--color-text);
-}
-
 .linkIcon {
   display: none;
   line-height: 0;
@@ -61,17 +46,15 @@
 
 @media (max-width: 40rem) {
   .footer {
-    /* Cancel `.page-container` horizontal padding (mobile). */
-    width: calc(100% + var(--space-20) + var(--space-20));
-    margin-left: calc(-1 * var(--space-20));
-    margin-right: calc(-1 * var(--space-20));
-    /* Cancel `.page-container` bottom padding (mobile). */
+    width: calc(100% + calc(20 * var(--rpx)) + calc(20 * var(--rpx)));
+    margin-left: calc(-20 * var(--rpx));
+    margin-right: calc(-20 * var(--rpx));
     margin-bottom: calc(-1 * 2rem);
   }
 
   .inner {
     grid-template-columns: 1fr auto;
-    padding-inline: calc(20 / 14 * 1rem);
+    padding-inline: calc(20 * var(--rpx));
   }
 
   .links {

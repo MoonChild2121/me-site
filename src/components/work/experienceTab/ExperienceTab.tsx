@@ -1,6 +1,5 @@
 'use client';
 
-import type { CSSProperties } from 'react';
 import { useMemo } from 'react';
 import { FiCalendar, FiMapPin } from 'react-icons/fi';
 
@@ -9,21 +8,20 @@ import {
   type Experience,
   type ExperienceGroupId,
 } from '../constants';
+import WorkTabShell from '../primitives/WorkTabShell';
+import { workStaggerProps } from '../primitives/workStaggerProps';
+import Pill from '@/components/common/Pill/Pill';
 import styles from './ExperienceTab.module.css';
-
-function staggerStyle(index: number): CSSProperties {
-  return { '--stagger': index } as CSSProperties;
-}
 
 function ExperienceCard({ exp, staggerIndex }: { exp: Experience; staggerIndex: number }) {
   return (
-    <article className={`${styles.expCard} ${styles.stagger}`} style={staggerStyle(staggerIndex)}>
+    <article {...workStaggerProps(staggerIndex, styles.expCard)}>
       <div className={styles.expCardInner}>
         <div className={styles.expCardTop}>
           <div className={styles.expHeaderBlock}>
-            <div className={styles.expTitle}>
-              <span>{exp.title}</span>
-              <span className={styles.expCompany}> — {exp.company}</span>
+            <div className={styles.expTitleBlock}>
+              <div className={styles.expRole}>{exp.title}</div>
+              <div className={styles.expCompany}>{exp.company}</div>
             </div>
             <div className={styles.expMetaStack}>
               <span className={styles.expMetaItem}>
@@ -46,9 +44,9 @@ function ExperienceCard({ exp, staggerIndex }: { exp: Experience; staggerIndex: 
           {exp.tags.length ? (
             <div className={styles.tagRow} aria-label="Key areas of work">
               {exp.tags.map(tag => (
-                <span key={tag} className={styles.tag}>
+                <Pill key={tag} as="span" variant="work">
                   {tag}
-                </span>
+                </Pill>
               ))}
             </div>
           ) : null}
@@ -74,30 +72,28 @@ export default function ExperienceTab() {
   let globalIdx = 0;
 
   return (
-    <section className={styles.section} aria-label="Experience">
-      <div className={styles.sectionBody}>
-        <div className={styles.expGroups} aria-label="Experience groups">
-          {EXPERIENCE_GROUPS.map(group => {
-            const items = byGroup[group.id];
-            if (!items.length) return null;
+    <WorkTabShell aria-label="Experience">
+      <div className={styles.expGroups} aria-label="Experience groups">
+        {EXPERIENCE_GROUPS.map(group => {
+          const items = byGroup[group.id];
+          if (!items.length) return null;
 
-            const needsScroll = items.length > 1;
-            const groupIdx = globalIdx++;
+          const needsScroll = items.length > 1;
+          const groupIdx = globalIdx++;
 
-            return (
-              <div key={group.id} className={`${styles.expGroup} ${styles.stagger}`} style={staggerStyle(groupIdx)}>
-                <div className={styles.expGroupLabel}>{group.label}</div>
-                <div className={needsScroll ? styles.expCardsScrollable : styles.expCards}>
-                  {items.map((exp, cardIdx) => {
-                    const key = `${exp.company}-${exp.title}-${exp.dateRange}`;
-                    return <ExperienceCard key={key} exp={exp} staggerIndex={groupIdx + cardIdx + 1} />;
-                  })}
-                </div>
+          return (
+            <div key={group.id} {...workStaggerProps(groupIdx, styles.expGroup)}>
+              <div className={styles.expGroupLabel}>{group.label}</div>
+              <div className={needsScroll ? styles.expCardsScrollable : styles.expCards}>
+                {items.map((exp, cardIdx) => {
+                  const key = `${exp.company}-${exp.title}-${exp.dateRange}`;
+                  return <ExperienceCard key={key} exp={exp} staggerIndex={groupIdx + cardIdx + 1} />;
+                })}
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
-    </section>
+    </WorkTabShell>
   );
 }

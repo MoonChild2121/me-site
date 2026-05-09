@@ -1,7 +1,6 @@
-import type { CSSProperties } from 'react';
-
-import type { ContactLink } from './types';
+import type { ContactChannel, ContactLink } from './types';
 import ContactIcon from './ContactIcon';
+import { staggerStyle } from '@/utils/motion';
 import styles from './Contact.module.css';
 
 type ContactRowProps = {
@@ -9,30 +8,22 @@ type ContactRowProps = {
   index: number;
 };
 
+const rowToneClass: Record<ContactChannel, string> = {
+  email: styles.rowToneEmail,
+  linkedin: styles.rowToneLinkedin,
+  github: styles.rowToneGithub,
+};
+
 export default function ContactRow({ link, index }: ContactRowProps) {
   const isMailto = link.href.startsWith('mailto');
-
-  const iconClass =
-    link.icon === 'email'
-      ? styles.rowIconEmail
-      : link.icon === 'linkedin'
-        ? styles.rowIconLinkedin
-        : styles.rowIconGithub;
-
-  const toneClass =
-    link.icon === 'email'
-      ? styles.rowToneEmail
-      : link.icon === 'linkedin'
-        ? styles.rowToneLinkedin
-        : styles.rowToneGithub;
 
   return (
     <a
       href={link.href}
       target={isMailto ? undefined : '_blank'}
       rel="noopener noreferrer"
-      className={`${styles.row} ${toneClass}`}
-      style={{ '--stagger': index } as CSSProperties}
+      className={`${styles.row} ${rowToneClass[link.icon]}`}
+      style={staggerStyle(index)}
       aria-label={`${link.label}: ${link.value}`}
     >
       <div className={styles.rowBody}>
@@ -40,7 +31,7 @@ export default function ContactRow({ link, index }: ContactRowProps) {
         <span className={styles.rowDesc}>{link.description}</span>
       </div>
 
-      <span className={`${styles.rowIcon} ${iconClass}`} aria-hidden>
+      <span className={styles.rowIcon} aria-hidden>
         <ContactIcon name={link.icon} />
       </span>
     </a>

@@ -1,20 +1,22 @@
+/* Base */
+
 .pill {
   font-family: var(--font-family-label);
   font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-xs);
+  font-size: var(--text-caption);
   letter-spacing: var(--label-letter-spacing);
   text-transform: uppercase;
-  line-height: var(--leading-tight);
+  line-height: var(--leading-snug);
   border-radius: var(--radius-pill);
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
 }
 
-/* ── filter: interactive toggle ── */
+/* Filter */
 
 .filter {
-  padding: var(--padding-xs) var(--space-14);
+  padding: var(--padding-xs) calc(14 * var(--rpx));
   border: 1px solid var(--color-border);
   background: transparent;
   color: var(--color-text-muted);
@@ -30,30 +32,66 @@
   border-color: var(--color-text);
 }
 
-/* ── status: accent-colored label ── */
+/* Status */
 
 .status {
-  padding: var(--space-4) var(--padding-sm);
+  padding: calc(4 * var(--rpx)) var(--padding-sm);
   background: var(--color-accent-subtle);
   color: var(--color-accent);
   border: 1px solid color-mix(in srgb, var(--color-accent) 20%, transparent);
 }
 
-/* ── tag: small neutral chip ── */
+/* Tag */
 
 .tag {
-  padding: var(--space-4) var(--padding-sm);
+  padding: calc(4 * var(--rpx)) var(--padding-sm);
   background: var(--color-surface-hover);
   color: var(--color-text);
   font-weight: var(--font-weight-medium);
   border: none;
 }
 
-/* ── inverted: label on dark surface ── */
+/* Inverted */
 
 .inverted {
-  padding: var(--space-4) var(--padding-sm);
+  padding: calc(4 * var(--rpx)) var(--padding-sm);
   border: 1px solid color-mix(in srgb, var(--color-background) 18%, transparent);
   background: transparent;
   color: var(--color-accent);
+}
+
+/* Work */
+
+.workList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(6 * var(--rpx));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.work {
+  display: inline-flex;
+  align-items: center;
+  padding: calc(4 * var(--rpx)) calc(10 * var(--rpx));
+  border-radius: var(--radius-pill);
+  border: 1px solid color-mix(in srgb, var(--work-flower-brown) 55%, var(--color-border) 45%);
+  background-color: color-mix(in srgb, var(--color-surface-raised) 58%, var(--work-flower-cream) 42%);
+  color: color-mix(in srgb, var(--work-flower-brown) 58%, var(--color-text));
+  font-family: var(--font-family-label);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--label-letter-spacing);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.workSentence {
+  text-transform: none;
+  letter-spacing: var(--tracking-tight);
+  font-family: var(--font-family-body);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+  white-space: normal;
 }

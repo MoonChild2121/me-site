@@ -11,7 +11,7 @@
 }
 
 .eduPrimaryTitle {
-  font-size: var(--font-size-xl);
+  font-size: var(--text-title);
   letter-spacing: var(--tracking-tight);
 }
 
@@ -29,14 +29,14 @@
   gap: var(--gap-md);
   max-width: 78ch;
   border-top: 1px solid var(--color-border);
-  padding-top: var(--space-20);
-  margin-top: var(--space-8);
+  padding-top: calc(20 * var(--rpx));
+  margin-top: calc(8 * var(--rpx));
 }
 
 .cfBlock {
   display: flex;
   flex-direction: column;
-  gap: var(--space-10);
+  gap: calc(10 * var(--rpx));
 }
 
 .cfLabel {
@@ -45,7 +45,7 @@
   letter-spacing: var(--label-letter-spacing);
   font-optical-sizing: auto;
   font-style: normal;
-  font-size: var(--font-size-xs);
+  font-size: var(--text-caption);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-muted);
 }
@@ -56,48 +56,56 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--gap-sm);
+  gap: calc(16 * var(--rpx));
 }
 
 .courseItem {
   display: flex;
   flex-direction: column;
-  gap: calc(3 / var(--rem-base) * 1rem);
+  gap: calc(8 * var(--rpx));
 }
 
 .courseTopRow {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
-  gap: var(--gap-md);
   flex-wrap: wrap;
+  gap: calc(6 * var(--rpx)) var(--gap-md);
 }
 
 .courseName {
-  font-family: var(--font-family-body);
-  font-size: var(--font-size);
+  flex: 1 1 12rem;
+  min-width: 0;
+  font-family: var(--font-family-headline);
+  font-size: var(--text-title-sm);
   font-weight: var(--font-weight-medium);
-  line-height: 1.4;
+  line-height: 1.25;
+  letter-spacing: var(--tracking-tight);
   color: var(--color-text);
 }
 
 .courseProvider {
+  flex: 0 1 auto;
+  margin-left: auto;
+  text-align: right;
   font-family: var(--font-family-label);
-  text-transform: uppercase;
-  letter-spacing: var(--label-letter-spacing);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-meta);
+  text-transform: none;
   font-optical-sizing: auto;
   font-style: normal;
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  color: color-mix(in srgb, var(--color-text) 72%, transparent);
-  white-space: nowrap;
+  color: color-mix(in srgb, var(--work-flower-brown) 42%, var(--color-text-muted) 58%);
+  line-height: var(--leading-snug);
 }
 
 .courseFocus {
+  margin: 0;
+  padding-top: calc(2 * var(--rpx));
   font-family: var(--font-family-body);
-  font-size: var(--font-size);
-  line-height: 1.55;
-  color: color-mix(in srgb, var(--color-text) 84%, transparent);
+  font-size: var(--text-body);
+  line-height: var(--leading-relaxed);
+  color: color-mix(in srgb, var(--color-text) 82%, transparent);
+  max-width: 65ch;
 }
 
 @media (max-width: 40rem) {
@@ -110,10 +118,10 @@
   }
 
   .eduPrimaryTitle {
-    font-size: var(--font-size-lg);
+    font-size: var(--text-title-sm);
   }
 
-  .courseProvider {
-    white-space: normal;
+  .courseName {
+    font-size: var(--text-body-lg);
   }
 }

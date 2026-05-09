@@ -1,9 +1,10 @@
 'use client';
 
-import type { CSSProperties } from 'react';
-
+import Pill from '@/components/common/Pill/Pill';
+import WorkPillList from '@/components/common/Pill/WorkPillList';
+import proseLists from '@/components/common/ProseLists/ProseLists.module.css';
 import type { Publication } from '../constants';
-import { staggerStyle } from '../staggerStyle';
+import { workStaggerProps } from '../primitives/workStaggerProps';
 import shared from '../WorkDashboard.module.css';
 import styles from './PublicationsTab.module.css';
 
@@ -28,27 +29,29 @@ function VenueLine({ venue }: { venue: string }) {
 
 export default function PublicationItem({ pub, index }: PublicationItemProps) {
   return (
-    <article
-      className={`${shared.item} ${styles.pubCard} ${shared.stagger}`}
-      style={staggerStyle(index) as CSSProperties}
-    >
+    <article {...workStaggerProps(index, shared.item, styles.pubCard)}>
       <header className={styles.pubHeader}>
         <div className={styles.pubKicker}>Journal paper</div>
 
         <h2 className={styles.pubTitle}>{pub.title}</h2>
 
-        <div className={styles.pubMeta}>
-          <VenueLine venue={pub.venue} />
-          <span className={styles.pubMetaDot} aria-hidden>
-            ·
-          </span>
-          <span className={styles.pubYear}>{pub.year}</span>
-        </div>
+        <WorkPillList className={styles.pubMetaPills} aria-label="Venue and year">
+          <li>
+            <Pill as="span" variant="workSentence">
+              <VenueLine venue={pub.venue} />
+            </Pill>
+          </li>
+          <li>
+            <Pill as="span" variant="workSentence">
+              {pub.year}
+            </Pill>
+          </li>
+        </WorkPillList>
       </header>
 
       {pub.summary ? <div className={styles.pubSummary}>{pub.summary}</div> : null}
       {pub.highlights?.length ? (
-        <ul className={`${shared.bullets} ${styles.pubBullets}`}>
+        <ul className={`${proseLists.bullets} ${styles.pubBullets}`}>
           {pub.highlights.map(h => (
             <li key={h}>{h}</li>
           ))}
@@ -67,4 +70,3 @@ export default function PublicationItem({ pub, index }: PublicationItemProps) {
     </article>
   );
 }
-

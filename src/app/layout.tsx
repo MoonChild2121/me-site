@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Inter } from "next/font/google";
 
+import AppMainScroll from "@/components/layout/AppMainScroll/AppMainScroll";
 import SiteNav from "@/components/layout/SiteNav/SiteNav";
 
 import "./globals.css";
@@ -29,7 +31,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable}`}
-      style={{ backgroundColor: "#f9f7f2" }}
+      style={{ backgroundColor: 'var(--color-background)' }}
     >
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -43,7 +45,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="app-body" style={{ backgroundColor: "#f9f7f2" }}>
+      <body className="app-body" style={{ backgroundColor: 'var(--color-background)' }}>
+        <Suspense fallback={null}>
+          <AppMainScroll />
+        </Suspense>
         <SiteNav />
         <main className="app-main">
           <div className="page-container">{children}</div>

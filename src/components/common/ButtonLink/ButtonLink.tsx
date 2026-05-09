@@ -7,6 +7,7 @@ type ButtonLinkVariant = 'outline' | 'small' | 'ghost';
 
 type ButtonLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   variant?: ButtonLinkVariant;
+  chrome?: 'default' | 'work';
   href: string;
   external?: boolean;
   className?: string;
@@ -14,13 +15,19 @@ type ButtonLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
 
 export default function ButtonLink({
   variant = 'outline',
+  chrome = 'default',
   href,
   external = false,
   className,
   children,
   ...rest
 }: ButtonLinkProps) {
-  const cls = [styles.btn, styles[variant], className ?? ''].filter(Boolean).join(' ');
+  const cls = [
+    styles.btn,
+    styles[variant],
+    chrome === 'work' && variant === 'outline' ? styles.outlineChromeWork : '',
+    className ?? '',
+  ].filter(Boolean).join(' ');
 
   if (external) {
     return (
